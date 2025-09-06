@@ -1,0 +1,32 @@
+{
+  "name": "uniform-configurator",
+  "version": "1.0.0",
+  "description": "Web-based 3D uniform configurator with layer-based texture editing and server-side image processing",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server.js",
+    "server:dev": "nodemon server.js",
+    "start": "concurrently \"npm run server:dev\" \"npm run dev\"",
+    "install-server-deps": "npm install concurrently"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "fabric": "^5.3.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
+    "sharp": "^0.34.3",
+    "three": "^0.160.0",
+    "uuid": "^12.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

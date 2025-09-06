@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(node server.js)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(npm start)",
+      "Bash(node:*)",
+      "mcp__playwright__playwright_navigate",
+      "mcp__playwright__playwright_console_logs",
+      "mcp__playwright__playwright_evaluate",
+      "mcp__playwright__playwright_screenshot",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,442 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Scale Slider Overlay */
+.scale-slider-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.scale-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.scale-slider-container label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 40px;
+}
+
+#scale-slider {
+    flex: 1;
+    height: 6px;
+    background-color: #444;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#scale-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+}
+
+#scale-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+}
+
+#scale-slider:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#scale-slider:disabled::-webkit-slider-thumb {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+#scale-slider:disabled::-moz-range-thumb {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+#scale-value {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 30px;
+    text-align: center;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    min-width: 600px; /* Minimum width to prevent complete collapse */
+}
+
+.viewer-panel {
+    flex: 1;
+    background-color: #1a1a1a;
+    position: relative;
+    min-width: 300px; /* Minimum width for 3D viewer */
+}
+
+#three-container {
+    width: 100%;
+    height: 100%;
+}
+
+.property-panel {
+    width: 320px;
+    min-width: 280px; /* Minimum width to prevent content from being unusable */
+    max-width: 400px; /* Maximum width to prevent it from taking too much space */
+    background-color: #383838;
+    border-left: 1px solid #555;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0; /* Prevent the panel from shrinking beyond its minimum */
+}
+
+.panel-header {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+}
+
+.panel-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.base-texture-section {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+}
+
+.base-texture-section h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.color-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.color-controls label {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.color-controls input[type="color"] {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.layers-section {
+    padding: 15px;
+    flex: 1;
+}
+
+.layers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.layers-header h4 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-layer-btn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    font-size: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.add-layer-btn:hover {
+    background-color: #357abd;
+}
+
+.layers-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.layer-item {
+    background-color: #4a4a4a;
+    border: 1px solid #666;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.layer-item:hover {
+    background-color: #525252;
+}
+
+.layer-item.selected {
+    background-color: #4a90e2;
+    border-color: #357abd;
+}
+
+.layer-item.locked {
+    opacity: 0.6;
+    background-color: #3a3a3a;
+    border-style: dashed;
+}
+
+.layer-item.locked .layer-name {
+    text-decoration: line-through;
+}
+
+.layer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.layer-name {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.layer-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.layer-control-btn {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.layer-control-btn:hover {
+    background-color: #777;
+}
+
+.layer-control-btn.delete:hover {
+    background-color: #e74c3c;
+}
+
+.layer-properties {
+    font-size: 11px;
+    color: #ccc;
+}
+
+.layer-property {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.layer-property input {
+    width: 60px;
+    padding: 2px 5px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: white;
+    font-size: 10px;
+    border-radius: 2px;
+}
+
+.layer-property input:disabled {
+    background-color: #2a2a2a;
+    color: #999999;
+    border-color: #444;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.export-section {
+    padding: 15px;
+    border-top: 1px solid #555;
+}
+
+.export-btn {
+    width: 100%;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.export-btn:hover {
+    background-color: #219a52;
+}
+
+.drag-drop-hint {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: 2px dashed #555;
+    border-radius: 4px;
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.drag-drop-hint small {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Drag and drop styling */
+#three-container.drag-highlight {
+    position: relative;
+}
+
+#three-container.drag-highlight::before {
+    content: 'Drop configuration file to load';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(39, 174, 96, 0.9);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    z-index: 1000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#three-container.drag-highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(39, 174, 96, 0.2);
+    border: 3px dashed #27ae60;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .property-panel {
+        width: 280px;
+        min-width: 250px;
+    }
+    
+    .app-container {
+        min-width: 550px;
+    }
+    
+    .viewer-panel {
+        min-width: 250px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .app-container {
+        flex-direction: column;
+        min-width: unset;
+        min-height: 100vh;
+    }
+    
+    .viewer-panel {
+        height: 60vh;
+        min-width: unset;
+        border-bottom: 1px solid #555;
+    }
+    
+    .property-panel {
+        width: 100%;
+        height: 40vh;
+        min-width: unset;
+        max-width: unset;
+        border-left: none;
+        border-top: 1px solid #555;
+        flex-shrink: 1;
+    }
+    
+    .layers-list {
+        max-height: 200px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .viewer-panel {
+        height: 50vh;
+    }
+    
+    .property-panel {
+        height: 50vh;
+    }
+    
+    .panel-header, .base-texture-section, .layers-section, .export-section {
+        padding: 10px;
+    }
+    
+    .layers-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .layers-header h4 {
+        margin-bottom: 5px;
+    }
+    
+    .add-layer-btn {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+    
+    .layers-list {
+        max-height: 150px;
+    }
+}

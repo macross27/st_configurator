@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniform Configurator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="viewer-panel">
+            <div id="three-container"></div>
+            
+            <!-- Scale slider overlay -->
+            <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;">
+                <div class="scale-slider-container">
+                    <label for="scale-slider">Scale:</label>
+                    <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1">
+                    <span id="scale-value">1.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="property-panel">
+            <div class="panel-header">
+                <h3>Texture Editor</h3>
+            </div>
+            
+            <div class="base-texture-section">
+                <h4>Base Texture</h4>
+                <div class="color-controls">
+                    <label>Primary Color:</label>
+                    <input type="color" id="primary-color" value="#ffffff">
+                    <label>Secondary Color:</label>
+                    <input type="color" id="secondary-color" value="#000000">
+                </div>
+            </div>
+            
+            <div class="layers-section">
+                <div class="layers-header">
+                    <h4>Layers</h4>
+                    <button id="add-text-btn" class="add-layer-btn">Add Text</button>
+                    <button id="add-logo-btn" class="add-layer-btn">Add Logo</button>
+                </div>
+                <div id="layers-list" class="layers-list"></div>
+            </div>
+            
+            
+            <div class="export-section">
+                <button id="export-btn" class="export-btn">Save Configuration</button>
+                <button id="import-btn" class="export-btn">Load Configuration</button>
+                <div class="drag-drop-hint">
+                    <small>Or drag & drop .uniformconfig files onto the 3D viewer</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="main.js"></script>
+</body>
+</html>
