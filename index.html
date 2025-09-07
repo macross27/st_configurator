@@ -11,6 +11,20 @@
         <div class="viewer-panel">
             <div id="three-container"></div>
             
+            <!-- Reset button (bottom left) -->
+            <div class="reset-button-container">
+                <button id="reset-view-btn" class="reset-view-btn" title="Reset view to default state">⟲</button>
+            </div>
+            
+            <!-- FOV slider overlay -->
+            <div id="fov-slider-overlay" class="fov-slider-overlay" style="display: none;">
+                <div class="fov-slider-container">
+                    <label for="fov-slider">FOV:</label>
+                    <input type="range" id="fov-slider" min="10" max="50" step="1" value="35">
+                    <span id="fov-value">35°</span>
+                </div>
+            </div>
+            
             <!-- Scale slider overlay -->
             <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;">
                 <div class="scale-slider-container">
@@ -18,6 +32,51 @@
                     <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1">
                     <span id="scale-value">1.0</span>
                 </div>
+                
+                <div class="rotate-flip-container">
+                    <div class="rotate-slider-container">
+                        <label for="rotate-slider">Rotation:</label>
+                        <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0">
+                        <span id="rotate-value">0°</span>
+                    </div>
+                    <div class="flip-controls-container">
+                        <label class="flip-checkbox-label">
+                            <input type="checkbox" id="flip-horizontal-checkbox">
+                            <span class="checkbox-text">Flip Horizontal</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Color picker for layers with color property -->
+                <div id="color-palette-container" class="color-display-container" style="display: none;">
+                    <div class="color-display-wrapper">
+                        <label class="color-display-label">Color:</label>
+                        <div class="current-color-display" id="current-color-display" title="Click to choose color">
+                            <div class="current-color-swatch" id="current-color-swatch"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Color picker dropdown -->
+                <div id="color-picker-dropdown" class="color-picker-dropdown">
+                    <div class="color-picker-content">
+                        <button class="color-picker-close-btn" id="color-picker-close-btn">×</button>
+                        <div class="color-picker-main">
+                            <div class="color-wheel-section">
+                                <canvas id="color-wheel-canvas" width="200" height="200"></canvas>
+                                <div class="color-wheel-handle" id="color-wheel-handle"></div>
+                            </div>
+                            <div class="brightness-section">
+                                <div class="brightness-slider-container">
+                                    <div class="brightness-slider-track" id="brightness-slider-track">
+                                        <div class="brightness-slider-handle" id="brightness-slider-handle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
         
@@ -45,6 +104,25 @@
                 <div id="layers-list" class="layers-list"></div>
             </div>
             
+            <!-- Color picker dropdown for texture editor layers -->
+            <div id="layer-color-picker-dropdown" class="color-picker-dropdown">
+                <div class="color-picker-content">
+                    <button class="color-picker-close-btn" id="layer-color-picker-close-btn">×</button>
+                    <div class="color-picker-main">
+                        <div class="color-wheel-section">
+                            <canvas id="layer-color-wheel-canvas" width="200" height="200"></canvas>
+                            <div class="color-wheel-handle" id="layer-color-wheel-handle"></div>
+                        </div>
+                        <div class="brightness-section">
+                            <div class="brightness-slider-container">
+                                <div class="brightness-slider-track" id="layer-brightness-slider-track">
+                                    <div class="brightness-slider-handle" id="layer-brightness-slider-handle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="export-section">
                 <button id="export-btn" class="export-btn">Save Configuration</button>

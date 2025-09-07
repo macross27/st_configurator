@@ -13,7 +13,14 @@
       "mcp__playwright__playwright_evaluate",
       "mcp__playwright__playwright_screenshot",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(gh:*)",
+      "mcp__playwright__playwright_fill",
+      "mcp__playwright__playwright_get_visible_html",
+      "mcp__playwright__playwright_click",
+      "mcp__playwright__playwright_press_key",
+      "mcp__playwright__playwright_close",
+      "Read(//c/Users/dshin/Downloads/**)"
     ],
     "deny": [],
     "ask": []

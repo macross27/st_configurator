@@ -150,7 +150,9 @@ class UniformConfigurator {
         };
         
         this.layerManager.onTextureUpdated = (texture) => {
+            console.log('🎨 onTextureUpdated called, applying to 3D model');
             this.sceneManager.setTexture(texture);
+            console.log('🎨 Texture applied to scene');
         };
         
         // UI Manager Events
@@ -187,7 +189,44 @@ class UniformConfigurator {
             }
         };
         
+        this.uiManager.onRotateChange = (rotation) => {
+            const selectedLayer = this.layerManager.getSelectedLayer();
+            if (selectedLayer) {
+                this.layerManager.updateLayer(selectedLayer, { rotation });
+                this.updateUI();
+            }
+        };
+        
+        this.uiManager.onFlipChange = (flippedHorizontally) => {
+            const selectedLayer = this.layerManager.getSelectedLayer();
+            if (selectedLayer) {
+                this.layerManager.updateLayer(selectedLayer, { flippedHorizontally });
+                this.updateUI();
+            }
+        };
+        
+        this.uiManager.onFovChange = (fov) => {
+            this.sceneManager.setFov(fov);
+        };
+        
+        this.uiManager.onResetView = () => {
+            const defaultState = this.sceneManager.resetToDefaultState();
+            if (defaultState) {
+                // Update FOV slider to match reset state
+                this.uiManager.updateFovSlider(defaultState.fov);
+            }
+        };
+        
+        this.uiManager.onLayerColorChange = (color) => {
+            const selectedLayer = this.layerManager.getSelectedLayer();
+            if (selectedLayer) {
+                this.layerManager.updateLayer(selectedLayer, { color });
+                this.updateUI();
+            }
+        };
+        
         this.uiManager.onLayerPropertyChange = (layer, prop, value) => {
+            console.log('🔧 onLayerPropertyChange called:', { layer: layer.name, prop, value });
             if (prop === 'x' || prop === 'y') {
                 layer.position[prop] = parseFloat(value);
             } else if (prop === 'rotation' || prop === 'scale' || prop === 'fontSize') {
@@ -196,7 +235,9 @@ class UniformConfigurator {
                 layer[prop] = value;
             }
             
+            console.log('🔧 Updated layer property, calling layerManager.updateLayer');
             this.layerManager.updateLayer(layer, {});
+            console.log('🔧 Layer update completed');
         };
         
         this.uiManager.onLayerControl = (action, layer) => {
@@ -234,6 +275,10 @@ class UniformConfigurator {
         
         this.interactionManager.onLayerDrag = (layer) => {
             this.updateUI();
+        };
+        
+        this.interactionManager.onLayerDeleteRequested = (layer) => {
+            this.requestLayerDeletion(layer);
         };
     }
     
@@ -452,6 +497,27 @@ class UniformConfigurator {
             console.error('Error loading configuration:', error);
             this.uiManager.showNotification('Error loading configuration file. Please check the file format.', 'error', this.config.defaultErrorDuration);
         }
+    }
+    
+    requestLayerDeletion(layer) {
+        const title = 'Delete Layer';
+        const message = `Are you sure you want to delete "${layer.name}"?\n\nThis action cannot be undone.`;
+        
+        this.uiManager.showConfirmationDialog(
+            title,
+            message,
+            () => {
+                // User confirmed deletion
+                this.layerManager.deleteLayer(layer);
+                this.cleanupLayerAssets(layer);
+                this.updateUI();
+                this.uiManager.showNotification(`Layer "${layer.name}" deleted`, 'info', 3000);
+            },
+            () => {
+                // User cancelled, do nothing
+                console.log('Layer deletion cancelled');
+            }
+        );
     }
     
     cleanupLayerAssets(layer) {
