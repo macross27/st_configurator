@@ -28,21 +28,23 @@
             <!-- Scale slider overlay -->
             <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;">
                 <div class="scale-slider-container">
-                    <label for="scale-slider">Scale:</label>
+                    <label for="scale-slider">크기:</label>
                     <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1">
                     <span id="scale-value">1.0</span>
                 </div>
                 
+                <div class="section-separator"></div>
+                
                 <div class="rotate-flip-container">
                     <div class="rotate-slider-container">
-                        <label for="rotate-slider">Rotation:</label>
+                        <label for="rotate-slider">회전:</label>
                         <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0">
                         <span id="rotate-value">0°</span>
                     </div>
                     <div class="flip-controls-container">
                         <label class="flip-checkbox-label">
                             <input type="checkbox" id="flip-horizontal-checkbox">
-                            <span class="checkbox-text">Flip Horizontal</span>
+                            <span class="checkbox-text">좌우반전</span>
                         </label>
                     </div>
                 </div>
@@ -50,7 +52,7 @@
                 <!-- Color picker for layers with color property -->
                 <div id="color-palette-container" class="color-display-container" style="display: none;">
                     <div class="color-display-wrapper">
-                        <label class="color-display-label">Color:</label>
+                        <label class="color-display-label">색:</label>
                         <div class="current-color-display" id="current-color-display" title="Click to choose color">
                             <div class="current-color-swatch" id="current-color-swatch"></div>
                         </div>

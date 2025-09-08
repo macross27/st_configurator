@@ -20,7 +20,10 @@
       "mcp__playwright__playwright_click",
       "mcp__playwright__playwright_press_key",
       "mcp__playwright__playwright_close",
-      "Read(//c/Users/dshin/Downloads/**)"
+      "Read(//c/Users/dshin/Downloads/**)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []
