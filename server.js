@@ -12,6 +12,7 @@ const path = require('path');
 const JobQueue = require('./lib/jobQueue');
 const ImageProcessor = require('./lib/imageProcessor');
 const SessionManager = require('./lib/sessionManager');
+const EmailService = require('./lib/emailService');
 
 const app = express();
 if (!process.env.PORT) {
@@ -44,6 +45,8 @@ const sessionManager = new SessionManager({
     sessionTimeoutMs: parseInt(process.env.SESSION_TIMEOUT_HOURS) * 60 * 60 * 1000 || 24 * 60 * 60 * 1000,
     maxSessionsPerIP: parseInt(process.env.MAX_SESSIONS_PER_IP) || 10
 });
+
+const emailService = new EmailService();
 
 // Ensure upload directories exist
 async function ensureDirectories() {
@@ -779,6 +782,43 @@ app.get('/api/sessions/:sessionId/layers/:layerId/image', async (req, res) => {
     }
 });
 
+// Send session files via email
+app.post('/api/sessions/:sessionId/email', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        const { recipient } = req.body; // Optional recipient override
+        
+        // Get session data
+        const session = await sessionManager.getSession(sessionId);
+        if (!session) {
+            return res.status(404).json({
+                success: false,
+                error: 'Session not found'
+            });
+        }
+        
+        console.log(`📧 Sending session files for session: ${sessionId}`);
+        
+        // Send session files via email
+        const result = await emailService.sendSessionFiles(sessionId, session, recipient);
+        
+        res.json({
+            success: true,
+            messageId: result.messageId,
+            message: 'Session files sent successfully',
+            recipient: recipient || process.env.EMAIL_RECIPIENT
+        });
+        
+    } catch (error) {
+        console.error('Error sending session files:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to send session files',
+            details: error.message
+        });
+    }
+});
+
 // Session stats endpoint
 app.get('/api/sessions/stats', async (req, res) => {
     try {
@@ -794,6 +834,104 @@ app.get('/api/sessions/stats', async (req, res) => {
         });
     }
 });
+
+// Email API endpoints
+app.post('/api/email/test', async (req, res) => {
+    try {
+        await emailService.testConnection();
+        res.json({ success: true, message: 'Email service connection successful' });
+    } catch (error) {
+        console.error('Email test failed:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Email service connection failed',
+            details: error.message 
+        });
+    }
+});
+
+app.post('/api/email/send', async (req, res) => {
+    try {
+        const { to, subject, html, text } = req.body;
+        
+        if (!to || !subject || !html) {
+            return res.status(400).json({
+                success: false,
+                error: 'Missing required fields: to, subject, html'
+            });
+        }
+
+        const result = await emailService.sendEmail(to, subject, html, text);
+        res.json({ 
+            success: true, 
+            messageId: result.messageId,
+            message: 'Email sent successfully' 
+        });
+    } catch (error) {
+        console.error('Failed to send email:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to send email',
+            details: error.message 
+        });
+    }
+});
+
+app.post('/api/email/notification', async (req, res) => {
+    try {
+        const { to, title, message, actionUrl } = req.body;
+        
+        if (!to || !title || !message) {
+            return res.status(400).json({
+                success: false,
+                error: 'Missing required fields: to, title, message'
+            });
+        }
+
+        const result = await emailService.sendNotification(to, title, message, actionUrl);
+        res.json({ 
+            success: true, 
+            messageId: result.messageId,
+            message: 'Notification sent successfully' 
+        });
+    } catch (error) {
+        console.error('Failed to send notification:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to send notification',
+            details: error.message 
+        });
+    }
+});
+
+app.post('/api/email/welcome', async (req, res) => {
+    try {
+        const { to, name } = req.body;
+        
+        if (!to) {
+            return res.status(400).json({
+                success: false,
+                error: 'Missing required field: to'
+            });
+        }
+
+        const result = await emailService.sendWelcome(to, name);
+        res.json({ 
+            success: true, 
+            messageId: result.messageId,
+            message: 'Welcome email sent successfully' 
+        });
+    } catch (error) {
+        console.error('Failed to send welcome email:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to send welcome email',
+            details: error.message 
+        });
+    }
+});
+
+
 
 // Session URL routing - serve the main app for session URLs
 app.get('/:sessionId', async (req, res) => {
