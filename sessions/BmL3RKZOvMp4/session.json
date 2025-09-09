@@ -1,0 +1,93 @@
+{
+  "sessionId": "BmL3RKZOvMp4",
+  "clientIP": "::1",
+  "createdAt": "2025-09-09T07:07:47.571Z",
+  "lastModified": "2025-09-09T07:11:47.633Z",
+  "layers": [
+    {
+      "id": "layer_1757401667692_tjeowx",
+      "type": "text",
+      "name": "Sample Text",
+      "visible": true,
+      "properties": {
+        "x": 0.1,
+        "y": 0.2,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1,
+        "text": "Sample Text",
+        "color": "#000000",
+        "fontSize": 48,
+        "fontFamily": "Arial"
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T07:07:47.692Z"
+    },
+    {
+      "id": "layer_1757401667697_pxmv3v",
+      "type": "logo",
+      "name": "Generated Image September 02, 2025 - 4_35PM.jpeg",
+      "visible": true,
+      "properties": {
+        "x": 0.06991151986173494,
+        "y": 0.6094165577307691,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1
+      },
+      "imagePath": "layer_1757401667697_pxmv3v.png",
+      "originalPath": "original_uploads/layer_1757401667697_pxmv3v_original.jpg",
+      "createdAt": "2025-09-09T07:07:47.698Z"
+    },
+    {
+      "id": "layer_1757401786651_k2naai",
+      "type": "text",
+      "name": "Sample Text",
+      "visible": true,
+      "properties": {
+        "x": 0.1,
+        "y": 0.2,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1,
+        "text": "Sample Text",
+        "color": "#000000",
+        "fontSize": 48,
+        "fontFamily": "Arial"
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T07:09:46.651Z"
+    },
+    {
+      "id": "layer_1757401788723_845v9w",
+      "type": "image",
+      "name": "Layer 4",
+      "visible": true,
+      "properties": {},
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T07:09:48.723Z"
+    }
+  ],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {
+    "primaryColor": "#ffffff",
+    "secondaryColor": "#000000",
+    "lastModified": "2025-09-09T07:09:46.648Z"
+  },
+  "lastAccessed": "2025-09-09T07:11:47.633Z"
+}

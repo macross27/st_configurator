@@ -1,0 +1,43 @@
+{
+  "sessionId": "FPolPfOZGVwq",
+  "clientIP": "::1",
+  "createdAt": "2025-09-09T02:11:05.768Z",
+  "lastModified": "2025-09-09T06:57:46.697Z",
+  "layers": [
+    {
+      "id": "layer_1757383865877_gyie0u",
+      "type": "text",
+      "name": "Sample Text",
+      "visible": true,
+      "properties": {
+        "x": 0.1,
+        "y": 0.2,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1,
+        "text": "Sample Text",
+        "color": "#000000",
+        "fontSize": 48,
+        "fontFamily": "Arial"
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T02:11:05.877Z"
+    }
+  ],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {},
+  "lastAccessed": "2025-09-09T06:57:46.697Z"
+}

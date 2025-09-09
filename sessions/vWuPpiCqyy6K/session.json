@@ -1,0 +1,59 @@
+{
+  "sessionId": "vWuPpiCqyy6K",
+  "clientIP": "::1",
+  "createdAt": "2025-09-09T06:58:40.171Z",
+  "lastModified": "2025-09-09T06:58:42.791Z",
+  "layers": [
+    {
+      "id": "layer_1757401120294_8msnyv",
+      "type": "text",
+      "name": "Sample Text",
+      "visible": true,
+      "properties": {
+        "x": 0.1,
+        "y": 0.2,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1,
+        "text": "Sample Text",
+        "color": "#000000",
+        "fontSize": 48,
+        "fontFamily": "Arial"
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T06:58:40.294Z"
+    },
+    {
+      "id": "layer_1757401120300_7ihs9n",
+      "type": "logo",
+      "name": "Generated Image September 02, 2025 - 4_35PM.jpeg",
+      "visible": true,
+      "properties": {
+        "x": 0.6817643873951194,
+        "y": 0.8541362719623178,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T06:58:40.300Z"
+    }
+  ],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {},
+  "lastAccessed": "2025-09-09T06:58:42.791Z"
+}

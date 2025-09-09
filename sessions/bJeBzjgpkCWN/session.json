@@ -1,0 +1,33 @@
+{
+  "sessionId": "bJeBzjgpkCWN",
+  "clientIP": "::1",
+  "createdAt": "2025-09-08T16:35:38.324Z",
+  "lastModified": "2025-09-09T06:57:46.682Z",
+  "layers": [
+    {
+      "id": "layer_1757349343462_hg3p0w",
+      "type": "text",
+      "name": "Layer 1",
+      "visible": true,
+      "properties": {},
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-08T16:35:43.462Z"
+    }
+  ],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {},
+  "lastAccessed": "2025-09-09T06:57:46.682Z"
+}

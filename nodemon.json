@@ -1,0 +1,23 @@
+{
+  "watch": ["server.js", "lib/imageProcessor.js"],
+  "ignore": [
+    "uploads/*",
+    "processed/*", 
+    "temp/*",
+    "sessions/*",
+    "main.js",
+    "lib/client/*",
+    "styles.css",
+    "index.html",
+    "assets/*",
+    "node_modules/*",
+    ".git/*",
+    "*.log",
+    "*.tmp"
+  ],
+  "ext": "js,json",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": 1000
+}

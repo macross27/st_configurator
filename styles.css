@@ -989,36 +989,35 @@ body {
     border-top: 1px solid #555;
 }
 
-.export-btn {
+
+.submit-btn {
     width: 100%;
-    background-color: #27ae60;
+    background-color: #3498db;
     color: white;
     border: none;
-    padding: 12px;
-    font-size: 14px;
-    border-radius: 3px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
 }
 
-.export-btn:hover {
-    background-color: #219a52;
+.submit-btn:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+    transform: translateY(-1px);
 }
 
-.drag-drop-hint {
-    text-align: center;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border: 2px dashed #555;
-    border-radius: 4px;
-    background: rgba(39, 174, 96, 0.1);
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(52, 152, 219, 0.5);
 }
 
-.drag-drop-hint small {
-    color: #aaa;
-    font-style: italic;
-}
 
 /* Drag and drop styling */
 #three-container.drag-highlight {

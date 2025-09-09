@@ -1,0 +1,26 @@
+{
+  "sessionId": "cyI6-h5ZtbMP",
+  "clientIP": "::1",
+  "createdAt": "2025-09-08T16:51:17.017Z",
+  "lastModified": "2025-09-09T06:57:46.690Z",
+  "layers": [],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {
+    "primaryColor": "#ffffff",
+    "secondaryColor": "#000000",
+    "lastModified": "2025-09-08T16:51:42.336Z"
+  },
+  "lastAccessed": "2025-09-09T06:57:46.690Z"
+}

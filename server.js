@@ -6,10 +6,12 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const path = require('path');
 
 const JobQueue = require('./lib/jobQueue');
 const ImageProcessor = require('./lib/imageProcessor');
+const SessionManager = require('./lib/sessionManager');
 
 const app = express();
 if (!process.env.PORT) {
@@ -35,6 +37,12 @@ const imageProcessor = new ImageProcessor({
     webpConversionThreshold: parseInt(process.env.WEBP_CONVERSION_THRESHOLD_MB) || 2,
     supportedFormats: (process.env.SUPPORTED_FORMATS || 'jpeg,png,webp,gif').split(','),
     processedDir: process.env.PROCESSED_DIR || './processed'
+});
+
+const sessionManager = new SessionManager({
+    sessionsDir: process.env.SESSIONS_DIR || './sessions',
+    sessionTimeoutMs: parseInt(process.env.SESSION_TIMEOUT_HOURS) * 60 * 60 * 1000 || 24 * 60 * 60 * 1000,
+    maxSessionsPerIP: parseInt(process.env.MAX_SESSIONS_PER_IP) || 10
 });
 
 // Ensure upload directories exist
@@ -386,6 +394,433 @@ app.get('/api/stats', async (req, res) => {
     }
 });
 
+// Session API Endpoints
+
+// Create new session
+app.post('/api/sessions', async (req, res) => {
+    try {
+        const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
+        const sessionId = await sessionManager.createSession(clientIP);
+        
+        res.json({
+            success: true,
+            sessionId: sessionId,
+            url: `/${sessionId}`,
+            message: 'Session created successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error creating session:', error);
+        res.status(500).json({
+            error: 'Failed to create session'
+        });
+    }
+});
+
+// Get session data
+app.get('/api/sessions/:sessionId', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        const sessionData = await sessionManager.getSession(sessionId);
+        
+        if (!sessionData) {
+            return res.status(404).json({
+                error: 'Session not found'
+            });
+        }
+        
+        res.json({
+            success: true,
+            session: sessionData
+        });
+        
+    } catch (error) {
+        console.error('Error getting session:', error);
+        res.status(500).json({
+            error: 'Failed to get session'
+        });
+    }
+});
+
+// Update session data
+app.put('/api/sessions/:sessionId', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        const updates = req.body;
+        
+        const updatedSession = await sessionManager.updateSession(sessionId, updates);
+        
+        res.json({
+            success: true,
+            session: updatedSession,
+            message: 'Session updated successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error updating session:', error);
+        if (error.message === 'Session not found') {
+            res.status(404).json({
+                error: 'Session not found'
+            });
+        } else {
+            res.status(500).json({
+                error: 'Failed to update session'
+            });
+        }
+    }
+});
+
+// Add layer to session with image upload
+app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        
+        // Check if session exists
+        const sessionData = await sessionManager.getSession(sessionId);
+        if (!sessionData) {
+            return res.status(404).json({
+                error: 'Session not found'
+            });
+        }
+        
+        console.log(`🔄 POST /api/sessions/${sessionId}/layers - Request received`);
+        console.log(`🔄 Request body: ${JSON.stringify(req.body, null, 2)}`);
+        console.log(`🔄 Request file: ${req.file ? 'present' : 'not present'}`);
+        
+        let layerData;
+        try {
+            // Handle both form-data (req.body.layerData) and direct JSON (req.body)
+            if (req.body.layerData) {
+                layerData = JSON.parse(req.body.layerData);
+                console.log(`🔄 Using form-data layerData`);
+            } else if (req.body && Object.keys(req.body).length > 0) {
+                layerData = req.body;
+                console.log(`🔄 Using direct JSON body`);
+            } else {
+                layerData = {};
+                console.log(`🔄 Using empty layerData`);
+            }
+        } catch (parseError) {
+            console.error(`❌ Parse error: ${parseError.message}`);
+            return res.status(400).json({
+                error: 'Invalid layer data format'
+            });
+        }
+        
+        console.log(`🔄 Final layerData: ${JSON.stringify(layerData, null, 2)}`);
+        
+        let processedImageBuffer = null;
+        let originalImageBuffer = null;
+        
+        // Check if this is a server-processed image reference
+        if (layerData.serverImageUrl) {
+            console.log(`🔄 Processing server image reference: ${layerData.serverImageUrl}`);
+            
+            try {
+                // Extract the image filename from the server URL
+                const urlMatch = layerData.serverImageUrl.match(/\/api\/images\/(.+)$/);
+                console.log(`🔄 URL match result: ${urlMatch ? urlMatch[1] : 'NO MATCH'}`);
+                
+                if (urlMatch) {
+                    const imageFileName = urlMatch[1];
+                    const processedImagePath = path.resolve('./processed', imageFileName);
+                    
+                    console.log(`🔄 Looking for existing processed image: ${processedImagePath}`);
+                    
+                    if (fsSync.existsSync(processedImagePath)) {
+                        // Copy the existing processed image to session
+                        processedImageBuffer = fsSync.readFileSync(processedImagePath);
+                        originalImageBuffer = processedImageBuffer; // Use processed as original for server images
+                        console.log(`✅ Successfully loaded existing image: ${processedImagePath} (${Math.round(processedImageBuffer.length / 1024)}KB)`);
+                    } else {
+                        console.error(`❌ Processed image not found at: ${processedImagePath}`);
+                        // List available files for debugging
+                        try {
+                            const processedFiles = fsSync.readdirSync('./processed').filter(f => f.includes('generated-image'));
+                            console.log(`🔍 Available processed files matching 'generated-image': ${processedFiles.slice(0, 5).join(', ')}${processedFiles.length > 5 ? `... and ${processedFiles.length - 5} more` : ''}`);
+                        } catch (listError) {
+                            console.error(`❌ Could not list processed directory: ${listError.message}`);
+                        }
+                    }
+                } else {
+                    console.error(`❌ Could not extract filename from serverImageUrl: ${layerData.serverImageUrl}`);
+                }
+            } catch (serverImageError) {
+                console.error(`❌ Error processing server image URL: ${serverImageError.message}`);
+                console.error(`❌ Stack trace: ${serverImageError.stack}`);
+            }
+        } else if (req.file) {
+            // Validate and process image
+            if (!imageProcessor.isValidImage(req.file)) {
+                return res.status(400).json({
+                    error: 'Invalid image format'
+                });
+            }
+            
+            console.log(`Processing image for session ${sessionId}: ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)`);
+            
+            // Process image with async pattern
+            const jobId = jobQueue.addJob(
+                (data, id) => imageProcessor.processImage(data, id),
+                req.file,
+                {
+                    priority: parseInt(req.body.priority) || 0,
+                    maxRetries: 2,
+                    metadata: {
+                        layerData: layerData,
+                        originalBuffer: req.file.buffer
+                    }
+                }
+            );
+            
+            // Return immediately with job ID for client polling
+            if (req.body.async === 'true') {
+                return res.json({
+                    success: true,
+                    jobId: jobId,
+                    message: 'Layer processing started',
+                    pollUrl: `/api/sessions/${sessionId}/layers/job/${jobId}`
+                });
+            }
+            
+            // Synchronous processing (existing behavior)
+            let processingComplete = false;
+            let attempts = 0;
+            const maxAttempts = 60; // 60 seconds timeout
+            
+            while (!processingComplete && attempts < maxAttempts) {
+                const status = jobQueue.getJobStatus(jobId);
+                
+                if (status.status === 'completed') {
+                    processedImageBuffer = status.result.buffer;
+                    originalImageBuffer = req.file.buffer;
+                    processingComplete = true;
+                } else if (status.status === 'failed') {
+                    throw new Error(status.error?.message || 'Image processing failed');
+                } else {
+                    // Wait 1 second before checking again
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    attempts++;
+                }
+            }
+            
+            if (!processingComplete) {
+                throw new Error('Image processing timeout');
+            }
+        }
+        
+        // Debug: Log what we're passing to addLayer
+        console.log(`🔄 About to call addLayer with:`);
+        console.log(`  - sessionId: ${sessionId}`);
+        console.log(`  - layerData.type: ${layerData.type}`);
+        console.log(`  - layerData.name: ${layerData.name}`);
+        console.log(`  - processedImageBuffer: ${processedImageBuffer ? `${Math.round(processedImageBuffer.length / 1024)}KB` : 'null'}`);
+        console.log(`  - originalImageBuffer: ${originalImageBuffer ? `${Math.round(originalImageBuffer.length / 1024)}KB` : 'null'}`);
+        
+        // Add layer to session
+        const layer = await sessionManager.addLayer(
+            sessionId,
+            layerData,
+            processedImageBuffer,
+            originalImageBuffer
+        );
+        
+        res.json({
+            success: true,
+            layer: layer,
+            message: 'Layer added successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error adding layer to session:', error);
+        res.status(500).json({
+            error: error.message || 'Failed to add layer'
+        });
+    }
+});
+
+// Update layer in session
+app.put('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
+    try {
+        const { sessionId, layerId } = req.params;
+        const updates = req.body;
+        
+        const updatedLayer = await sessionManager.updateLayer(sessionId, layerId, updates);
+        
+        res.json({
+            success: true,
+            layer: updatedLayer,
+            message: 'Layer updated successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error updating layer:', error);
+        if (error.message === 'Session not found' || error.message === 'Layer not found') {
+            res.status(404).json({
+                error: error.message
+            });
+        } else {
+            res.status(500).json({
+                error: 'Failed to update layer'
+            });
+        }
+    }
+});
+
+// Remove layer from session
+app.delete('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
+    try {
+        const { sessionId, layerId } = req.params;
+        
+        await sessionManager.removeLayer(sessionId, layerId);
+        
+        res.json({
+            success: true,
+            message: 'Layer removed successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error removing layer:', error);
+        if (error.message === 'Session not found' || error.message === 'Layer not found') {
+            res.status(404).json({
+                error: error.message
+            });
+        } else {
+            res.status(500).json({
+                error: 'Failed to remove layer'
+            });
+        }
+    }
+});
+
+// Poll job status for async layer processing
+app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
+    try {
+        const { sessionId, jobId } = req.params;
+        
+        // Check if session exists
+        const sessionData = await sessionManager.getSession(sessionId);
+        if (!sessionData) {
+            return res.status(404).json({
+                error: 'Session not found'
+            });
+        }
+        
+        // Get job status
+        const status = jobQueue.getJobStatus(jobId);
+        
+        if (status.status === 'completed') {
+            // Job completed, add layer to session
+            const processedImageBuffer = status.result.buffer;
+            const jobMetadata = status.options?.metadata || {};
+            const layerData = jobMetadata.layerData || {};
+            const originalImageBuffer = jobMetadata.originalBuffer;
+            
+            const layer = await sessionManager.addLayer(
+                sessionId,
+                layerData,
+                processedImageBuffer,
+                originalImageBuffer
+            );
+            
+            res.json({
+                success: true,
+                status: 'completed',
+                layer: layer,
+                message: 'Layer processing completed'
+            });
+        } else if (status.status === 'failed') {
+            res.json({
+                success: false,
+                status: 'failed',
+                error: status.error?.message || 'Image processing failed'
+            });
+        } else {
+            // Still processing
+            res.json({
+                success: true,
+                status: 'processing',
+                message: 'Layer processing in progress'
+            });
+        }
+        
+    } catch (error) {
+        console.error('Error polling job status:', error);
+        res.status(500).json({
+            error: error.message || 'Failed to get job status'
+        });
+    }
+});
+
+// Get layer image
+app.get('/api/sessions/:sessionId/layers/:layerId/image', async (req, res) => {
+    try {
+        const { sessionId, layerId } = req.params;
+        
+        const imageBuffer = await sessionManager.getLayerImage(sessionId, layerId);
+        
+        // Set appropriate headers
+        res.setHeader('Content-Type', 'image/png');
+        res.setHeader('Cache-Control', 'public, max-age=86400');
+        
+        res.send(imageBuffer);
+        
+    } catch (error) {
+        console.error('Error getting layer image:', error);
+        if (error.message === 'Session not found' || error.message.includes('not found')) {
+            res.status(404).json({
+                error: 'Image not found'
+            });
+        } else {
+            res.status(500).json({
+                error: 'Failed to get image'
+            });
+        }
+    }
+});
+
+// Session stats endpoint
+app.get('/api/sessions/stats', async (req, res) => {
+    try {
+        const stats = await sessionManager.getStats();
+        res.json({
+            success: true,
+            stats: stats
+        });
+    } catch (error) {
+        console.error('Error getting session stats:', error);
+        res.status(500).json({
+            error: 'Failed to get session stats'
+        });
+    }
+});
+
+// Session URL routing - serve the main app for session URLs
+app.get('/:sessionId', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        
+        // Validate session ID format (12 characters, alphanumeric)
+        if (!/^[A-Za-z0-9_-]{12}$/.test(sessionId)) {
+            return res.status(404).send('Session not found');
+        }
+        
+        // Check if session exists
+        const sessionData = await sessionManager.getSession(sessionId);
+        if (!sessionData) {
+            return res.status(404).send('Session not found');
+        }
+        
+        // For now, redirect to main app with session parameter
+        // In production, you would serve the same index.html but inject the sessionId
+        res.redirect(`/?session=${sessionId}`);
+        
+    } catch (error) {
+        console.error('Error handling session URL:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 // Error handling middleware
 app.use((error, req, res, next) => {
     console.error('Express error:', error);
@@ -461,6 +896,11 @@ async function startServer() {
             // Start periodic cleanup
             setInterval(() => {
                 imageProcessor.cleanupOldFiles();
+            }, 60 * 60 * 1000); // Every hour
+            
+            // Start periodic session cleanup
+            setInterval(() => {
+                sessionManager.cleanupExpiredSessions();
             }, 60 * 60 * 1000); // Every hour
         });
         

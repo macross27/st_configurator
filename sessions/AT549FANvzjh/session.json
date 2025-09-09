@@ -1,0 +1,22 @@
+{
+  "sessionId": "AT549FANvzjh",
+  "clientIP": "::1",
+  "createdAt": "2025-09-08T10:07:08.983Z",
+  "lastModified": "2025-09-09T06:57:46.682Z",
+  "layers": [],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {},
+  "lastAccessed": "2025-09-09T06:57:46.682Z"
+}

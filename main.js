@@ -5,6 +5,7 @@ import { InteractionManager } from './lib/client/InteractionManager.js';
 import { UIManager } from './lib/client/UIManager.js';
 import { ConfigurationManager } from './lib/client/ConfigurationManager.js';
 import { ImageProcessor } from './lib/client/ImageProcessor.js';
+import { SessionManager } from './lib/client/SessionManager.js';
 import './lib/serverApiClient.js';
 
 class UniformConfigurator {
@@ -12,6 +13,7 @@ class UniformConfigurator {
         this.serverAvailable = false;
         this.serverApiClient = null;
         this.imageProcessor = null;
+        this.sessionManager = null;
         this.config = {};
         
         this.initializeApp();
@@ -121,6 +123,23 @@ class UniformConfigurator {
         this.uiManager = new UIManager();
         this.configurationManager = new ConfigurationManager(this.sceneManager, this.layerManager);
         this.interactionManager = new InteractionManager(this.sceneManager, this.layerManager);
+        
+        // Initialize Session Manager (but don't auto-create sessions)
+        if (this.serverAvailable) {
+            const serverHost = import.meta.env.VITE_SERVER_HOST || import.meta.env.VITE_DEFAULT_SERVER_HOST || 'localhost';
+            const serverPort = import.meta.env.VITE_SERVER_PORT || import.meta.env.VITE_DEFAULT_SERVER_PORT || '3030';
+            const serverProtocol = import.meta.env.VITE_SERVER_PROTOCOL || import.meta.env.VITE_DEFAULT_SERVER_PROTOCOL || 'http';
+            
+            const serverUrl = `${serverProtocol}://${serverHost}:${serverPort}`;
+            
+            this.sessionManager = new SessionManager({
+                serverUrl: serverUrl,
+                onSessionCreated: (sessionData) => this.handleSessionCreated(sessionData),
+                onSessionLoaded: (sessionData) => this.handleSessionLoaded(sessionData),
+                onSessionSaved: (sessionData) => this.handleSessionSaved(sessionData),
+                onSessionError: (error) => this.handleSessionError(error)
+            });
+        }
     }
     
     setupEventHandlers() {
@@ -145,7 +164,14 @@ class UniformConfigurator {
         };
         
         // Layer Manager Events
+        this.layerManager.onLayerAdded = (layer) => {
+            console.log('🎨 Layer added:', layer);
+            this.layerManager.selectLayer(layer.id);
+            this.updateUI();
+        };
+        
         this.layerManager.onLayerSelected = (layer) => {
+            console.log('🎯 Layer selected:', layer);
             this.updateUI();
         };
         
@@ -173,35 +199,29 @@ class UniformConfigurator {
             }
         };
         
-        this.uiManager.onExport = () => {
-            this.configurationManager.exportConfiguration();
-        };
         
-        this.uiManager.onImport = (file) => {
-            this.loadConfiguration(file);
+        this.uiManager.onSubmit = async () => {
+            await this.handleSubmit();
         };
         
         this.uiManager.onScaleChange = (scale) => {
             const selectedLayer = this.layerManager.getSelectedLayer();
             if (selectedLayer) {
-                this.layerManager.updateLayer(selectedLayer, { scale });
-                this.updateUI();
+                this.layerManager.updateLayer(selectedLayer.id, { scale });
             }
         };
         
         this.uiManager.onRotateChange = (rotation) => {
             const selectedLayer = this.layerManager.getSelectedLayer();
             if (selectedLayer) {
-                this.layerManager.updateLayer(selectedLayer, { rotation });
-                this.updateUI();
+                this.layerManager.updateLayer(selectedLayer.id, { rotation });
             }
         };
         
         this.uiManager.onFlipChange = (flippedHorizontally) => {
             const selectedLayer = this.layerManager.getSelectedLayer();
             if (selectedLayer) {
-                this.layerManager.updateLayer(selectedLayer, { flippedHorizontally });
-                this.updateUI();
+                this.layerManager.updateLayer(selectedLayer.id, { flippedHorizontally });
             }
         };
         
@@ -220,33 +240,35 @@ class UniformConfigurator {
         this.uiManager.onLayerColorChange = (color) => {
             const selectedLayer = this.layerManager.getSelectedLayer();
             if (selectedLayer) {
-                this.layerManager.updateLayer(selectedLayer, { color });
+                this.layerManager.updateLayer(selectedLayer.id, { color });
                 this.updateUI();
             }
         };
         
         this.uiManager.onLayerPropertyChange = (layer, prop, value) => {
             console.log('🔧 onLayerPropertyChange called:', { layer: layer.name, prop, value });
+            const updateData = {};
+            
             if (prop === 'x' || prop === 'y') {
-                layer.position[prop] = parseFloat(value);
+                updateData.position = {...layer.position, [prop]: parseFloat(value)};
             } else if (prop === 'rotation' || prop === 'scale' || prop === 'fontSize') {
-                layer[prop] = parseFloat(value);
+                updateData[prop] = parseFloat(value);
             } else {
-                layer[prop] = value;
+                updateData[prop] = value;
             }
             
             console.log('🔧 Updated layer property, calling layerManager.updateLayer');
-            this.layerManager.updateLayer(layer, {});
+            this.layerManager.updateLayer(layer.id, updateData);
             console.log('🔧 Layer update completed');
         };
         
         this.uiManager.onLayerControl = (action, layer) => {
             switch (action) {
                 case 'select':
-                    this.layerManager.selectLayer(layer);
+                    this.layerManager.selectLayer(layer.id);
                     break;
                 case 'lock':
-                    this.layerManager.toggleLayerLock(layer);
+                    this.layerManager.toggleLayerLock(layer.id);
                     break;
                 case 'duplicate':
                     this.layerManager.duplicateLayer(layer);
@@ -260,10 +282,6 @@ class UniformConfigurator {
         };
         
         // Configuration Manager Events
-        this.configurationManager.onLoadConfiguration = (file) => {
-            this.loadConfiguration(file);
-        };
-        
         this.configurationManager.onDropImages = (files) => {
             this.processMultipleImages(files);
         };
@@ -420,11 +438,11 @@ class UniformConfigurator {
                     this.configurationManager.storeUserImage(assetId, processedImageData);
                 }
                 
-                const layer = this.layerManager.addLogoLayer(img, {
-                    name: file.name,
-                    assetId: assetId,
-                    serverImageUrl: serverProcessed ? processedImageData : null
-                });
+                const layer = this.layerManager.addLogoLayer(img, file.name);
+                
+                // Set additional properties after layer creation
+                layer.assetId = assetId;
+                layer.serverImageUrl = serverProcessed ? processedImageData : null;
                 
                 if (wasResized || fileSizeReduced || serverProcessed) {
                     this.showImageProcessingNotification(file.name, {
@@ -540,10 +558,178 @@ class UniformConfigurator {
         const layers = this.layerManager.getLayers();
         const selectedLayer = this.layerManager.getSelectedLayer();
         
+        console.log('🔄 updateUI - selectedLayer:', selectedLayer);
+        console.log('🔄 updateUI - all layers:', layers);
+        
         this.uiManager.updateLayersList(layers, selectedLayer);
         this.uiManager.updateScaleSlider(selectedLayer);
+    }
+    
+    async handleSubmit() {
+        if (!this.sessionManager) {
+            this.uiManager.showNotification('❌ Session system not available. Server may be offline.', 'error', 5000);
+            return;
+        }
+        
+        try {
+            // Show loading notification
+            this.uiManager.showNotification('💾 Submitting session...', 'info', 2000);
+            
+            
+            // Update session configuration with current settings
+            this.updateSessionConfiguration();
+            
+            // Submit session and get the shareable URL
+            const shareableUrl = await this.sessionManager.submitSession(this.layerManager);
+            
+            // Show success notification with the shareable URL
+            this.uiManager.showNotification(
+                `✅ Session saved! Your unique URL: ${shareableUrl}
+                
+                Click the URL to copy it to clipboard, then share it to continue editing later.`, 
+                'success', 
+                15000
+            );
+            
+            console.log(`🔗 Session submitted successfully: ${shareableUrl}`);
+            
+        } catch (error) {
+            console.error('Error submitting session:', error);
+            this.uiManager.showNotification(
+                `❌ Failed to submit session: ${error.message}`, 
+                'error', 
+                8000
+            );
+        }
+    }
+    
+    // Session Management Event Handlers
+    handleSessionCreated(sessionData) {
+        console.log(`✅ New session created: ${sessionData.sessionId}`);
+        // Don't show URL immediately - wait for user to submit
+    }
+    
+    handleSessionLoaded(sessionData) {
+        console.log(`✅ Session loaded: ${sessionData.sessionId}`);
+        this.uiManager.showNotification(`Session restored! ${sessionData.layers.length} layers loaded.`, 'success', 5000);
+        
+        // Restore session state
+        this.restoreSessionState(sessionData);
+    }
+    
+    handleSessionSaved(sessionData) {
+        console.log(`💾 Session saved: ${sessionData.sessionId}`);
+        // Optional: Show a subtle save indicator
+    }
+    
+    handleSessionError(error) {
+        console.error('Session error:', error);
+        this.uiManager.showNotification(`Session error: ${error.message}`, 'error', 8000);
+    }
+    
+    async restoreSessionState(sessionData) {
+        try {
+            // Restore layers
+            for (const layerData of sessionData.layers) {
+                // Create layer from session data for all layer types
+                const layer = this.layerManager.createLayerFromSessionData(layerData);
+                if (layer) {
+                    // Try to load image if there's an imagePath OR if it's an image layer (attempt fallback loading)
+                    if (layerData.imagePath || (layer.type !== 'text' && !layerData.imagePath)) {
+                        const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
+                        try {
+                            await this.layerManager.loadLayerImage(layer, imageUrl);
+                        } catch (error) {
+                            console.warn(`⚠️ Failed to load image for layer ${layerData.id}:`, error);
+                            // Continue with other layers even if one fails to load
+                        }
+                    }
+                }
+            }
+            
+            // Restore model settings if any
+            if (sessionData.modelSettings && sessionData.modelSettings.modelPath) {
+                await this.sceneManager.loadModel(sessionData.modelSettings.modelPath);
+            }
+            
+            // Force texture update after all layers are restored AND model is loaded
+            setTimeout(() => {
+                this.layerManager.updateTexture();
+            }, 500); // Small delay to ensure everything is ready
+            
+            // Restore configuration
+            if (sessionData.configuration) {
+                this.applyConfiguration(sessionData.configuration);
+            }
+            
+            // Update UI to reflect restored state
+            this.updateUI();
+            
+        } catch (error) {
+            console.error('Error restoring session state:', error);
+            this.uiManager.showNotification('Error restoring session data', 'error', 5000);
+        }
+    }
+    
+    applyConfiguration(config) {
+        // Apply any saved configuration (colors, settings, etc.)
+        if (config.primaryColor) {
+            const primaryColorInput = document.getElementById('primary-color');
+            if (primaryColorInput) {
+                primaryColorInput.value = config.primaryColor;
+            }
+        }
+        
+        if (config.secondaryColor) {
+            const secondaryColorInput = document.getElementById('secondary-color');
+            if (secondaryColorInput) {
+                secondaryColorInput.value = config.secondaryColor;
+            }
+        }
+        
+        // Update colors if they were set
+        if (config.primaryColor || config.secondaryColor) {
+            this.layerManager.updateBaseTexture(
+                config.primaryColor || '#ff6600',
+                config.secondaryColor || '#0066ff'
+            );
+        }
+    }
+    
+    displayShareableUrl() {
+        if (!this.sessionManager || !this.sessionManager.isSessionActive()) {
+            return;
+        }
+        
+        const shareUrl = this.sessionManager.getShareableUrl();
+        
+        // Add share URL to UI (you might want to add this to a specific UI element)
+        const shareElement = document.getElementById('share-url');
+        if (shareElement) {
+            shareElement.textContent = shareUrl;
+            shareElement.href = shareUrl;
+        } else {
+            // If no dedicated share element, show in notification
+            console.log(`🔗 Shareable URL: ${shareUrl}`);
+        }
+    }
+    
+    // Note: Images are now processed locally until user clicks SUBMIT
+    // The session system will handle image storage only when submitting
+    
+    updateSessionConfiguration() {
+        if (!this.sessionManager) return;
+        
+        const primaryColor = document.getElementById('primary-color')?.value;
+        const secondaryColor = document.getElementById('secondary-color')?.value;
+        
+        this.sessionManager.updateConfiguration({
+            primaryColor: primaryColor,
+            secondaryColor: secondaryColor,
+            lastModified: new Date().toISOString()
+        });
     }
 }
 
 // Initialize the application
-new UniformConfigurator();
+window.uniformConfigurator = new UniformConfigurator();

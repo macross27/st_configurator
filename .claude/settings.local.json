@@ -23,7 +23,14 @@
       "Read(//c/Users/dshin/Downloads/**)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "mcp__playwright__playwright_upload_file",
+      "Bash(start http://localhost:3025)",
+      "Bash(cat:*)",
+      "mcp__playwright__playwright_get",
+      "Bash(taskkill:*)",
+      "Bash(pkill:*)",
+      "Bash(start http://localhost:3020)"
     ],
     "deny": [],
     "ask": []
