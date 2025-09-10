@@ -657,6 +657,30 @@ Implemented multiple UI improvements and fixed several critical bugs affecting u
 
 ---
 
-*Last updated: September 8, 2025*  
-*Latest session: UI Enhancements, Session Manager Integration, and Rotation Hit Detection Fix*  
+## Development Environment Safety - September 9, 2025
+
+### Critical Warning: Process Termination
+**⚠️ NEVER USE**: `taskkill //F //IM node.exe`
+- **Issue**: This command kills ALL Node.js processes, including Claude Code sessions
+- **Result**: Terminates the active Claude development session
+- **Alternative**: Use `Ctrl+C` in the specific terminal running the server
+- **Safe Practice**: Target specific PIDs when process termination is needed
+
+### Safe Server Management
+```bash
+# ✅ Safe: Stop server in its terminal window
+Ctrl+C
+
+# ✅ Safe: Target specific process by PID
+tasklist | findstr node
+taskkill /PID <specific_pid> /F
+
+# ❌ DANGEROUS: Kills ALL Node processes including Claude
+taskkill //F //IM node.exe
+```
+
+---
+
+*Last updated: September 9, 2025*  
+*Latest session: Development Environment Safety Guidelines Added*  
 *Major achievements: Complete modular architecture, comprehensive session management, rotation-aware hit detection, memory optimization, enhanced user experience*

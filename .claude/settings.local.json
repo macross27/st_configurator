@@ -30,7 +30,12 @@
       "mcp__playwright__playwright_get",
       "Bash(taskkill:*)",
       "Bash(pkill:*)",
-      "Bash(start http://localhost:3020)"
+      "Bash(start http://localhost:3020)",
+      "Read(//e/**)",
+      "Bash(timeout:*)",
+      "Bash(start http://localhost:3023)",
+      "mcp__playwright__playwright_select",
+      "Bash(start http://localhost:3021)"
     ],
     "deny": [],
     "ask": []

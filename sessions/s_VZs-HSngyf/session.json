@@ -1,0 +1,53 @@
+{
+  "sessionId": "s_VZs-HSngyf",
+  "clientIP": "::1",
+  "createdAt": "2025-09-09T08:13:49.020Z",
+  "lastModified": "2025-09-10T05:04:14.547Z",
+  "layers": [
+    {
+      "id": "layer_1757405629132_gce5vp",
+      "type": "text",
+      "name": "Sample Text",
+      "visible": true,
+      "properties": {
+        "x": 0.1,
+        "y": 0.2,
+        "scale": 1,
+        "rotation": 0,
+        "opacity": 1,
+        "text": "Sample Text",
+        "color": "#000000",
+        "fontSize": 48,
+        "fontFamily": "Arial"
+      },
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T08:13:49.132Z"
+    },
+    {
+      "id": "layer_1757405769256_5c3siq",
+      "type": "test",
+      "name": "Layer 2",
+      "visible": true,
+      "properties": {},
+      "imagePath": null,
+      "originalPath": null,
+      "createdAt": "2025-09-09T08:16:09.256Z"
+    }
+  ],
+  "modelSettings": {
+    "modelPath": null,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "configuration": {},
+  "lastAccessed": "2025-09-10T05:04:14.547Z"
+}

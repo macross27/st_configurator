@@ -13,6 +13,7 @@ const JobQueue = require('./lib/jobQueue');
 const ImageProcessor = require('./lib/imageProcessor');
 const SessionManager = require('./lib/sessionManager');
 const EmailService = require('./lib/emailService');
+const OrderParser = require('./lib/OrderParser');
 
 const app = express();
 if (!process.env.PORT) {
@@ -36,6 +37,7 @@ const imageProcessor = new ImageProcessor({
     maxInputHeight: parseInt(process.env.MAX_INPUT_IMAGE_HEIGHT) || 8192,
     quality: parseInt(process.env.COMPRESSION_QUALITY * 100) || 80,
     webpConversionThreshold: parseInt(process.env.WEBP_CONVERSION_THRESHOLD_MB) || 2,
+    imageConversionThreshold: parseInt(process.env.IMAGE_CONVERSION_THRESHOLD_MB) || 2,
     supportedFormats: (process.env.SUPPORTED_FORMATS || 'jpeg,png,webp,gif').split(','),
     processedDir: process.env.PROCESSED_DIR || './processed'
 });
@@ -47,6 +49,10 @@ const sessionManager = new SessionManager({
 });
 
 const emailService = new EmailService();
+
+const orderParser = new OrderParser({
+    sessionsDir: process.env.SESSIONS_DIR || './sessions'
+});
 
 // Ensure upload directories exist
 async function ensureDirectories() {
@@ -927,6 +933,159 @@ app.post('/api/email/welcome', async (req, res) => {
             success: false, 
             error: 'Failed to send welcome email',
             details: error.message 
+        });
+    }
+});
+
+// Order Processing API Endpoints
+
+// Submit order and save XLSX to session
+app.post('/api/sessions/:sessionId/orders', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        const orderData = req.body;
+        
+        // Validate required fields
+        if (!orderData.customerName || !orderData.customerPhone || !orderData.players || orderData.players.length === 0) {
+            return res.status(400).json({
+                error: 'Missing required order data: customerName, customerPhone, and players'
+            });
+        }
+        
+        // Generate order number if not provided
+        if (!orderData.orderNumber) {
+            const today = new Date();
+            const dateStr = today.getFullYear().toString().slice(-2) + 
+                           (today.getMonth() + 1).toString().padStart(2, '0') + 
+                           today.getDate().toString().padStart(2, '0');
+            const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            orderData.orderNumber = `ORD${dateStr}${randomNum}`;
+        }
+        
+        // Save order to session
+        const result = await orderParser.saveToSession(orderData, sessionId);
+        
+        res.json({
+            success: true,
+            orderNumber: result.parsedData.orderNumber,
+            filename: result.filename,
+            sessionId: sessionId,
+            xlsxPath: result.xlsxPath,
+            totalPrice: result.parsedData.totalPrice,
+            summary: result.parsedData.summary,
+            message: 'Order saved successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error submitting order:', error);
+        res.status(500).json({
+            error: 'Failed to submit order'
+        });
+    }
+});
+
+// List orders for a session
+app.get('/api/sessions/:sessionId/orders', async (req, res) => {
+    try {
+        const { sessionId } = req.params;
+        const orders = await orderParser.listSessionOrders(sessionId);
+        
+        res.json({
+            success: true,
+            orders: orders,
+            count: orders.length
+        });
+        
+    } catch (error) {
+        console.error('Error listing orders:', error);
+        res.status(500).json({
+            error: 'Failed to list orders'
+        });
+    }
+});
+
+// Download order XLSX file
+app.get('/api/sessions/:sessionId/orders/:filename', async (req, res) => {
+    try {
+        const { sessionId, filename } = req.params;
+        
+        // Validate filename to prevent directory traversal
+        if (!filename.endsWith('.xlsx') && !filename.endsWith('.json')) {
+            return res.status(400).json({
+                error: 'Invalid file type. Only .xlsx and .json files are allowed'
+            });
+        }
+        
+        const filePath = await orderParser.getOrderFilePath(sessionId, filename);
+        
+        // Set appropriate headers for download
+        const isXlsx = filename.endsWith('.xlsx');
+        res.setHeader('Content-Type', isXlsx ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'application/json');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        
+        // Send file
+        res.sendFile(path.resolve(filePath));
+        
+    } catch (error) {
+        console.error('Error downloading order file:', error);
+        if (error.message === 'Order file not found') {
+            res.status(404).json({
+                error: 'Order file not found'
+            });
+        } else {
+            res.status(500).json({
+                error: 'Failed to download order file'
+            });
+        }
+    }
+});
+
+// Delete order from session
+app.delete('/api/sessions/:sessionId/orders/:orderNumber', async (req, res) => {
+    try {
+        const { sessionId, orderNumber } = req.params;
+        
+        await orderParser.deleteOrder(sessionId, orderNumber);
+        
+        res.json({
+            success: true,
+            message: 'Order deleted successfully'
+        });
+        
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        res.status(500).json({
+            error: 'Failed to delete order'
+        });
+    }
+});
+
+// Generate and download XLSX without saving to session
+app.post('/api/orders/generate-xlsx', async (req, res) => {
+    try {
+        const orderData = req.body;
+        
+        // Validate required fields
+        if (!orderData.customerName || !orderData.customerPhone || !orderData.players || orderData.players.length === 0) {
+            return res.status(400).json({
+                error: 'Missing required order data: customerName, customerPhone, and players'
+            });
+        }
+        
+        // Generate XLSX
+        const { buffer, filename } = await orderParser.generateXLSX(orderData);
+        
+        // Set headers for download
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        
+        // Send buffer
+        res.send(buffer);
+        
+    } catch (error) {
+        console.error('Error generating XLSX:', error);
+        res.status(500).json({
+            error: 'Failed to generate XLSX file'
         });
     }
 });

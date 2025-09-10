@@ -593,9 +593,9 @@ body {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.6);
-    font-size: 20px;
+    font-size: 11px;
     font-weight: bold;
-    width: 24px;
+    width: 50px;
     height: 24px;
     border-radius: 4px;
     cursor: pointer;
@@ -932,12 +932,12 @@ body {
     background-color: #e74c3c;
     color: white;
     border: none;
-    padding: 1px 6px;
-    font-size: 14px;
+    padding: 1px 4px;
+    font-size: 9px;
     font-weight: bold;
-    border-radius: 50%;
+    border-radius: 4px;
     cursor: pointer;
-    width: 20px;
+    width: 45px;
     height: 20px;
     display: flex;
     align-items: center;
@@ -990,32 +990,14 @@ body {
 }
 
 
+/* Submit button styles now managed by UIStyleManager.js */
 .submit-btn {
-    width: 100%;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
     margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
 }
 
-.submit-btn:hover {
-    background-color: #2980b9;
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
-    transform: translateY(-1px);
-}
-
-.submit-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(52, 152, 219, 0.5);
+/* Order button styles now managed by UIStyleManager.js */
+.order-btn {
+    margin-bottom: 1rem;
 }
 
 
@@ -1128,5 +1110,399 @@ body {
     
     .layers-list {
         max-height: 150px;
+    }
+}
+
+/* Order Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 1200px;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 0;
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Order Form Styles */
+.order-form {
+    color: #1f2937;
+}
+
+.form-section {
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #374151;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 8px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #374151;
+}
+
+.form-input {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+    box-sizing: border-box;
+}
+
+.form-select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.players-section {
+    margin-top: 20px;
+}
+
+.player-entry {
+    display: grid;
+    grid-template-columns: 60px 150px 140px 100px 100px 100px 80px 1fr;
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+}
+
+.add-player-btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.add-player-btn:hover {
+    background-color: #059669;
+}
+
+.remove-player-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remove-player-btn:hover {
+    background-color: #dc2626;
+}
+
+.order-summary {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 4px 0;
+}
+
+.summary-total {
+    font-weight: 600;
+    font-size: 18px;
+    border-top: 2px solid #6b7280;
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* Saved Orders Button */
+.saved-orders-btn {
+    background-color: #059669;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 0 4px;
+}
+
+.saved-orders-btn:hover {
+    background-color: #047857;
+}
+
+/* Saved Orders Modal */
+.saved-orders-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 16px 0;
+}
+
+.saved-order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.order-info {
+    flex: 1;
+}
+
+.order-title {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.order-details {
+    color: #6b7280;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+.order-date {
+    color: #9ca3af;
+    font-size: 0.8em;
+}
+
+.order-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-download {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: #2563eb;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+.no-orders {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .player-entry {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .saved-order-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .order-actions {
+        justify-content: center;
+    }
+    
+    .export-section {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .saved-orders-btn {
+        margin: 0;
     }
 }

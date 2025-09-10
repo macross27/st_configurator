@@ -6,6 +6,8 @@ import { UIManager } from './lib/client/UIManager.js';
 import { ConfigurationManager } from './lib/client/ConfigurationManager.js';
 import { ImageProcessor } from './lib/client/ImageProcessor.js';
 import { SessionManager } from './lib/client/SessionManager.js';
+import { OrderFormManager } from './lib/client/OrderFormManager.js';
+import UIStyleManager from './lib/client/UIStyleManager.js';
 import './lib/serverApiClient.js';
 
 class UniformConfigurator {
@@ -124,6 +126,10 @@ class UniformConfigurator {
         this.configurationManager = new ConfigurationManager(this.sceneManager, this.layerManager);
         this.interactionManager = new InteractionManager(this.sceneManager, this.layerManager);
         
+        // Initialize UI Style Manager and apply unified styling
+        this.uiStyleManager = new UIStyleManager();
+        this.uiStyleManager.unifyButtons();
+        
         // Initialize Session Manager (but don't auto-create sessions)
         if (this.serverAvailable) {
             const serverHost = import.meta.env.VITE_SERVER_HOST || import.meta.env.VITE_DEFAULT_SERVER_HOST || 'localhost';
@@ -139,6 +145,16 @@ class UniformConfigurator {
                 onSessionSaved: (sessionData) => this.handleSessionSaved(sessionData),
                 onSessionError: (error) => this.handleSessionError(error)
             });
+            
+            // Initialize Order Form Manager with all dependencies
+            this.orderFormManager = new OrderFormManager({
+                sessionManager: this.sessionManager,
+                serverApiClient: this.serverApiClient,
+                showNotification: (message, duration) => this.uiManager.showNotification(message, 'info', duration)
+            });
+        } else {
+            // Initialize Order Form Manager without server dependencies
+            this.orderFormManager = new OrderFormManager();
         }
     }
     

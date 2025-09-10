@@ -62,7 +62,7 @@
                 <!-- Color picker dropdown -->
                 <div id="color-picker-dropdown" class="color-picker-dropdown">
                     <div class="color-picker-content">
-                        <button class="color-picker-close-btn" id="color-picker-close-btn">×</button>
+                        <button class="color-picker-close-btn" id="color-picker-close-btn">창 닫기</button>
                         <div class="color-picker-main">
                             <div class="color-wheel-section">
                                 <canvas id="color-wheel-canvas" width="200" height="200"></canvas>
@@ -109,7 +109,7 @@
             <!-- Color picker dropdown for texture editor layers -->
             <div id="layer-color-picker-dropdown" class="color-picker-dropdown">
                 <div class="color-picker-content">
-                    <button class="color-picker-close-btn" id="layer-color-picker-close-btn">×</button>
+                    <button class="color-picker-close-btn" id="layer-color-picker-close-btn">창 닫기</button>
                     <div class="color-picker-main">
                         <div class="color-wheel-section">
                             <canvas id="layer-color-wheel-canvas" width="200" height="200"></canvas>
@@ -127,7 +127,21 @@
             </div>
             
             <div class="export-section">
-                <button id="submit-btn" class="submit-btn">SUBMIT</button>
+                <button id="order-btn" class="order-btn">주문서 작성</button>
+                <button id="submit-btn" class="submit-btn">보내기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Order Form Modal -->
+    <div id="order-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">주문서 작성</h2>
+                <button class="modal-close-btn" id="order-modal-close">창 닫기</button>
+            </div>
+            <div class="modal-body">
+                <!-- Form will be dynamically populated by JavaScript -->
             </div>
         </div>
     </div>
