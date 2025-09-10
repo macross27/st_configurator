@@ -35,7 +35,13 @@
       "Bash(timeout:*)",
       "Bash(start http://localhost:3023)",
       "mcp__playwright__playwright_select",
-      "Bash(start http://localhost:3021)"
+      "Bash(start http://localhost:3021)",
+      "WebSearch",
+      "WebFetch(domain:developers.kakao.com)",
+      "Bash(agents list)",
+      "Bash(mkdir:*)",
+      "Read(//c/Users/**)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

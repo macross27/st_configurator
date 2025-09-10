@@ -8,6 +8,7 @@ import { ImageProcessor } from './lib/client/ImageProcessor.js';
 import { SessionManager } from './lib/client/SessionManager.js';
 import { OrderFormManager } from './lib/client/OrderFormManager.js';
 import UIStyleManager from './lib/client/UIStyleManager.js';
+import { DesignSystem } from './lib/client/DesignSystem.js';
 import './lib/serverApiClient.js';
 
 class UniformConfigurator {
@@ -126,7 +127,8 @@ class UniformConfigurator {
         this.configurationManager = new ConfigurationManager(this.sceneManager, this.layerManager);
         this.interactionManager = new InteractionManager(this.sceneManager, this.layerManager);
         
-        // Initialize UI Style Manager and apply unified styling
+        // Initialize Design System and UI Style Manager
+        DesignSystem.init();
         this.uiStyleManager = new UIStyleManager();
         this.uiStyleManager.unifyButtons();
         
@@ -314,6 +316,17 @@ class UniformConfigurator {
         this.interactionManager.onLayerDeleteRequested = (layer) => {
             this.requestLayerDeletion(layer);
         };
+        
+        // Connect performance monitoring
+        this.layerManager.setPerformanceMonitor(this.sceneManager.performanceMonitor);
+        
+        // Add performance logging in development
+        if (import.meta.env.DEV) {
+            // Log performance report every 30 seconds
+            setInterval(() => {
+                this.sceneManager.logPerformanceReport();
+            }, 30000);
+        }
     }
     
     async loadDefaultTexture() {
