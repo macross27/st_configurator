@@ -442,8 +442,8 @@ class UniformConfigurator {
             if (isValidationError) {
                 const fileSizeMB = (this.config.maxImageFileSize);
                 this.uiManager.showErrorModal(
-                    '❌ File Too Large',
-                    `The file you selected exceeds the maximum allowed size.\n\nMaximum file size: ${fileSizeMB}MB\n\nPlease:\n• Compress your image file\n• Use a smaller resolution image\n• Try a different image format`
+                    '❌ 파일 용량 초과',
+                    `${file.name}의 용량이 최대 허용치 ${fileSizeMB}MB를 초과하여 사용하실수 없습니다.`
                 );
             } else {
                 this.uiManager.showNotification(`❌ ${error.message}`, 'error', 0);
@@ -510,25 +510,7 @@ class UniformConfigurator {
     showImageProcessingNotification(filename, details) {
         const { wasResized, originalSize, newSize, fileSizeReduced, finalFileSizeKB, serverProcessed, processingTime } = details;
         
-        let message = `Image "${filename}" was processed successfully${serverProcessed ? ' on server' : ' locally'}.\n`;
-        
-        if (processingTime) {
-            message += `• Processing time: ${processingTime}ms\n`;
-        }
-        
-        if (wasResized) {
-            message += `• Resolution automatically reduced: ${originalSize.width}×${originalSize.height} → ${newSize.width}×${newSize.height}\n`;
-        }
-        
-        if (fileSizeReduced) {
-            message += `• File size optimized to ${finalFileSizeKB}KB\n`;
-        }
-        
-        if (serverProcessed) {
-            message += '• Server-side processing provides consistent performance across devices\n';
-        }
-        
-        message += '\nThe optimized image will be used from this point forward.';
+        let message = `${filename} 의 해상도를\n${originalSize.width}×${originalSize.height} 에서 ${newSize.width}×${newSize.height}으로\n${finalFileSizeKB}KB 용량으로 변환하였습니다.`;
         
         const notificationType = serverProcessed ? 'info' : 'warning';
         this.uiManager.showNotification(message, notificationType, 0);
@@ -601,33 +583,34 @@ class UniformConfigurator {
         }
         
         try {
-            // Show loading notification
-            this.uiManager.showNotification('💾 Submitting session...', 'info', 2000);
-            
+            // Show submission dialog instead of notification
+            this.uiManager.showSubmissionDialog();
             
             // Update session configuration with current settings
             this.updateSessionConfiguration();
             
+            // Update progress
+            this.uiManager.updateSubmissionDialog('세션 정보를 업데이트하는 중...', 25);
+            
             // Submit session and get the shareable URL
             const shareableUrl = await this.sessionManager.submitSession(this.layerManager);
             
-            // Show success notification with the shareable URL
-            this.uiManager.showNotification(
-                `✅ Session saved! Your unique URL: ${shareableUrl}
-                
-                Click the URL to copy it to clipboard, then share it to continue editing later.`, 
-                'success', 
-                15000
+            // Update progress before success
+            this.uiManager.updateSubmissionDialog('제출 완료 처리 중...', 100);
+            
+            // Show success in dialog
+            this.uiManager.showSubmissionSuccess(
+                `작업물이 성공적으로 제출되었습니다!\n\n공유 URL: ${shareableUrl}\n\nURL을 클릭하면 클립보드에 복사됩니다.`
             );
             
             console.log(`🔗 Session submitted successfully: ${shareableUrl}`);
             
         } catch (error) {
             console.error('Error submitting session:', error);
-            this.uiManager.showNotification(
-                `❌ Failed to submit session: ${error.message}`, 
-                'error', 
-                8000
+            
+            // Show error in dialog
+            this.uiManager.showSubmissionError(
+                `제출에 실패했습니다: ${error.message}`
             );
         }
     }
@@ -640,7 +623,7 @@ class UniformConfigurator {
     
     handleSessionLoaded(sessionData) {
         console.log(`✅ Session loaded: ${sessionData.sessionId}`);
-        this.uiManager.showNotification(`Session restored! ${sessionData.layers.length} layers loaded.`, 'success', 5000);
+        this.uiManager.showNotification('세션이 복원되었습니다!', 'success', 5000);
         
         // Restore session state
         this.restoreSessionState(sessionData);

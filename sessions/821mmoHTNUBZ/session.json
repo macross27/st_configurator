@@ -1,7 +1,7 @@
 {
-  "sessionId": "8XWsLFRwPg1u",
+  "sessionId": "821mmoHTNUBZ",
   "clientIP": "::1",
-  "createdAt": "2025-09-10T04:12:24.489Z",
+  "createdAt": "2025-09-10T07:15:46.023Z",
   "lastModified": "2025-09-11T08:55:39.141Z",
   "layers": [],
   "modelSettings": {
@@ -17,6 +17,10 @@
       "z": 0
     }
   },
-  "configuration": {},
+  "configuration": {
+    "primaryColor": "#ffffff",
+    "secondaryColor": "#000000",
+    "lastModified": "2025-09-10T07:16:51.064Z"
+  },
   "lastAccessed": "2025-09-11T08:55:39.141Z"
 }

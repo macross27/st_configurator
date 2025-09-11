@@ -1,0 +1,51 @@
+{
+  "orderNumber": "rUZeXEQmOwEq_ad_010433234",
+  "customerName": "ad",
+  "customerPhone": "010433234",
+  "teamName": "ddef",
+  "selectedOptions": {
+    "uniform": "ST커스텀_1",
+    "neck": "스탠다드 넥",
+    "fabric": "프로엑티브"
+  },
+  "players": [
+    {
+      "id": "1",
+      "name": "lulu",
+      "number": "07",
+      "type": "top",
+      "sleeveType": "short",
+      "topSize": "L",
+      "bottomSize": "S"
+    },
+    {
+      "id": "player-1757577170005-2k6v61dd5",
+      "name": "jay",
+      "number": "08",
+      "type": "bottom",
+      "sleeveType": "short",
+      "topSize": "S",
+      "bottomSize": "M"
+    },
+    {
+      "id": "player-1757577187751-u4ufukj4y",
+      "name": "james",
+      "number": "19",
+      "type": "set",
+      "sleeveType": "short",
+      "topSize": "M",
+      "bottomSize": "XL"
+    }
+  ],
+  "specialRequests": "",
+  "timestamp": "2025-09-11T07:53:44.528Z",
+  "totalPrice": 90000,
+  "summary": {
+    "totalPlayers": 3,
+    "sets": 1,
+    "topsOnly": 1,
+    "bottomsOnly": 1,
+    "shortSleeveCount": 3,
+    "longSleeveCount": 0
+  }
+}

@@ -41,7 +41,8 @@
       "Bash(agents list)",
       "Bash(mkdir:*)",
       "Read(//c/Users/**)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []
