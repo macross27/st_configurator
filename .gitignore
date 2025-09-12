@@ -19,6 +19,7 @@ build/
 temp/
 uploads/
 processed/
+sessions/
 
 # OS generated files
 .DS_Store
@@ -34,6 +35,7 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+.claude/
 
 # Logs
 logs

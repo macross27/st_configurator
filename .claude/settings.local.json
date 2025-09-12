@@ -42,7 +42,15 @@
       "Bash(mkdir:*)",
       "Read(//c/Users/**)",
       "Bash(dir:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(head:*)",
+      "Bash(start http://localhost:3022)",
+      "Bash(del test_phase2.js)",
+      "mcp__playwright__playwright_get_visible_text",
+      "Bash(findstr:*)",
+      "Bash(tasklist)",
+      "Bash(netstat:*)",
+      "Bash(start http://localhost:3024)"
     ],
     "deny": [],
     "ask": []

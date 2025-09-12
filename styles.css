@@ -9,6 +9,8 @@ body {
     background-color: #ffffff;
     color: #ffffff;
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Scale Slider Overlay */
@@ -726,36 +728,44 @@ body {
 .app-container {
     display: flex;
     height: 100vh;
-    min-width: 600px; /* Minimum width to prevent complete collapse */
+    width: 100vw;
+    min-width: 600px;
+    overflow: hidden;
 }
 
 .viewer-panel {
     flex: 1;
     background-color: #1a1a1a;
     position: relative;
-    min-width: 300px; /* Minimum width for 3D viewer */
+    min-width: 400px;
+    width: calc(100vw - 320px);
+    max-width: calc(100vw - 320px);
 }
 
 #three-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .property-panel {
     width: 320px;
-    min-width: 280px; /* Minimum width to prevent content from being unusable */
-    max-width: 400px; /* Maximum width to prevent it from taking too much space */
+    min-width: 320px;
+    max-width: 320px;
     background-color: #383838;
     border-left: 1px solid #555;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    flex-shrink: 0; /* Prevent the panel from shrinking beyond its minimum */
+    flex-shrink: 0;
+    height: 100vh;
 }
 
 .panel-header {
-    padding: 15px;
+    padding: 12px 15px;
     border-bottom: 1px solid #555;
+    flex-shrink: 0;
 }
 
 .panel-header h3 {
@@ -764,8 +774,9 @@ body {
 }
 
 .base-texture-section {
-    padding: 15px;
+    padding: 12px 15px;
     border-bottom: 1px solid #555;
+    flex-shrink: 0;
 }
 
 .base-texture-section h4 {
@@ -796,6 +807,9 @@ body {
 .layers-section {
     padding: 15px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .layers-header {
@@ -826,8 +840,9 @@ body {
 }
 
 .layers-list {
-    max-height: 400px;
+    flex: 1;
     overflow-y: auto;
+    min-height: 200px;
 }
 
 .layer-item {
@@ -859,6 +874,23 @@ body {
     text-decoration: line-through;
     background-color: #666;
     opacity: 0.7;
+}
+
+/* Phase 4: Image error indicators */
+.layer-item.image-error {
+    border-color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.layer-item.image-error .layer-name {
+    background-color: #cc4444;
+}
+
+.image-error-indicator {
+    margin-left: 5px;
+    color: #ff6b6b;
+    font-size: 10px;
+    vertical-align: middle;
 }
 
 .layer-header {
@@ -985,8 +1017,10 @@ body {
 
 
 .export-section {
-    padding: 15px;
+    padding: 12px 15px;
     border-top: 1px solid #555;
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 
@@ -1036,19 +1070,36 @@ body {
     z-index: 999;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1024px) {
+/* Large screen optimization */
+@media screen and (min-width: 1400px) {
     .property-panel {
-        width: 280px;
-        min-width: 250px;
-    }
-    
-    .app-container {
-        min-width: 550px;
+        width: 380px;
+        min-width: 380px;
+        max-width: 380px;
     }
     
     .viewer-panel {
-        min-width: 250px;
+        width: calc(100vw - 380px);
+        max-width: calc(100vw - 380px);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .property-panel {
+        width: 300px;
+        min-width: 300px;
+        max-width: 300px;
+    }
+    
+    .viewer-panel {
+        width: calc(100vw - 300px);
+        max-width: calc(100vw - 300px);
+        min-width: 400px;
+    }
+    
+    .app-container {
+        min-width: 700px;
     }
 }
 
@@ -1057,17 +1108,20 @@ body {
         flex-direction: column;
         min-width: unset;
         min-height: 100vh;
+        width: 100vw;
     }
     
     .viewer-panel {
-        height: 60vh;
+        height: 65vh;
+        width: 100vw;
         min-width: unset;
+        max-width: unset;
         border-bottom: 1px solid #555;
     }
     
     .property-panel {
-        width: 100%;
-        height: 40vh;
+        width: 100vw;
+        height: 35vh;
         min-width: unset;
         max-width: unset;
         border-left: none;
@@ -1076,40 +1130,51 @@ body {
     }
     
     .layers-list {
-        max-height: 200px;
+        max-height: 150px;
+    }
+    
+    #three-container {
+        height: 65vh;
     }
 }
 
 @media screen and (max-width: 480px) {
     .viewer-panel {
-        height: 50vh;
+        height: 60vh;
     }
     
     .property-panel {
-        height: 50vh;
+        height: 40vh;
+    }
+    
+    #three-container {
+        height: 60vh;
     }
     
     .panel-header, .base-texture-section, .layers-section, .export-section {
-        padding: 10px;
+        padding: 8px;
     }
     
     .layers-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
     }
     
     .layers-header h4 {
-        margin-bottom: 5px;
+        margin-bottom: 3px;
+        font-size: 13px;
     }
     
     .add-layer-btn {
         margin-left: 0;
         margin-right: 5px;
+        padding: 4px 6px;
+        font-size: 9px;
     }
     
     .layers-list {
-        max-height: 150px;
+        max-height: 120px;
     }
 }
 
@@ -1605,6 +1670,55 @@ body {
     white-space: pre-line;
 }
 
+.url-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.url-container label {
+    display: block;
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.clickable-url {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 6px;
+    padding: 12px;
+    color: #60a5fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    word-break: break-all;
+    user-select: all;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.clickable-url:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-1px);
+}
+
+.clickable-url.copied {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.url-instruction {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 8px;
+    font-style: italic;
+}
+
 .submission-progress {
     margin-top: 24px;
 }
@@ -1671,4 +1785,36 @@ body {
     background: #357abd;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.submission-dialog {
+    position: relative;
+}
+
+.submission-close-btn {
+    position: static;
+    margin: 20px auto 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.submission-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.submission-close-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }

@@ -292,8 +292,14 @@ class UniformConfigurator {
                     this.layerManager.duplicateLayer(layer);
                     break;
                 case 'delete':
-                    this.layerManager.deleteLayer(layer);
+                    this.layerManager.removeLayer(layer.id);
                     this.cleanupLayerAssets(layer);
+                    // Also remove from server session
+                    if (this.sessionManager && this.sessionManager.currentSessionId) {
+                        this.sessionManager.removeLayer(layer.id).catch(error => {
+                            console.warn('Failed to remove layer from server session:', error);
+                        });
+                    }
                     break;
             }
             this.updateUI();
@@ -358,9 +364,13 @@ class UniformConfigurator {
             
             let processResult;
             
-            if (this.serverAvailable) {
+            // Check file size against conversion threshold
+            const fileSizeMB = file.size / (1024 * 1024);
+            const conversionThresholdMB = this.config.imageConversionThreshold;
+            
+            if (this.serverAvailable && fileSizeMB >= conversionThresholdMB) {
                 try {
-                    console.log(`🌐 Processing ${file.name} on server...`);
+                    console.log(`🌐 Processing ${file.name} (${fileSizeMB.toFixed(2)}MB) on server (above ${conversionThresholdMB}MB threshold)...`);
                     processResult = await this.serverApiClient.processImage(file, { priority: 1 });
                     processResult.serverProcessed = true;
                     console.log('✅ Server processing completed:', processResult);
@@ -374,6 +384,8 @@ class UniformConfigurator {
                     this.serverAvailable = false;
                     this.uiManager.showNotification('Server processing failed - switching to client-side', 'warning', 3000);
                 }
+            } else if (this.serverAvailable && fileSizeMB < conversionThresholdMB) {
+                console.log(`💻 Processing ${file.name} (${fileSizeMB.toFixed(2)}MB) on client (below ${conversionThresholdMB}MB threshold)...`);
             }
             
             if (!processResult) {
@@ -537,7 +549,7 @@ class UniformConfigurator {
             message,
             () => {
                 // User confirmed deletion
-                this.layerManager.deleteLayer(layer);
+                this.layerManager.removeLayer(layer.id);
                 this.cleanupLayerAssets(layer);
                 this.updateUI();
                 this.uiManager.showNotification(`Layer "${layer.name}" deleted`, 'info', 3000);
@@ -600,7 +612,8 @@ class UniformConfigurator {
             
             // Show success in dialog
             this.uiManager.showSubmissionSuccess(
-                `작업물이 성공적으로 제출되었습니다!\n\n공유 URL: ${shareableUrl}\n\nURL을 클릭하면 클립보드에 복사됩니다.`
+                `작업물이 성공적으로 제출되었습니다!\n\n공유 URL: ${shareableUrl}\n\nURL을 클릭하면 클립보드에 복사됩니다.`,
+                shareableUrl
             );
             
             console.log(`🔗 Session submitted successfully: ${shareableUrl}`);
@@ -639,22 +652,136 @@ class UniformConfigurator {
         this.uiManager.showNotification(`Session error: ${error.message}`, 'error', 8000);
     }
     
+    // Phase 4: Image validation during session load
+    async validateLayerImage(layerId, imageUrl) {
+        if (!imageUrl) {
+            return false;
+        }
+        
+        try {
+            const response = await fetch(imageUrl, { method: 'HEAD' });
+            if (response.ok) {
+                return true;
+            } else {
+                console.error(`Image validation failed for layer ${layerId}: HTTP ${response.status}`);
+                return false;
+            }
+        } catch (error) {
+            console.error(`Failed to validate image for layer ${layerId}:`, error);
+            return false;
+        }
+    }
+    
+    // Phase 4: Handle missing layer images gracefully
+    handleMissingLayerImage(layerData, layer, reason) {
+        const reasonText = reason === 'missing_file' ? 'Image file not found' : 
+                          reason === 'missing_path' ? 'Image processing failed' : 'Failed to load image';
+        console.warn(`⚠️ ${reasonText} for layer ${layerData.id || layerData.name}, creating layer with placeholder`);
+        
+        // Add visual indicator that image is missing
+        if (layer && this.layerManager) {
+            // For text layers, this is fine - they don't need images
+            if (layer.type === 'text') {
+                return;
+            }
+            
+            // For image/logo layers, mark as having an error
+            layer.hasImageError = true;
+            layer.imageErrorReason = reasonText;
+            layer.originalFileName = layerData.name;
+            
+            // Create a placeholder image showing the error
+            this.createPlaceholderImage(layer, reasonText);
+            
+            // Update layer panel to show warning
+            if (this.uiManager && this.uiManager.updateLayerPanel) {
+                setTimeout(() => {
+                    this.uiManager.updateLayerPanel();
+                }, 100);
+            }
+        }
+        
+        // Show user notification for missing images
+        const layerName = layerData.name || layerData.id || 'Unknown';
+        this.uiManager.showNotification(
+            `⚠️ ${reasonText} for layer "${layerName}". Layer created with placeholder - you can re-upload the image.`, 
+            'warning', 
+            8000
+        );
+    }
+    
+    createPlaceholderImage(layer, errorReason) {
+        // Create a placeholder image that shows the error
+        const canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 200;
+        const ctx = canvas.getContext('2d');
+        
+        // Red background
+        ctx.fillStyle = '#ff6b6b';
+        ctx.fillRect(0, 0, 200, 200);
+        
+        // White text
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('❌ MISSING', 100, 80);
+        ctx.fillText('IMAGE', 100, 100);
+        ctx.font = '12px Arial';
+        ctx.fillText(errorReason, 100, 130);
+        ctx.fillText('Re-upload needed', 100, 150);
+        
+        // Convert to image and set on layer
+        const img = new Image();
+        img.onload = () => {
+            layer.image = img;
+            // Update the texture to show the placeholder
+            if (this.layerManager) {
+                this.layerManager.updateTexture();
+            }
+        };
+        img.src = canvas.toDataURL();
+    }
+    
     async restoreSessionState(sessionData) {
         try {
+            // Clear all existing layers before restoring session layers
+            console.log(`🧹 Clearing ${this.layerManager.getLayers().length} existing layers before session restore`);
+            this.layerManager.clearLayers();
+            this.updateUI(); // Update UI after clearing layers
+            
             // Restore layers
             for (const layerData of sessionData.layers) {
                 // Create layer from session data for all layer types
                 const layer = this.layerManager.createLayerFromSessionData(layerData);
                 if (layer) {
-                    // Try to load image if there's an imagePath OR if it's an image layer (attempt fallback loading)
-                    if (layerData.imagePath || (layer.type !== 'text' && !layerData.imagePath)) {
+                    // Handle image layers with imagePath
+                    if (layerData.imagePath && layer.type !== 'text') {
                         const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
-                        try {
-                            await this.layerManager.loadLayerImage(layer, imageUrl);
-                        } catch (error) {
-                            console.warn(`⚠️ Failed to load image for layer ${layerData.id}:`, error);
-                            // Continue with other layers even if one fails to load
+                        
+                        // Validate image exists before loading
+                        const imageExists = await this.validateLayerImage(layerData.id, imageUrl);
+                        if (imageExists) {
+                            try {
+                                await this.layerManager.loadLayerImage(layer, imageUrl);
+                                console.log(`✅ Successfully loaded image for layer ${layerData.id}`);
+                            } catch (error) {
+                                console.warn(`⚠️ Failed to load image for layer ${layerData.id}:`, error);
+                                this.handleMissingLayerImage(layerData, layer, 'load_error');
+                            }
+                        } else {
+                            console.warn(`⚠️ Layer ${layerData.id} has missing image file: ${imageUrl}`);
+                            this.handleMissingLayerImage(layerData, layer, 'missing_file');
                         }
+                    } 
+                    // Handle image layers WITHOUT imagePath (processing failed/timed out)
+                    else if (layer.type !== 'text' && !layerData.imagePath) {
+                        console.warn(`⚠️ Image layer ${layerData.id} has no imagePath - processing may have failed`);
+                        this.handleMissingLayerImage(layerData, layer, 'missing_path');
+                    }
+                    // Text layers don't need image loading - they render directly
+                    else if (layer.type === 'text') {
+                        console.log(`✅ Successfully restored text layer ${layerData.id}`);
                     }
                 }
             }
@@ -666,7 +793,10 @@ class UniformConfigurator {
             
             // Force texture update after all layers are restored AND model is loaded
             setTimeout(() => {
-                this.layerManager.updateTexture();
+                // Force update and mark entire texture as dirty to ensure complete re-render
+                this.layerManager.markBaseDirty();
+                this.layerManager.updateTexture(true); // Force update = true
+                console.log('🔄 Forced texture update after session restoration');
             }, 500); // Small delay to ensure everything is ready
             
             // Restore configuration

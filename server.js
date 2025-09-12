@@ -36,7 +36,6 @@ const imageProcessor = new ImageProcessor({
     maxInputWidth: parseInt(process.env.MAX_INPUT_IMAGE_WIDTH) || 8192,
     maxInputHeight: parseInt(process.env.MAX_INPUT_IMAGE_HEIGHT) || 8192,
     quality: parseInt(process.env.COMPRESSION_QUALITY * 100) || 80,
-    webpConversionThreshold: parseInt(process.env.WEBP_CONVERSION_THRESHOLD_MB) || 2,
     imageConversionThreshold: parseInt(process.env.IMAGE_CONVERSION_THRESHOLD_MB) || 2,
     supportedFormats: (process.env.SUPPORTED_FORMATS || 'jpeg,png,webp,gif').split(','),
     processedDir: process.env.PROCESSED_DIR || './processed'
@@ -114,6 +113,12 @@ app.use(cors({
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// HTTP Request Logging
+app.use((req, res, next) => {
+    console.log(`🌐 ${req.method} ${req.path} - ${new Date().toISOString()}`);
+    next();
+});
 
 // Rate limiting
 const uploadLimiter = rateLimit({
@@ -706,10 +711,12 @@ app.delete('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
 app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
     try {
         const { sessionId, jobId } = req.params;
+        console.log(`🔄 GET /api/sessions/${sessionId}/layers/job/${jobId} - Polling job status`);
         
         // Check if session exists
         const sessionData = await sessionManager.getSession(sessionId);
         if (!sessionData) {
+            console.error(`❌ Session not found: ${sessionId}`);
             return res.status(404).json({
                 error: 'Session not found'
             });
@@ -717,13 +724,21 @@ app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
         
         // Get job status
         const status = jobQueue.getJobStatus(jobId);
+        console.log(`🔍 Job ${jobId} status: ${status.status}`);
         
         if (status.status === 'completed') {
+            console.log(`✅ Job ${jobId} completed, adding layer to session`);
             // Job completed, add layer to session
-            const processedImageBuffer = status.result.buffer;
+            const processedImageBuffer = status.result.processedData 
+                ? Buffer.from(status.result.processedData, 'base64')
+                : null;
             const jobMetadata = status.options?.metadata || {};
             const layerData = jobMetadata.layerData || {};
             const originalImageBuffer = jobMetadata.originalBuffer;
+            
+            console.log(`🔧 processedImageBuffer: ${processedImageBuffer ? `${Math.round(processedImageBuffer.length / 1024)}KB` : 'null'}`);
+            console.log(`🔧 layerData: ${JSON.stringify(layerData, null, 2)}`);
+            console.log(`🔧 originalImageBuffer: ${originalImageBuffer ? `${Math.round(originalImageBuffer.length / 1024)}KB` : 'null'}`);
             
             const layer = await sessionManager.addLayer(
                 sessionId,
@@ -894,6 +909,16 @@ app.post('/api/email/notification', async (req, res) => {
             });
         }
 
+        // Check if email service is configured
+        if (!emailService.transporter) {
+            console.warn('Email notification skipped: SMTP not configured');
+            return res.json({ 
+                success: false, 
+                error: 'Email service not configured',
+                message: 'SMTP credentials not set in environment variables' 
+            });
+        }
+        
         const result = await emailService.sendNotification(to, title, message, actionUrl);
         res.json({ 
             success: true, 
