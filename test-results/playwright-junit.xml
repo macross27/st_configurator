@@ -1,0 +1,374 @@
+<testsuites id="" name="" tests="90" failures="0" skipped="90" errors="0" time="0.036863000000000055">
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="chromium" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="firefox" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="webkit" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="Mobile Chrome" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="Mobile Safari" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-workflows.spec.js" timestamp="2025-09-21T18:16:55.544Z" hostname="Tablet" tests="15" failures="0" skipped="15" time="0" errors="0">
+<testcase name="User Workflows › New User Workflow › should load application and display 3D scene" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should add text layer and customize it" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should upload and add image layer" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › New User Workflow › should save session with custom name" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should load existing session with layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should duplicate and modify layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should reorder layers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Experienced User Workflow › should export configuration" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle oversized file upload gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should handle network interruption gracefully" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Error Recovery Workflow › should recover from invalid session data" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should handle multiple layer operations efficiently" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Performance and Memory › should maintain responsiveness during texture updates" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Mobile Responsiveness › should work on mobile viewport" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Workflows › Cross-Browser Compatibility › should work consistently across browsers" classname="user-workflows.spec.js" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

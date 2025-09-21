@@ -1,0 +1,441 @@
+{
+  "timestamp": "2025-09-21T18:45:48.008Z",
+  "phases": [
+    {
+      "phase": 1,
+      "description": "Navigate and load application",
+      "startTime": "2025-09-21T18:45:48.010Z",
+      "endTime": "2025-09-21T18:45:50.514Z",
+      "status": "success"
+    },
+    {
+      "phase": 2,
+      "description": "Open text input modal",
+      "startTime": "2025-09-21T18:45:50.514Z",
+      "endTime": "2025-09-21T18:45:53.448Z",
+      "status": "success",
+      "textInputInfo": {
+        "found": true,
+        "selector": "input[type=\"text\"]",
+        "id": "",
+        "placeholder": ""
+      }
+    },
+    {
+      "phase": 3,
+      "description": "Add text layer",
+      "startTime": "2025-09-21T18:45:53.448Z",
+      "endTime": "2025-09-21T18:45:56.761Z",
+      "status": "failed",
+      "layerInfo": {
+        "layerManagerExists": false,
+        "totalLayers": 0,
+        "textLayers": 0,
+        "textLayerContent": null
+      }
+    },
+    {
+      "phase": 4,
+      "description": "Open order form",
+      "startTime": "2025-09-21T18:45:56.761Z",
+      "endTime": "2025-09-21T18:45:59.905Z",
+      "status": "failed",
+      "formInfo": {
+        "formFound": false
+      }
+    },
+    {
+      "phase": 5,
+      "description": "Fill and submit form",
+      "startTime": "2025-09-21T18:45:59.905Z",
+      "status": "skipped",
+      "endTime": "2025-09-21T18:45:59.905Z"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-09-21T18:45:48.774Z"
+    }
+  ],
+  "networkErrors": [],
+  "serverResponses": [
+    {
+      "url": "http://localhost:3029/",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.039Z"
+    },
+    {
+      "url": "http://localhost:3029/styles-tokens.css",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.068Z"
+    },
+    {
+      "url": "http://localhost:3029/@vite/client",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.068Z"
+    },
+    {
+      "url": "http://localhost:3029/styles.css",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.069Z"
+    },
+    {
+      "url": "http://localhost:3029/accessibility.css",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.071Z"
+    },
+    {
+      "url": "http://localhost:3029/main.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.088Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/vite/dist/client/env.mjs",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.097Z"
+    },
+    {
+      "url": "http://localhost:3029/accessibility-validator.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.101Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three.js?v=aae6ee6e",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.108Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.125Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.143Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/InteractionManager.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.147Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ConfigurationManager.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.148Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ImageProcessor.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.176Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758479086356",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.206Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/UIStyleManager.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.212Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/UIManager.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.214Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/OrderFormManager.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.217Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/DesignSystem.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.218Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/KeyboardManager.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.229Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.233Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/I18nUIUpdater.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.236Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ErrorManager.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.245Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/serverApiClient.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.250Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=aae6ee6e",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.370Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three.js?v=064b3e0f",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.371Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_loaders_DRACOLoader__js.js?v=cacecfe2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.372Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_controls_OrbitControls__js.js?v=23081f04",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.372Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_loaders_GLTFLoader__js.js?v=a9b00838",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.373Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/PerformanceMonitor.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.374Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ErrorHandlingUtils.js?t=1758466235030",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.375Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SecureDOM.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.376Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ColorWheelPicker.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.376Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=aae6ee6e",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.377Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=064b3e0f",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.396Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=cacecfe2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.420Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=23081f04",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.449Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=a9b00838",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.452Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/dompurify.js?v=2aa32dc2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.460Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=064b3e0f",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.468Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=2aa32dc2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.470Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=cacecfe2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.488Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=23081f04",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.524Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=a9b00838",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.529Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/i18n/ko.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.768Z"
+    },
+    {
+      "url": "http://localhost:3029/favicon.ico",
+      "status": 404,
+      "timestamp": "2025-09-21T18:45:48.772Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/i18n/en.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.800Z"
+    },
+    {
+      "url": "http://localhost:3030/api/health",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.870Z"
+    },
+    {
+      "url": "http://localhost:3030/api/config",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.892Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/texture.png",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:48.903Z"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.222Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/model.gltf",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.277Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/texture.png",
+      "status": 304,
+      "timestamp": "2025-09-21T18:45:49.299Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/model.bin",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.300Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.116.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.357Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.116.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.359Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.117.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.363Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.117.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.364Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.118.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.385Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.118.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.388Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.119.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.393Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.119.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.395Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.112.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.397Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.112.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.400Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.115.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.402Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.115.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.404Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.114.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.406Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.113.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.409Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5CgmG0X7t.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.413Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5CgmG0X7t.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.416Z"
+    },
+    {
+      "url": "https://www.gstatic.com/draco/versioned/decoders/1.5.6/draco_wasm_wrapper.js",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.433Z"
+    },
+    {
+      "url": "https://www.gstatic.com/draco/versioned/decoders/1.5.6/draco_decoder.wasm",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.438Z"
+    },
+    {
+      "url": "blob:http://localhost:3029/16cc52ee-466c-410a-911b-c834fab4b5f1",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:49.506Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5CgmG0X7t.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:50.609Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.113.woff2",
+      "status": 200,
+      "timestamp": "2025-09-21T18:45:50.610Z"
+    }
+  ],
+  "finalStatus": "not_working"
+}

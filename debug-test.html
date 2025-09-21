@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #three-container { width: 400px; height: 300px; border: 1px solid #ccc; }
+        #console { margin-top: 20px; padding: 10px; background: #f0f0f0; white-space: pre-wrap; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Debug Test Page</h1>
+    <div id="three-container"></div>
+    <div id="console"></div>
+
+    <script type="module">
+        // Capture console output
+        const consoleDiv = document.getElementById('console');
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        function addToConsole(type, ...args) {
+            const message = args.map(arg =>
+                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+            ).join(' ');
+            consoleDiv.textContent += `[${type}] ${message}\n`;
+        }
+
+        console.log = (...args) => {
+            originalLog(...args);
+            addToConsole('LOG', ...args);
+        };
+
+        console.error = (...args) => {
+            originalError(...args);
+            addToConsole('ERROR', ...args);
+        };
+
+        // Now run the debug script
+        console.log('🔍 DEBUG: Starting application...');
+
+        try {
+            import('three').then(THREE => {
+                console.log('✅ Three.js loaded:', !!THREE);
+                window.THREE = THREE;
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    console.log('✅ DOM loaded');
+
+                    const container = document.getElementById('three-container');
+                    console.log('✅ Container found:', !!container);
+                    console.log('Container dimensions:', container?.clientWidth, 'x', container?.clientHeight);
+
+                    if (container && container.clientWidth > 0 && container.clientHeight > 0) {
+                        try {
+                            const scene = new THREE.Scene();
+                            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                            const renderer = new THREE.WebGLRenderer();
+                            renderer.setSize(container.clientWidth, container.clientHeight);
+                            container.appendChild(renderer.domElement);
+
+                            const geometry = new THREE.BoxGeometry();
+                            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                            const cube = new THREE.Mesh(geometry, material);
+                            scene.add(cube);
+
+                            camera.position.z = 5;
+                            renderer.render(scene, camera);
+                            console.log('✅ Basic Three.js rendering works!');
+
+                        } catch (error) {
+                            console.error('❌ Three.js setup failed:', error);
+                        }
+                    } else {
+                        console.error('❌ Container has zero dimensions or not found');
+                    }
+                });
+            }).catch(error => {
+                console.error('❌ Three.js import failed:', error);
+            });
+
+        } catch (error) {
+            console.error('❌ Critical error during import:', error);
+        }
+    </script>
+</body>
+</html>

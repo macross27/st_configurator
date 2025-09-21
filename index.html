@@ -1,51 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uniform Configurator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>유니폼 구성기</title>
     <link rel="stylesheet" href="styles-tokens.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
-    <div class="app-container">
-        <div class="viewer-panel">
-            <div id="three-container"></div>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link" data-i18n="accessibility.skipToMain">메인 콘텐츠로 건너뛰기</a>
+
+    <!-- Live region for screen reader announcements -->
+    <div id="screen-reader-announcements" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div id="screen-reader-alerts" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+    <div class="app-container" role="application" data-i18n-aria="accessibility.appContainer" aria-label="3D 유니폼 구성기 응용프로그램">
+        <aside class="property-panel" role="complementary" aria-label="Texture Editor Controls">
+            <div class="panel-header">
+                <h1 data-i18n="nav.textureEditor">텍스처 에디터</h1>
+            </div>
+
+            <section class="base-texture-section" aria-labelledby="base-texture-heading">
+                <h2 id="base-texture-heading" data-i18n="baseTexture.title">기본 텍스처</h2>
+                <div class="color-controls">
+                    <label for="primary-color" data-i18n="baseTexture.primaryColor">기본 색상:</label>
+                    <input type="color" id="primary-color" value="#ffffff"
+                           aria-label="Select primary base color">
+                    <label for="secondary-color" data-i18n="baseTexture.secondaryColor">보조 색상:</label>
+                    <input type="color" id="secondary-color" value="#000000"
+                           aria-label="Select secondary base color">
+                </div>
+            </section>
+
+            <section class="layers-section" aria-labelledby="layers-heading">
+                <div class="layers-header">
+                    <h2 id="layers-heading" data-i18n="layers.title">레이어</h2>
+                    <div class="layer-controls" role="group" data-i18n-aria="accessibility.addNewLayers" aria-label="새 레이어 추가">
+                        <button id="add-text-btn" class="add-layer-btn"
+                                data-i18n-aria="accessibility.addNewTextLayer" aria-label="새 텍스트 레이어 추가" data-i18n="layers.addText">텍스트 추가</button>
+                        <button id="add-logo-btn" class="add-layer-btn"
+                                data-i18n-aria="accessibility.addNewLogoLayer" aria-label="새 로고 레이어 추가" data-i18n="layers.addLogo">로고 추가</button>
+                    </div>
+                </div>
+                <div id="layers-list" class="layers-list" role="list" data-i18n-aria="accessibility.textureLayersList" aria-label="텍스처 레이어 목록"></div>
+            </section>
+
+            <!-- Color picker dropdown for texture editor layers -->
+            <div id="layer-color-picker-dropdown" class="color-picker-dropdown" role="dialog"
+                 aria-label="Layer Color Picker" aria-modal="true" tabindex="-1">
+                <div class="color-picker-content">
+                    <button class="color-picker-close-btn" id="layer-color-picker-close-btn"
+                            aria-label="Close layer color picker">Close</button>
+                    <div class="color-picker-main">
+                        <div class="color-wheel-section">
+                            <label for="layer-color-wheel-canvas" class="sr-only">Layer color wheel - click or use arrow keys to select hue and saturation</label>
+                            <canvas id="layer-color-wheel-canvas" width="200" height="200"
+                                    role="slider"
+                                    aria-label="Layer color wheel for hue and saturation selection"
+                                    tabindex="0"></canvas>
+                            <div class="color-wheel-handle" id="layer-color-wheel-handle" aria-hidden="true"></div>
+                        </div>
+                        <div class="brightness-section">
+                            <label for="layer-brightness-slider-track" class="sr-only">Layer brightness slider</label>
+                            <div class="brightness-slider-container">
+                                <div class="brightness-slider-track" id="layer-brightness-slider-track"
+                                     role="slider"
+                                     aria-label="Layer brightness level"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     aria-valuenow="50"
+                                     tabindex="0">
+                                    <div class="brightness-slider-handle" id="layer-brightness-slider-handle" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="export-section" aria-labelledby="export-heading">
+                <h2 id="export-heading" class="sr-only">Export and Order Actions</h2>
+                <div class="action-controls" role="group" data-i18n-aria="accessibility.exportAndOrderActions" aria-label="내보내기 및 주문 작업">
+                    <button id="order-btn" class="order-btn"
+                            data-i18n-aria="accessibility.createOrderForm" aria-label="현재 구성으로 주문서 작성" data-i18n="nav.createOrder">주문서 작성</button>
+                    <button id="submit-btn" class="submit-btn"
+                            data-i18n-aria="accessibility.submitConfiguration" aria-label="현재 구성 제출" data-i18n="actions.submitOrder">주문 제출</button>
+                </div>
+            </section>
+        </aside>
+
+        <main id="main-content" role="main" data-i18n-aria="accessibility.mainContent" aria-label="3D 유니폼 미리보기 및 컨트롤">
+        <section class="viewer-panel" data-i18n-aria="accessibility.previewViewport" aria-label="3D 미리보기 뷰포트">
+            <div id="three-container" role="img" data-i18n-aria="accessibility.threeDPreview" aria-label="3D 유니폼 미리보기 - 화살표 키로 회전, +/- 키로 확대/축소" tabindex="0"></div>
             
             <!-- Reset button (bottom left) -->
             <div class="reset-button-container">
-                <button id="reset-view-btn" class="reset-view-btn" title="Reset view to default state">⟲</button>
+                <button id="reset-view-btn" class="reset-view-btn"
+                        aria-label="Reset 3D view to default state"
+                        title="Reset view to default state">⟲</button>
             </div>
             
             <!-- FOV slider overlay -->
-            <div id="fov-slider-overlay" class="fov-slider-overlay" style="display: none;">
+            <div id="fov-slider-overlay" class="fov-slider-overlay" style="display: none;" role="dialog" aria-label="Field of View Controls">
                 <div class="fov-slider-container">
-                    <label for="fov-slider">FOV:</label>
-                    <input type="range" id="fov-slider" min="10" max="50" step="1" value="35">
-                    <span id="fov-value">35°</span>
+                    <label for="fov-slider">Field of View:</label>
+                    <input type="range" id="fov-slider" min="10" max="50" step="1" value="35"
+                           aria-label="Field of view angle in degrees"
+                           aria-describedby="fov-value">
+                    <span id="fov-value" aria-live="polite">35°</span>
                 </div>
             </div>
             
             <!-- Scale slider overlay -->
-            <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;">
+            <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;" role="dialog" aria-label="Layer Property Controls">
                 <div class="scale-slider-container">
-                    <label for="scale-slider">크기:</label>
-                    <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1">
-                    <span id="scale-value">1.0</span>
+                    <label for="scale-slider" data-i18n="controls.scale">크기:</label>
+                    <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1"
+                           aria-label="Layer scale from 0.1 to 3.0"
+                           aria-describedby="scale-value">
+                    <span id="scale-value" aria-live="polite">1.0</span>
                 </div>
-                
+
                 <div class="section-separator"></div>
-                
+
                 <div class="rotate-flip-container">
                     <div class="rotate-slider-container">
-                        <label for="rotate-slider">회전:</label>
-                        <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0">
-                        <span id="rotate-value">0°</span>
+                        <label for="rotate-slider" data-i18n="controls.rotation">회전:</label>
+                        <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0"
+                               aria-label="Layer rotation angle in degrees"
+                               aria-describedby="rotate-value">
+                        <span id="rotate-value" aria-live="polite">0°</span>
                     </div>
                     <div class="flip-controls-container">
                         <label class="flip-checkbox-label">
-                            <input type="checkbox" id="flip-horizontal-checkbox">
-                            <span class="checkbox-text">좌우반전</span>
+                            <input type="checkbox" id="flip-horizontal-checkbox"
+                                   aria-label="Flip layer horizontally">
+                            <span class="checkbox-text" data-i18n="controls.flipHorizontal">좌우반전</span>
                         </label>
                     </div>
                 </div>
@@ -53,26 +145,42 @@
                 <!-- Color picker for layers with color property -->
                 <div id="color-palette-container" class="color-display-container" style="display: none;">
                     <div class="color-display-wrapper">
-                        <label class="color-display-label">색:</label>
-                        <div class="current-color-display" id="current-color-display" title="Click to choose color">
-                            <div class="current-color-swatch" id="current-color-swatch"></div>
-                        </div>
+                        <label class="color-display-label" for="current-color-display">Color:</label>
+                        <button class="current-color-display" id="current-color-display"
+                                aria-label="Open color picker"
+                                aria-describedby="current-color-description">
+                            <div class="current-color-swatch" id="current-color-swatch" aria-hidden="true"></div>
+                            <span id="current-color-description" class="sr-only">Current color picker button</span>
+                        </button>
                     </div>
                 </div>
                 
                 <!-- Color picker dropdown -->
-                <div id="color-picker-dropdown" class="color-picker-dropdown">
+                <div id="color-picker-dropdown" class="color-picker-dropdown" role="dialog"
+                     aria-label="Color Picker" aria-modal="true" tabindex="-1">
                     <div class="color-picker-content">
-                        <button class="color-picker-close-btn" id="color-picker-close-btn">창 닫기</button>
+                        <button class="color-picker-close-btn" id="color-picker-close-btn"
+                                aria-label="Close color picker">Close</button>
                         <div class="color-picker-main">
                             <div class="color-wheel-section">
-                                <canvas id="color-wheel-canvas" width="200" height="200"></canvas>
-                                <div class="color-wheel-handle" id="color-wheel-handle"></div>
+                                <label for="color-wheel-canvas" class="sr-only">Color wheel - click or use arrow keys to select hue and saturation</label>
+                                <canvas id="color-wheel-canvas" width="200" height="200"
+                                        role="slider"
+                                        aria-label="Color wheel for hue and saturation selection"
+                                        tabindex="0"></canvas>
+                                <div class="color-wheel-handle" id="color-wheel-handle" aria-hidden="true"></div>
                             </div>
                             <div class="brightness-section">
+                                <label for="brightness-slider-track" class="sr-only">Brightness slider</label>
                                 <div class="brightness-slider-container">
-                                    <div class="brightness-slider-track" id="brightness-slider-track">
-                                        <div class="brightness-slider-handle" id="brightness-slider-handle"></div>
+                                    <div class="brightness-slider-track" id="brightness-slider-track"
+                                         role="slider"
+                                         aria-label="Brightness level"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         aria-valuenow="50"
+                                         tabindex="0">
+                                        <div class="brightness-slider-handle" id="brightness-slider-handle" aria-hidden="true"></div>
                                     </div>
                                 </div>
                             </div>
@@ -81,72 +189,42 @@
                 </div>
                 
             </div>
-        </div>
-        
-        <div class="property-panel">
-            <div class="panel-header">
-                <h3>Texture Editor</h3>
-            </div>
-            
-            <div class="base-texture-section">
-                <h4>Base Texture</h4>
-                <div class="color-controls">
-                    <label>Primary Color:</label>
-                    <input type="color" id="primary-color" value="#ffffff">
-                    <label>Secondary Color:</label>
-                    <input type="color" id="secondary-color" value="#000000">
-                </div>
-            </div>
-            
-            <div class="layers-section">
-                <div class="layers-header">
-                    <h4>Layers</h4>
-                    <button id="add-text-btn" class="add-layer-btn">Add Text</button>
-                    <button id="add-logo-btn" class="add-layer-btn">Add Logo</button>
-                </div>
-                <div id="layers-list" class="layers-list"></div>
-            </div>
-            
-            <!-- Color picker dropdown for texture editor layers -->
-            <div id="layer-color-picker-dropdown" class="color-picker-dropdown">
-                <div class="color-picker-content">
-                    <button class="color-picker-close-btn" id="layer-color-picker-close-btn">창 닫기</button>
-                    <div class="color-picker-main">
-                        <div class="color-wheel-section">
-                            <canvas id="layer-color-wheel-canvas" width="200" height="200"></canvas>
-                            <div class="color-wheel-handle" id="layer-color-wheel-handle"></div>
-                        </div>
-                        <div class="brightness-section">
-                            <div class="brightness-slider-container">
-                                <div class="brightness-slider-track" id="layer-brightness-slider-track">
-                                    <div class="brightness-slider-handle" id="layer-brightness-slider-handle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="export-section">
-                <button id="order-btn" class="order-btn">주문서 작성</button>
-                <button id="submit-btn" class="submit-btn">보내기</button>
-            </div>
-        </div>
+        </section>
+        </main>
     </div>
     
     <!-- Order Form Modal -->
-    <div id="order-modal" class="modal-overlay" style="display: none;">
+    <div id="order-modal" class="modal-overlay" style="display: none;"
+         role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">주문서 작성</h2>
-                <button class="modal-close-btn" id="order-modal-close">창 닫기</button>
+                <h2 id="order-modal-title" class="modal-title">Create Order Form</h2>
+                <button class="modal-close-btn" id="order-modal-close"
+                        aria-label="Close order form dialog">Close</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" role="document">
                 <!-- Form will be dynamically populated by JavaScript -->
             </div>
         </div>
     </div>
-    
+
+    <!-- Keyboard navigation help -->
+    <div id="keyboard-help" class="keyboard-help">
+        <h4>Keyboard Controls</h4>
+        <ul>
+            <li><kbd>Tab</kbd> Navigate between controls</li>
+            <li><kbd>Arrow keys</kbd> Navigate 3D view/menus</li>
+            <li><kbd>Enter/Space</kbd> Activate buttons</li>
+            <li><kbd>Delete</kbd> Remove selected layer</li>
+            <li><kbd>Ctrl+↑/↓</kbd> Reorder layers</li>
+            <li><kbd>Ctrl+1-9</kbd> Select layer by number</li>
+            <li><kbd>+/-</kbd> Zoom in 3D view</li>
+            <li><kbd>Esc</kbd> Close dialogs/clear selection</li>
+        </ul>
+    </div>
+
     <script type="module" src="main.js"></script>
+    <!-- Accessibility validation in development -->
+    <script type="module" src="accessibility-validator.js"></script>
 </body>
 </html>

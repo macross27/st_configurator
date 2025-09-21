@@ -1,0 +1,470 @@
+{
+  "timestamp": "2025-09-21T18:42:29.395Z",
+  "testPhases": [
+    {
+      "phase": 1,
+      "description": "Navigate to application",
+      "startTime": "2025-09-21T18:42:29.398Z"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-09-21T18:42:30.590Z"
+    }
+  ],
+  "networkErrors": [
+    {
+      "url": "http://localhost:3029/favicon.ico",
+      "status": 404,
+      "statusText": "Not Found",
+      "timestamp": "2025-09-21T18:42:30.589Z"
+    }
+  ],
+  "serverResponses": [
+    {
+      "url": "http://localhost:3029/",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.472Z"
+    },
+    {
+      "url": "http://localhost:3029/styles-tokens.css",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.546Z"
+    },
+    {
+      "url": "http://localhost:3029/styles.css",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.548Z"
+    },
+    {
+      "url": "http://localhost:3029/accessibility.css",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.548Z"
+    },
+    {
+      "url": "http://localhost:3029/@vite/client",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.550Z"
+    },
+    {
+      "url": "http://localhost:3029/main.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.582Z"
+    },
+    {
+      "url": "http://localhost:3029/accessibility-validator.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.599Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/vite/dist/client/env.mjs",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.601Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three.js?v=aae6ee6e",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.606Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.608Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.622Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/InteractionManager.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.627Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ConfigurationManager.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.657Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/UIManager.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.685Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ImageProcessor.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.694Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/UIStyleManager.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.696Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758479086356",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.697Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/OrderFormManager.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.699Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/DesignSystem.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.701Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/KeyboardManager.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.702Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.705Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/I18nUIUpdater.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.709Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ErrorManager.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.772Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/serverApiClient.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.796Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=aae6ee6e",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.797Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three.js?v=064b3e0f",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.798Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_loaders_GLTFLoader__js.js?v=a9b00838",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.804Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_loaders_DRACOLoader__js.js?v=cacecfe2",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.804Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/three_examples_jsm_controls_OrbitControls__js.js?v=23081f04",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.806Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/PerformanceMonitor.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.807Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ColorWheelPicker.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.807Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/SecureDOM.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.807Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/client/ErrorHandlingUtils.js?t=1758466235030",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.808Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=064b3e0f",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.809Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=aae6ee6e",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.830Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=cacecfe2",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:29.834Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=064b3e0f",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.058Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=23081f04",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.060Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=a9b00838",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.061Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/dompurify.js?v=2aa32dc2",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.063Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=cacecfe2",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.064Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=23081f04",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.065Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=a9b00838",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.066Z"
+    },
+    {
+      "url": "http://localhost:3029/node_modules/.vite/deps/chunk-BUSYA2B4.js?v=2aa32dc2",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.076Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/i18n/ko.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.548Z"
+    },
+    {
+      "url": "http://localhost:3029/favicon.ico",
+      "status": 404,
+      "statusText": "Not Found",
+      "timestamp": "2025-09-21T18:42:30.589Z"
+    },
+    {
+      "url": "http://localhost:3029/lib/i18n/en.js",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.598Z"
+    },
+    {
+      "url": "http://localhost:3030/api/health",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.637Z"
+    },
+    {
+      "url": "http://localhost:3030/api/config",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.642Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/texture.png",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:30.649Z"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:30.955Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/model.gltf",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:31.067Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/texture.png",
+      "status": 304,
+      "statusText": "Not Modified",
+      "timestamp": "2025-09-21T18:42:31.135Z"
+    },
+    {
+      "url": "http://localhost:3029/assets/model.bin",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:31.135Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.119.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.150Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.119.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.155Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.112.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.159Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.112.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.162Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.117.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.181Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.117.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.184Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.113.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.189Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.114.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.192Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.118.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.200Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.115.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.201Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5CgmG0X7t.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.202Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.116.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.204Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.118.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.207Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.115.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.209Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5CgmG0X7t.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.235Z"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v38/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.116.woff2",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.236Z"
+    },
+    {
+      "url": "https://www.gstatic.com/draco/versioned/decoders/1.5.6/draco_wasm_wrapper.js",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.260Z"
+    },
+    {
+      "url": "https://www.gstatic.com/draco/versioned/decoders/1.5.6/draco_decoder.wasm",
+      "status": 200,
+      "statusText": "",
+      "timestamp": "2025-09-21T18:42:31.264Z"
+    },
+    {
+      "url": "blob:http://localhost:3029/16897756-e65b-4d23-9d04-39622e6c4004",
+      "status": 200,
+      "statusText": "OK",
+      "timestamp": "2025-09-21T18:42:31.443Z"
+    }
+  ],
+  "screenshots": [
+    "test_final_initial.png"
+  ],
+  "finalStatus": "test_failed",
+  "testError": "Waiting failed: 10000ms exceeded"
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Uniform Configurator Test Results</h1>
+    <div id="test-results"></div>
+
+    <script>
+        // Redirect console.log to display on page
+        const originalLog = console.log;
+        const testResults = document.getElementById('test-results');
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const div = document.createElement('div');
+            div.className = 'log';
+            const text = args.join(' ');
+            if (text.includes('✅')) {
+                div.className += ' success';
+            } else if (text.includes('❌')) {
+                div.className += ' error';
+            } else {
+                div.className += ' info';
+            }
+            div.textContent = text;
+            testResults.appendChild(div);
+        };
+
+        // Run tests by opening the main app in iframe and testing it
+        console.log('Opening main app for testing...');
+
+        const iframe = document.createElement('iframe');
+        iframe.src = 'http://localhost:3029';
+        iframe.style.width = '1px';
+        iframe.style.height = '1px';
+        iframe.style.position = 'absolute';
+        iframe.style.opacity = '0';
+        document.body.appendChild(iframe);
+
+        iframe.onload = function() {
+            console.log('Main app loaded in iframe, running tests...');
+
+            setTimeout(() => {
+                try {
+                    const app = iframe.contentWindow.uniformConfigurator;
+                    if (app) {
+                        console.log('✅ UniformConfigurator found in iframe');
+
+                        // Test base texture
+                        if (app.baseTextureImage) {
+                            console.log('✅ Base texture loaded:', app.baseTextureImage.width + 'x' + app.baseTextureImage.height);
+                        } else {
+                            console.log('❌ Base texture not loaded');
+                        }
+
+                        // Test layer manager
+                        if (app.layerManager) {
+                            console.log('✅ LayerManager available');
+                            const layers = app.layerManager.getLayers();
+                            console.log('📝 Initial layers count:', layers.length);
+
+                            // Test adding text layer
+                            try {
+                                app.layerManager.addTextLayer('Test Text');
+                                const newLayers = app.layerManager.getLayers();
+                                if (newLayers.length > layers.length) {
+                                    console.log('✅ Text layer added successfully');
+                                } else {
+                                    console.log('❌ Text layer was not added');
+                                }
+                            } catch (error) {
+                                console.log('❌ Error adding text layer:', error.message);
+                            }
+                        } else {
+                            console.log('❌ LayerManager not found');
+                        }
+
+                        // Test scene manager
+                        if (app.sceneManager) {
+                            console.log('✅ SceneManager available');
+                            if (app.sceneManager.model) {
+                                console.log('✅ 3D model loaded');
+                            } else {
+                                console.log('❌ 3D model not loaded');
+                            }
+                        } else {
+                            console.log('❌ SceneManager not found');
+                        }
+
+                    } else {
+                        console.log('❌ UniformConfigurator not found in iframe');
+                    }
+                } catch (error) {
+                    console.log('❌ Cross-origin error - cannot test iframe content');
+                    console.log('ℹ️ Testing through direct URL...');
+                    window.open('http://localhost:3029', '_blank');
+                }
+            }, 5000);
+        };
+    </script>
+</body>
+</html>

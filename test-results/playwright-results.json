@@ -1,0 +1,2066 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\macross27\\Documents\\st_configurator\\playwright.config.js",
+    "rootDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "C:\\Users\\macross27\\Documents\\st_configurator\\tests\\e2e\\global-setup.js",
+    "globalTeardown": "C:\\Users\\macross27\\Documents\\st_configurator\\tests\\e2e\\global-teardown.js",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "project": "st_configurator",
+      "version": "1.0.0",
+      "description": "E2E tests for the st_configurator application"
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "test-results/playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/playwright-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/playwright-junit.xml"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/macross27/Documents/st_configurator/test-results/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "project": "st_configurator",
+          "version": "1.0.0",
+          "description": "E2E tests for the st_configurator application"
+        },
+        "id": "Tablet",
+        "name": "Tablet",
+        "testDir": "C:/Users/macross27/Documents/st_configurator/tests/e2e",
+        "testIgnore": [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "user-workflows.spec.js",
+      "file": "user-workflows.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "User Workflows",
+          "file": "user-workflows.spec.js",
+          "line": 7,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "New User Workflow",
+              "file": "user-workflows.spec.js",
+              "line": 20,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-5e8b23650f90099cfeb9",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-e3a26191b155e6749d49",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-b37bf1a8a491539bd716",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-bc5415f77677242e2cbb",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                },
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-1ed4efcb2b27355708ab",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-742399c0df5ea1b0bff5",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-a943b6f6a58dac7123a7",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-d4f1237c42e869341a62",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                },
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-00ae012841aad87ddaac",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-d6d900714f6038c3feba",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-26446f2c6edbcc6054fe",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7a17675862da9a7eddff",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                },
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-496cba8bea97caacade2",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-23304c759e757b8809fc",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-538965f3355200d5ac18",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-01fd386eb63ade4d3964",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                },
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-d26109d70593cc471d40",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-86c3dbbe952f07a3e346",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-e3bc8fbaee6924e3fc9b",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-1548f3be3514d087573f",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                },
+                {
+                  "title": "should load application and display 3D scene",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-1c02f812e2ba3fa347b1",
+                  "file": "user-workflows.spec.js",
+                  "line": 21,
+                  "column": 9
+                },
+                {
+                  "title": "should add text layer and customize it",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c60da544ce3d2a133f73",
+                  "file": "user-workflows.spec.js",
+                  "line": 34,
+                  "column": 9
+                },
+                {
+                  "title": "should upload and add image layer",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-1ebe85b8618fd19acd28",
+                  "file": "user-workflows.spec.js",
+                  "line": 67,
+                  "column": 9
+                },
+                {
+                  "title": "should save session with custom name",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-156a2e2117756481c829",
+                  "file": "user-workflows.spec.js",
+                  "line": 101,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "Experienced User Workflow",
+              "file": "user-workflows.spec.js",
+              "line": 126,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-ae62edf3987a1fd33dd4",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-aa3acf1e44d817044227",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-ad8c504629ef57b0c24f",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-4a72b7571abcf83f85a1",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                },
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-0c267bfc766f59bb17aa",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-5b988cf0479a1a92717c",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-ac96a0f7a251b8262e22",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c121cea1d54bd6b5a779",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                },
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-6255bff9997e0af161aa",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c6ebbff317fdc86356ef",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-e833afa7ad9889c453d3",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-53fa671ead90577484d8",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                },
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-8faf77532cd8a21dc1c1",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-2b41c039bdb074398f79",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-cc86c5980a5681f6b04b",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-53c54276f6861177a00d",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                },
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-0f51e1f5366ccfe62efc",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-0abf46da8a9e88e92af2",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-463724094587876ff4e5",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7944cbc7056535f97e35",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                },
+                {
+                  "title": "should load existing session with layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-381e727cf09cb853652c",
+                  "file": "user-workflows.spec.js",
+                  "line": 133,
+                  "column": 9
+                },
+                {
+                  "title": "should duplicate and modify layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-6d67cd8958777c99f953",
+                  "file": "user-workflows.spec.js",
+                  "line": 149,
+                  "column": 9
+                },
+                {
+                  "title": "should reorder layers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-3c48560d1bdb5c8ee00f",
+                  "file": "user-workflows.spec.js",
+                  "line": 176,
+                  "column": 9
+                },
+                {
+                  "title": "should export configuration",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-5c189a0225182b6bd300",
+                  "file": "user-workflows.spec.js",
+                  "line": 195,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "Error Recovery Workflow",
+              "file": "user-workflows.spec.js",
+              "line": 214,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-271c5afe549ef956af80",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-4b7d782d0914293422af",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-6110e3f9be5db7ee38ee",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                },
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-a0e485fdfdaa5a246faf",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7f5ec872aca1eae1c7c2",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-59247cbe5a7f1a187ec6",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                },
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c66df574d1dc12638785",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-b2c445ad814f6b8975bc",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-487b52b4ff6ab99d1df5",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                },
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7dc71d0d7bfa72931df2",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-d3be30c8838bec240ac3",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-93b1e643f5734017de67",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                },
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-e4938cca56ed7265b587",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-f3f1544c3a3885bf7be2",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-905292b096666f2f51d2",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                },
+                {
+                  "title": "should handle oversized file upload gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7653e3e942b84cc8bcdd",
+                  "file": "user-workflows.spec.js",
+                  "line": 215,
+                  "column": 9
+                },
+                {
+                  "title": "should handle network interruption gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-2f995a48e8954cf9cb86",
+                  "file": "user-workflows.spec.js",
+                  "line": 236,
+                  "column": 9
+                },
+                {
+                  "title": "should recover from invalid session data",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-fdb5c4fda5df7489da29",
+                  "file": "user-workflows.spec.js",
+                  "line": 263,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "Performance and Memory",
+              "file": "user-workflows.spec.js",
+              "line": 282,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-8f6c32a0979717b437f1",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-85f41e695c3c11e78127",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                },
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c0034496b376c610ef91",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-ed1332465493a42a8476",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                },
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-07022f1c0ef858d126c5",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-72f67e6b2286c355e1a7",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                },
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-c0fb44551d306e9a728e",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-94b613581e447a66d539",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                },
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-705dde26eb68a661ead6",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-1a672db05df4245f56f4",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                },
+                {
+                  "title": "should handle multiple layer operations efficiently",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-12a305d66f841de6429a",
+                  "file": "user-workflows.spec.js",
+                  "line": 283,
+                  "column": 9
+                },
+                {
+                  "title": "should maintain responsiveness during texture updates",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-0cde9ea5c118910310a5",
+                  "file": "user-workflows.spec.js",
+                  "line": 306,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "Mobile Responsiveness",
+              "file": "user-workflows.spec.js",
+              "line": 335,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-cbdddff9decb606297c1",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                },
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-fdb6006fc93e6ddaa035",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                },
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-a9f28e63d41861d7f841",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                },
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-7e2d7d3f30703175d4cd",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                },
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-0c5a8a2a853a47d1d5f5",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                },
+                {
+                  "title": "should work on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-8a9130f0a63071e26c81",
+                  "file": "user-workflows.spec.js",
+                  "line": 336,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "Cross-Browser Compatibility",
+              "file": "user-workflows.spec.js",
+              "line": 363,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-9f7efc48b2822b88fbf0",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                },
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-39801a675293675350d4",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                },
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-6e068bc3113e27380807",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                },
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-dd96b95aff544439288e",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                },
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-044a6d15bf92a757111b",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                },
+                {
+                  "title": "should work consistently across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Tablet",
+                      "projectName": "Tablet",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "54c66175644afc2f067e-d99bd52c9269d62753c2",
+                  "file": "user-workflows.spec.js",
+                  "line": 364,
+                  "column": 9
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-09-21T18:16:55.510Z",
+    "duration": 36.863000000000056,
+    "expected": 0,
+    "skipped": 90,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

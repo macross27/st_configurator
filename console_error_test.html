@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Error Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .iframe-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .console-log {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .error {
+            color: #ff6b6b;
+        }
+        .warning {
+            color: #ffd93d;
+        }
+        .info {
+            color: #74c0fc;
+        }
+        .log {
+            color: #51cf66;
+        }
+        .timestamp {
+            color: #868e96;
+            font-size: 12px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #4c6ef5;
+            background: #f8f9fa;
+        }
+        .button-test {
+            margin: 10px 0;
+        }
+        button {
+            background: #4c6ef5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #364fc7;
+        }
+        .error-count {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .clear-btn {
+            background: #868e96;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ST Configurator - JavaScript Console Error Testing</h1>
+
+        <div class="test-section">
+            <h2>Application Frame</h2>
+            <p>Below is the embedded ST Configurator application. Any JavaScript errors will be captured and displayed in the console log below.</p>
+            <div class="iframe-container">
+                <iframe id="app-iframe" src="http://localhost:3029"></iframe>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Manual Button Tests</h2>
+            <p>Click these buttons to test specific functionality:</p>
+            <div class="button-test">
+                <button onclick="testTextAddButton()">Test "텍스트 추가" Button</button>
+                <button onclick="testOrderButton()">Test "주문서 작성" Button</button>
+                <button onclick="testSceneMethods()">Test Scene Methods</button>
+                <button onclick="testLayerMethods()">Test Layer Methods</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Console Output <span class="error-count" id="error-count">0 Errors</span></h2>
+            <button class="clear-btn" onclick="clearConsole()">Clear Console</button>
+            <div class="console-log" id="console-output"></div>
+        </div>
+    </div>
+
+    <script>
+        let errorCount = 0;
+        let iframe;
+
+        function logToConsole(type, message, timestamp = new Date()) {
+            const output = document.getElementById('console-output');
+            const timeStr = timestamp.toLocaleTimeString();
+            const logLine = `[${timeStr}] [${type.toUpperCase()}] ${message}\n`;
+
+            const span = document.createElement('span');
+            span.className = type;
+            span.textContent = logLine;
+
+            output.appendChild(span);
+            output.scrollTop = output.scrollHeight;
+
+            if (type === 'error') {
+                errorCount++;
+                updateErrorCount();
+            }
+        }
+
+        function updateErrorCount() {
+            document.getElementById('error-count').textContent = `${errorCount} Errors`;
+        }
+
+        function clearConsole() {
+            document.getElementById('console-output').textContent = '';
+            errorCount = 0;
+            updateErrorCount();
+        }
+
+        function testTextAddButton() {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const button = iframeDoc.getElementById('add-text-btn');
+                if (button) {
+                    logToConsole('info', 'Found add-text-btn, attempting click...');
+                    button.click();
+                    logToConsole('info', 'add-text-btn clicked successfully');
+                } else {
+                    logToConsole('error', 'add-text-btn not found in iframe');
+                }
+            } catch (error) {
+                logToConsole('error', `Error testing text add button: ${error.message}`);
+            }
+        }
+
+        function testOrderButton() {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const button = iframeDoc.getElementById('order-btn');
+                if (button) {
+                    logToConsole('info', 'Found order-btn, attempting click...');
+                    button.click();
+                    logToConsole('info', 'order-btn clicked successfully');
+                } else {
+                    logToConsole('error', 'order-btn not found in iframe');
+                }
+            } catch (error) {
+                logToConsole('error', `Error testing order button: ${error.message}`);
+            }
+        }
+
+        function testSceneMethods() {
+            try {
+                const iframeWindow = iframe.contentWindow;
+                if (iframeWindow.sceneManager) {
+                    logToConsole('info', 'Testing sceneManager methods...');
+
+                    // Test basic scene methods
+                    if (typeof iframeWindow.sceneManager.render === 'function') {
+                        logToConsole('info', 'sceneManager.render() exists');
+                    } else {
+                        logToConsole('error', 'sceneManager.render() not found');
+                    }
+
+                    if (typeof iframeWindow.sceneManager.onWindowResize === 'function') {
+                        logToConsole('info', 'sceneManager.onWindowResize() exists');
+                    } else {
+                        logToConsole('error', 'sceneManager.onWindowResize() not found');
+                    }
+
+                } else {
+                    logToConsole('error', 'sceneManager not found in iframe window');
+                }
+            } catch (error) {
+                logToConsole('error', `Error testing scene methods: ${error.message}`);
+            }
+        }
+
+        function testLayerMethods() {
+            try {
+                const iframeWindow = iframe.contentWindow;
+                if (iframeWindow.layerManager) {
+                    logToConsole('info', 'Testing layerManager methods...');
+
+                    // Test basic layer methods
+                    if (typeof iframeWindow.layerManager.addTextLayer === 'function') {
+                        logToConsole('info', 'layerManager.addTextLayer() exists');
+                    } else {
+                        logToConsole('error', 'layerManager.addTextLayer() not found');
+                    }
+
+                    if (typeof iframeWindow.layerManager.getLayers === 'function') {
+                        logToConsole('info', 'layerManager.getLayers() exists');
+                        const layers = iframeWindow.layerManager.getLayers();
+                        logToConsole('info', `Current layers count: ${layers.length}`);
+                    } else {
+                        logToConsole('error', 'layerManager.getLayers() not found');
+                    }
+
+                } else {
+                    logToConsole('error', 'layerManager not found in iframe window');
+                }
+            } catch (error) {
+                logToConsole('error', `Error testing layer methods: ${error.message}`);
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            iframe = document.getElementById('app-iframe');
+
+            // Override console methods to capture logs from iframe
+            const originalConsole = {
+                log: console.log,
+                error: console.error,
+                warn: console.warn,
+                info: console.info
+            };
+
+            // Capture console messages
+            console.log = function(...args) {
+                logToConsole('log', args.join(' '));
+                originalConsole.log.apply(console, args);
+            };
+
+            console.error = function(...args) {
+                logToConsole('error', args.join(' '));
+                originalConsole.error.apply(console, args);
+            };
+
+            console.warn = function(...args) {
+                logToConsole('warning', args.join(' '));
+                originalConsole.warn.apply(console, args);
+            };
+
+            console.info = function(...args) {
+                logToConsole('info', args.join(' '));
+                originalConsole.info.apply(console, args);
+            };
+
+            // Listen for iframe load
+            iframe.addEventListener('load', function() {
+                logToConsole('info', 'Application iframe loaded successfully');
+
+                // Try to access iframe window for further testing
+                try {
+                    const iframeWindow = iframe.contentWindow;
+                    if (iframeWindow) {
+                        logToConsole('info', 'Iframe window accessible');
+
+                        // Check if main objects exist
+                        setTimeout(() => {
+                            if (iframeWindow.sceneManager) {
+                                logToConsole('info', 'sceneManager found in global scope');
+                            } else {
+                                logToConsole('warning', 'sceneManager not found in global scope');
+                            }
+
+                            if (iframeWindow.layerManager) {
+                                logToConsole('info', 'layerManager found in global scope');
+                            } else {
+                                logToConsole('warning', 'layerManager not found in global scope');
+                            }
+
+                            if (iframeWindow.uiManager) {
+                                logToConsole('info', 'uiManager found in global scope');
+                            } else {
+                                logToConsole('warning', 'uiManager not found in global scope');
+                            }
+                        }, 2000);
+                    }
+                } catch (error) {
+                    logToConsole('error', `Cannot access iframe window: ${error.message}`);
+                }
+            });
+
+            iframe.addEventListener('error', function(event) {
+                logToConsole('error', `Iframe error: ${event.error ? event.error.message : 'Unknown error'}`);
+            });
+
+            logToConsole('info', 'Console error testing initialized');
+        });
+
+        // Capture unhandled errors
+        window.addEventListener('error', function(event) {
+            logToConsole('error', `Unhandled error: ${event.error ? event.error.message : event.message}`);
+        });
+
+        // Capture unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(event) {
+            logToConsole('error', `Unhandled promise rejection: ${event.reason}`);
+        });
+    </script>
+</body>
+</html>

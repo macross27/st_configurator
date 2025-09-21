@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-21T18:16:48.954Z",
+  "environment": {
+    "ci": false,
+    "node": "v22.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "testResults": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "duration": 242.47399999999993,
+    "suites": 0
+  },
+  "coverage": null,
+  "performance": null
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Screenshot Test</title>
+    <style>
+        iframe { width: 100%; height: 600px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Application Test</h1>
+    <iframe src="http://localhost:3026" id="app-frame"></iframe>
+    <script>
+        setTimeout(() => {
+            const iframe = document.getElementById('app-frame');
+            console.log('Iframe loaded, app should be visible above');
+        }, 3000);
+    </script>
+</body>
+</html>

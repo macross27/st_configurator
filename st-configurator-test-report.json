@@ -1,0 +1,3676 @@
+{
+  "timestamp": "2025-09-21T18:18:05.819Z",
+  "testUrl": "http://localhost:3029",
+  "actions": [
+    {
+      "step": 1,
+      "action": "Navigate to application",
+      "url": "http://localhost:3029",
+      "timestamp": "2025-09-21T18:18:06.401Z"
+    },
+    {
+      "step": 2,
+      "action": "Capture initial state screenshot",
+      "result": "success",
+      "timestamp": "2025-09-21T18:18:11.245Z"
+    },
+    {
+      "step": 3,
+      "action": "Look for New Session button",
+      "result": "not_found",
+      "note": "Button not found, proceeding with existing session",
+      "timestamp": "2025-09-21T18:18:11.285Z"
+    },
+    {
+      "step": 4,
+      "action": "Add text layer",
+      "text": "Test Text",
+      "result": "success",
+      "timestamp": "2025-09-21T18:18:12.978Z"
+    },
+    {
+      "step": 5,
+      "action": "Submit/Save form",
+      "result": "success",
+      "timestamp": "2025-09-21T18:18:15.334Z"
+    }
+  ],
+  "errors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://localhost:3029/favicon.ico",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "timestamp": "2025-09-21T18:18:06.938Z"
+    },
+    {
+      "type": "network_error",
+      "url": "http://localhost:3030/api/sessions/7-OvxE4GnOg-/layers",
+      "status": 500,
+      "statusText": "Internal Server Error",
+      "timestamp": "2025-09-21T18:18:13.650Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "location": {
+        "url": "http://localhost:3030/api/sessions/7-OvxE4GnOg-/layers",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "timestamp": "2025-09-21T18:18:13.650Z"
+    },
+    {
+      "type": "error",
+      "text": "Error adding layer: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 363,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.651Z"
+    },
+    {
+      "type": "error",
+      "text": "Session error: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 1019,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.652Z"
+    },
+    {
+      "type": "error",
+      "text": "❌ Error in addLayerToFormData for layer layer_1758478691341_bljng0: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 303,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.652Z"
+    },
+    {
+      "type": "error",
+      "text": "❌ Error processing layer layer_1758478691341_bljng0: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 147,
+        "columnNumber": 36
+      },
+      "timestamp": "2025-09-21T18:18:13.653Z"
+    }
+  ],
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=064b3e0f",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.833Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=a9b00838",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.862Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=cacecfe2",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.892Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=23081f04",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.922Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryUpload\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.924Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryConnection\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.925Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recoverSession\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.925Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recreateLayer\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.926Z"
+    },
+    {
+      "type": "warning",
+      "text": "Form element missing label: JSHandle@node",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 532,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:07.054Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "initial-state",
+      "path": "C:\\Users\\macross27\\Documents\\st_configurator\\test-initial-state.png",
+      "timestamp": "2025-09-21T18:18:11.245Z"
+    },
+    {
+      "name": "after-text-addition",
+      "path": "C:\\Users\\macross27\\Documents\\st_configurator\\test-after-text-addition.png",
+      "timestamp": "2025-09-21T18:18:13.257Z"
+    },
+    {
+      "name": "final-state",
+      "path": "C:\\Users\\macross27\\Documents\\st_configurator\\test-final-state.png",
+      "timestamp": "2025-09-21T18:18:15.543Z"
+    }
+  ],
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:3029/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      },
+      "timestamp": "2025-09-21T18:18:06.581Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:3029/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      },
+      "timestamp": "2025-09-21T18:18:06.647Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=064b3e0f",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.833Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=a9b00838",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.862Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=cacecfe2",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.892Z"
+    },
+    {
+      "type": "warning",
+      "text": "WARNING: Multiple instances of Three.js being imported.",
+      "location": {
+        "url": "http://localhost:3029/node_modules/.vite/deps/chunk-UZOV2HZI.js?v=23081f04",
+        "lineNumber": 30162,
+        "columnNumber": 12
+      },
+      "timestamp": "2025-09-21T18:18:06.922Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryUpload\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.924Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryConnection\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.925Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recoverSession\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.925Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recreateLayer\" in both languages",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 223,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.926Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ ErrorManager initialized",
+      "location": {
+        "url": "http://localhost:3029/lib/client/ErrorManager.js?t=1758466235030",
+        "lineNumber": 168,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:06.926Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Design System initialized",
+      "location": {
+        "url": "http://localhost:3029/lib/client/DesignSystem.js",
+        "lineNumber": 412,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:06.926Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 Starting app initialization...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 34,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.929Z"
+    },
+    {
+      "type": "log",
+      "text": "1️⃣ Initializing error management...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 37,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.929Z"
+    },
+    {
+      "type": "log",
+      "text": "2️⃣ Initializing i18n system...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 41,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.930Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://localhost:3029/favicon.ico",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "timestamp": "2025-09-21T18:18:06.938Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Language packs loaded: [ko, en]",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 67,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.951Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Language changed from ko to ko",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 286,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:06.954Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18nManager initialized with language: ko",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nManager.js?t=1758466235030",
+        "lineNumber": 46,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.954Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18n system initialized",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 83,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.955Z"
+    },
+    {
+      "type": "log",
+      "text": "3️⃣ Loading server configuration...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 44,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.955Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Server is available",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 117,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:06.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Server configuration loaded: {maxImageFileSize: 5, imageConversionThreshold: 2, maxImageWidth: 1024, maxImageHeight: 1024, compressionQuality: 0.8}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 145,
+        "columnNumber": 28
+      },
+      "timestamp": "2025-09-21T18:18:06.972Z"
+    },
+    {
+      "type": "log",
+      "text": "4️⃣ Loading default texture...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 47,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.973Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Loading base texture from ./assets/texture.png...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 683,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.973Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Base texture loaded successfully: 1365 x 1365",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 695,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.981Z"
+    },
+    {
+      "type": "log",
+      "text": "5️⃣ Setting up managers...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 50,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:06.981Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Loading model: ./assets/model.gltf",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 166,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.026Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Design System initialized",
+      "location": {
+        "url": "http://localhost:3029/lib/client/DesignSystem.js",
+        "lineNumber": 412,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.045Z"
+    },
+    {
+      "type": "log",
+      "text": "🟡 OrderFormManager constructor called Error\n    at new OrderFormManager (http://localhost:3029/lib/client/OrderFormManager.js:17:63)\n    at UniformConfigurator.setupManagers (http://localhost:3029/main.js:223:37)\n    at UniformConfigurator.initializeApp (http://localhost:3029/main.js:52:18)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/OrderFormManager.js",
+        "lineNumber": 16,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.047Z"
+    },
+    {
+      "type": "log",
+      "text": "🆔 Instance ID: ofm-1758478687047-z9olhv8m7",
+      "location": {
+        "url": "http://localhost:3029/lib/client/OrderFormManager.js",
+        "lineNumber": 20,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.047Z"
+    },
+    {
+      "type": "log",
+      "text": "🔗 Events bound for instance: ofm-1758478687047-z9olhv8m7",
+      "location": {
+        "url": "http://localhost:3029/lib/client/OrderFormManager.js",
+        "lineNumber": 619,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.047Z"
+    },
+    {
+      "type": "warning",
+      "text": "Form element missing label: JSHandle@node",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 532,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:07.054Z"
+    },
+    {
+      "type": "log",
+      "text": "6️⃣ Setting up event handlers...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 53,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "7️⃣ Initializing i18n UI updater...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 57,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ UI updated for language: ko",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nUIUpdater.js",
+        "lineNumber": 65,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18nUIUpdater initialized",
+      "location": {
+        "url": "http://localhost:3029/lib/client/I18nUIUpdater.js",
+        "lineNumber": 30,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18n UI updater initialized",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 96,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ App initialization completed successfully!",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 61,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.056Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.118Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.119Z"
+    },
+    {
+      "type": "log",
+      "text": "Loading progress: 100%",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 227,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:07.124Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Material reference stored: {material: MeshLambertMaterial, childName: man}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 207,
+        "columnNumber": 32
+      },
+      "timestamp": "2025-09-21T18:18:07.643Z"
+    },
+    {
+      "type": "log",
+      "text": "Default state captured: {cameraPosition: Object, cameraTarget: Object, fov: 35}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 419,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.643Z"
+    },
+    {
+      "type": "log",
+      "text": "Camera centered on model: {center: _Vector3, size: _Vector3, cameraPosition: _Vector3}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 298,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.644Z"
+    },
+    {
+      "type": "log",
+      "text": "Model loaded successfully",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 216,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:07.645Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Model loaded, initializing texture...",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 239,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.645Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Base texture image available: true",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 244,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.645Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture dimensions: 1365 x 1365",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 245,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.645Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 SceneManager.setTexture called: {texture: CanvasTexture, material: MeshLambertMaterial, materialExists: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 306,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.646Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to 1 materials",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 332,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.646Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Texture applied to 3D model",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 260,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.646Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.663Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.882Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.883Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.883Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.885Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.891Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.892Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 Starting WCAG AA Compliance Validation...\n",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 14,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.939Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 Validating Semantic Structure...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 50,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.939Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Main landmark present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.940Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 heading elements found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.940Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Skip link present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.940Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Language declared: ko",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.940Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 Validating Heading Structure...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 86,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.940Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Single h1 element present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Heading level skipped: H4 after h2",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Heading hierarchy validated",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🗺️ Validating Landmark Elements...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 125,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: main landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: main role landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: aside landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.942Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: complementary role landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.943Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: section landmark present (4)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.943Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 35 labeled landmarks found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.943Z"
+    },
+    {
+      "type": "log",
+      "text": "📃 Validating List Structures...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 148,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.943Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: List role without listitem children",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.944Z"
+    },
+    {
+      "type": "log",
+      "text": "⌨️ Validating Keyboard Navigation...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 170,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.945Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 25 focusable elements found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.945Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Validating Focus Management...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 202,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.945Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: CSS focus styles found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.945Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Focus-visible styles found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.947Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 3 focusable elements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.947Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 1 focusable elements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.947Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 7 focusable elements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 3 focusable elements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 1 focusable elements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 Validating Tab Order...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 233,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 5 elements with explicit tab order",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: 10 hidden focusable elements (may confuse users)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Validating Color Contrast...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 258,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.948Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.949Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.949Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.951Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.951Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.951Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.951Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.951Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.952Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.953Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.954Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.955Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.955Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 657,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.955Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 55 elements pass contrast requirements",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.955Z"
+    },
+    {
+      "type": "log",
+      "text": "👁️ Validating Focus Indicators...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 297,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.956Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Focus indicators are visible",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.956Z"
+    },
+    {
+      "type": "log",
+      "text": "👆 Validating Touch Targets...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 322,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.956Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.957Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.957Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.957Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.957Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (168x42px): a",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.958Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.958Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.958Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.958Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.959Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.959Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.959Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.959Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 8 elements meet minimum touch target size (44px)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.959Z"
+    },
+    {
+      "type": "log",
+      "text": "🏷️ Validating ARIA Implementation...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 350,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.960Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 35 elements with ARIA labels",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.961Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 17 elements with ARIA roles",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.961Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 ARIA live regions found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.961Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 0 elements with aria-expanded",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.961Z"
+    },
+    {
+      "type": "log",
+      "text": "🏷️ Validating Form Labels...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 392,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.962Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 form controls properly labeled",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.962Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: All form controls have labels",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.962Z"
+    },
+    {
+      "type": "log",
+      "text": "📢 Validating Live Regions...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 420,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.962Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with assertive politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Screen reader announcements container found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Screen reader alerts container found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 Validating Form Accessibility...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 461,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 error message containers found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ Validating Error Handling...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 494,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 form elements with descriptions",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "🖼️ Validating Image Accessibility...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 516,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Canvas element properly labeled",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Canvas element may need accessibility labels",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Canvas element properly labeled",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "📱 Validating Modal Accessibility...",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 555,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.966Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal missing aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal may be missing close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.973Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal missing aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 662,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 667,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "\n============================================================",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 671,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 WCAG AA ACCESSIBILITY COMPLIANCE REPORT",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 672,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "============================================================",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 673,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "\n✅ PASSED: 57 checks",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 675,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.974Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNINGS: 19 items",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 676,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUES: 23 problems",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 677,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "\n📈 COMPLIANCE SCORE: 58%",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 682,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "\n❌ CRITICAL ISSUES (Must Fix):",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 685,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.975Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 3:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): label",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 686,
+        "columnNumber": 49
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "\n⚠️ WARNINGS (Should Fix):",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 690,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Heading level skipped: H4 after h2",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • List role without listitem children",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • 10 hidden focusable elements (may confuse users)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (168x42px): a",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.977Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.978Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.979Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.979Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.979Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Canvas element may need accessibility labels",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.979Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal missing aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.979Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal may be missing close button",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal missing aria-modal attribute",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 691,
+        "columnNumber": 53
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "\n✅ PASSED CHECKS:",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 694,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Main landmark present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • 6 heading elements found",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Skip link present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Language declared: ko",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Single h1 element present",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Heading hierarchy validated",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main role landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.980Z"
+    },
+    {
+      "type": "log",
+      "text": "   • aside landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "   • complementary role landmark present (1)",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 695,
+        "columnNumber": 57
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "   ... and 47 more",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 697,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "\n============================================================",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 701,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WCAG AA COMPLIANCE: NEEDS WORK",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 709,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "Multiple accessibility issues need attention.",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 710,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "============================================================",
+      "location": {
+        "url": "http://localhost:3029/accessibility-validator.js",
+        "lineNumber": 712,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:07.981Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 onTextureUpdated called, applying to 3D model",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 281,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.344Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 SceneManager.setTexture called: {texture: CanvasTexture, material: MeshLambertMaterial, materialExists: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 306,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.345Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to 1 materials",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 332,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.345Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to scene",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 283,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Layer added: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 270,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectLayer called with: layer_1758478691341_bljng0",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 400,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectedLayer is now: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 406,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Layer selected: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 276,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.346Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.347Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.347Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.348Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.348Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:11.348Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.371Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:11.372Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectLayer called with: layer_1758478691341_bljng0",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 400,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.429Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectedLayer is now: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 406,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.430Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Layer selected: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 276,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.430Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.430Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.430Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.432Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.432Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectLayer called with: layer_1758478691341_bljng0",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 400,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.433Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectedLayer is now: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 406,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.433Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Layer selected: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 276,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.434Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.435Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.435Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.435Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.435Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectLayer called with: layer_1758478691341_bljng0",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 400,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.436Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 selectedLayer is now: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/LayerManager.js?t=1758466235030",
+        "lineNumber": 406,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.436Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Layer selected: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 276,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.436Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.436Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.437Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - selectedLayer: {id: layer_1758478691341_bljng0, type: text, name: Sample Text, text: Sample Text, visible: true}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 952,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.437Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 updateUI - all layers: [Object]",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 953,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.437Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.464Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.464Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 onTextureUpdated called, applying to 3D model",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 281,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 SceneManager.setTexture called: {texture: CanvasTexture, material: MeshLambertMaterial, materialExists: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 306,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to 1 materials",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 332,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to scene",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 283,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.468Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.469Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 onLayerPropertyChange called: {layer: Sample Text, prop: text, value: Test Text}",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 351,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.470Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Updated layer property, calling layerManager.updateLayer",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 362,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.471Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Layer update completed",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 364,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.471Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.472Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.472Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 onTextureUpdated called, applying to 3D model",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 281,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.475Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 SceneManager.setTexture called: {texture: CanvasTexture, material: MeshLambertMaterial, materialExists: true}",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 306,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.476Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to 1 materials",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 332,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:12.476Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to scene",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 283,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.476Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 472,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.489Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SceneManager.js?t=1758466235030",
+        "lineNumber": 508,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:12.490Z"
+    },
+    {
+      "type": "log",
+      "text": "Submitting session with 1 layers",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 116,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.298Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Creating new session at: http://localhost:3030/api/sessions",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 41,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.299Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Created new session: 7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 67,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.321Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ New session created: 7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 1001,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.321Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 Submitting session with 1 layers",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 128,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:13.416Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 DEBUG: Layer layer_1758478691341_bljng0 - sessionUploaded: undefined",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 133,
+        "columnNumber": 28
+      },
+      "timestamp": "2025-09-21T18:18:13.417Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 Uploading new layer: layer_1758478691341_bljng0",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 136,
+        "columnNumber": 32
+      },
+      "timestamp": "2025-09-21T18:18:13.417Z"
+    },
+    {
+      "type": "log",
+      "text": "Processing layer: layer_1758478691341_bljng0, type: text",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 225,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.417Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Exported client image as blob for layer layer_1758478691341_bljng0, size: 11229 bytes",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 285,
+        "columnNumber": 32
+      },
+      "timestamp": "2025-09-21T18:18:13.638Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Attempting to fetch: http://localhost:3030/api/sessions/7-OvxE4GnOg-/layers",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 323,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.639Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Server URL: http://localhost:3030",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 324,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.639Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Session ID: 7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 325,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.639Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "location": {
+        "url": "http://localhost:3030/api/sessions/7-OvxE4GnOg-/layers",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "timestamp": "2025-09-21T18:18:13.650Z"
+    },
+    {
+      "type": "error",
+      "text": "Error adding layer: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 363,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.651Z"
+    },
+    {
+      "type": "error",
+      "text": "Session error: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 1019,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.652Z"
+    },
+    {
+      "type": "error",
+      "text": "❌ Error in addLayerToFormData for layer layer_1758478691341_bljng0: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 303,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.652Z"
+    },
+    {
+      "type": "error",
+      "text": "❌ Error processing layer layer_1758478691341_bljng0: Error: Failed to add layer: Internal Server Error\n    at SessionManager.addLayer (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:342:23)\n    at async SessionManager.addLayerToFormData (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:296:13)\n    at async SessionManager.submitSession (http://localhost:3029/lib/client/SessionManager.js?t=1758466235030:140:45)\n    at async UniformConfigurator.handleSubmit (http://localhost:3029/main.js:977:34)\n    at async uiManager.onSubmit (http://localhost:3029/main.js:307:13)",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 147,
+        "columnNumber": 36
+      },
+      "timestamp": "2025-09-21T18:18:13.653Z"
+    },
+    {
+      "type": "log",
+      "text": "Successfully added 0/1 layer images to submission",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 156,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:13.653Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 Validation: 0 images processed successfully",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 613,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.654Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 Layers breakdown: [Object]",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 614,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.654Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 Session submitted: 7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 184,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.673Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 Session saved: 7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 1014,
+        "columnNumber": 16
+      },
+      "timestamp": "2025-09-21T18:18:13.673Z"
+    },
+    {
+      "type": "log",
+      "text": "📧 Sending session notification via email...",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 189,
+        "columnNumber": 24
+      },
+      "timestamp": "2025-09-21T18:18:13.674Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Session notification sent successfully",
+      "location": {
+        "url": "http://localhost:3029/lib/client/SessionManager.js?t=1758466235030",
+        "lineNumber": 205,
+        "columnNumber": 28
+      },
+      "timestamp": "2025-09-21T18:18:13.685Z"
+    },
+    {
+      "type": "log",
+      "text": "🔗 Session submitted successfully: http://localhost:3029/7-OvxE4GnOg-",
+      "location": {
+        "url": "http://localhost:3029/main.js",
+        "lineNumber": 987,
+        "columnNumber": 20
+      },
+      "timestamp": "2025-09-21T18:18:13.686Z"
+    }
+  ],
+  "status": "completed",
+  "summary": {
+    "totalActions": 5,
+    "totalErrors": 7,
+    "totalWarnings": 9,
+    "totalScreenshots": 3,
+    "consoleMessages": 345
+  }
+}

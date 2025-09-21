@@ -1,0 +1,138 @@
+{
+  "timestamp": "2025-09-21T14:19:55.045Z",
+  "testResults": [
+    {
+      "test": "Initial State",
+      "status": "SUCCESS",
+      "screenshot": "test_initial_state.png",
+      "details": "Application loaded successfully"
+    },
+    {
+      "test": "Add Text",
+      "status": "PARTIAL",
+      "screenshot": "test_after_add_text.png",
+      "details": "Found 0 layer(s) after adding text"
+    },
+    {
+      "test": "Add Logo",
+      "status": "SUCCESS",
+      "screenshot": "test_after_add_logo.png",
+      "details": "Found 0 layer(s) after adding logo"
+    },
+    {
+      "test": "Order Form",
+      "status": "FAILED",
+      "screenshot": "test_order_modal.png",
+      "details": "Order modal did not open"
+    }
+  ],
+  "consoleMessages": [
+    {
+      "type": "log",
+      "text": "   • Modal may be missing close button",
+      "timestamp": "2025-09-21T14:19:44.236Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal missing aria-modal attribute",
+      "timestamp": "2025-09-21T14:19:44.236Z"
+    },
+    {
+      "type": "log",
+      "text": "\n✅ PASSED CHECKS:",
+      "timestamp": "2025-09-21T14:19:44.236Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Main landmark present",
+      "timestamp": "2025-09-21T14:19:44.237Z"
+    },
+    {
+      "type": "log",
+      "text": "   • 6 heading elements found",
+      "timestamp": "2025-09-21T14:19:44.237Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Skip link present",
+      "timestamp": "2025-09-21T14:19:44.239Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Language declared: ko",
+      "timestamp": "2025-09-21T14:19:44.239Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Single h1 element present",
+      "timestamp": "2025-09-21T14:19:44.239Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Heading hierarchy validated",
+      "timestamp": "2025-09-21T14:19:44.239Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main landmark present (1)",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main role landmark present (1)",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "   • aside landmark present (1)",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "   • complementary role landmark present (1)",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "   ... and 49 more",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "\n============================================================",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WCAG AA COMPLIANCE: NEEDS WORK",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "Multiple accessibility issues need attention.",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "============================================================",
+      "timestamp": "2025-09-21T14:19:44.240Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T14:19:45.732Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "timestamp": "2025-09-21T14:19:45.732Z"
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total": 4,
+    "success": 2,
+    "failed": 1,
+    "partial": 1
+  }
+}

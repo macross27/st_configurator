@@ -1,0 +1,117 @@
+{
+  "compilerOptions": {
+    // Enable type checking for JavaScript files
+    "checkJs": true,
+
+    // Allow JavaScript files to be compiled
+    "allowJs": true,
+
+    // Specify ECMAScript target version
+    "target": "ES2022",
+
+    // Specify module code generation
+    "module": "ESNext",
+
+    // Module resolution strategy
+    "moduleResolution": "bundler",
+
+    // Library files to include
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker"
+    ],
+
+    // Allow default imports from modules with no default export
+    "allowSyntheticDefaultImports": true,
+
+    // Enable interop between CommonJS and ES modules
+    "esModuleInterop": true,
+
+    // Ensure case sensitivity in file names
+    "forceConsistentCasingInFileNames": true,
+
+    // Enable strict type-checking options
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "alwaysStrict": false,
+
+    // Additional type checking
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
+
+    // Report errors for unreachable code
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+
+    // Skip type checking of declaration files
+    "skipLibCheck": true,
+
+    // Base URL for resolving non-relative module names
+    "baseUrl": "./",
+
+    // Path mapping for module resolution
+    "paths": {
+      "@/*": ["./"],
+      "@lib/*": ["./lib/*"],
+      "@client/*": ["./lib/client/*"],
+      "@tests/*": ["./tests/*"]
+    },
+
+    // Module detection strategy
+    "moduleDetection": "force",
+
+    // Emit options
+    "noEmit": true,
+
+    // JavaScript-specific options
+    "maxNodeModuleJsDepth": 1,
+
+    // Type declarations
+    "types": [
+      "node",
+      "web"
+    ]
+  },
+
+  // Include files for type checking
+  "include": [
+    "**/*.js",
+    "**/*.mjs",
+    "lib/**/*.js",
+    "tests/**/*.js",
+    "main.js",
+    "server.js"
+  ],
+
+  // Exclude files from type checking
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    ".vite",
+    "main-original.js",
+    "main-refactored.js",
+    "lib/client/*-fixed.js",
+    "sessions",
+    "uploads",
+    "**/*.min.js"
+  ],
+
+  // TypeScript configuration for VS Code
+  "ts-node": {
+    "esm": true
+  }
+}

@@ -1,0 +1,480 @@
+/**
+ * Accessibility Styles for WCAG AA Compliance
+ * Focus management, color contrast, and screen reader support
+ */
+
+/* ===== SCREEN READER ONLY CONTENT ===== */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* ===== FOCUS INDICATORS ===== */
+/* High visibility focus indicators for all interactive elements */
+*:focus,
+.focus-visible {
+    outline: 3px solid #4A90E2 !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 1px #fff, 0 0 0 4px #4A90E2 !important;
+}
+
+/* Enhanced focus for buttons */
+button:focus,
+button.focus-visible,
+.add-layer-btn:focus,
+.order-btn:focus,
+.submit-btn:focus,
+.reset-view-btn:focus {
+    outline: 3px solid #4A90E2 !important;
+    outline-offset: 2px !important;
+    box-shadow:
+        0 0 0 1px #ffffff,
+        0 0 0 4px #4A90E2,
+        0 4px 12px rgba(74, 144, 226, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+/* Enhanced focus for form inputs */
+input:focus,
+input.focus-visible,
+select:focus,
+textarea:focus {
+    outline: 3px solid #4A90E2 !important;
+    outline-offset: 1px !important;
+    border-color: #4A90E2 !important;
+    box-shadow:
+        0 0 0 1px #ffffff,
+        0 0 0 4px #4A90E2,
+        inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Color input specific focus */
+input[type="color"]:focus {
+    outline: 3px solid #4A90E2 !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 6px rgba(74, 144, 226, 0.3) !important;
+}
+
+/* Range slider focus */
+input[type="range"]:focus {
+    outline: 2px solid #4A90E2 !important;
+    outline-offset: 2px !important;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow:
+        0 0 0 3px #ffffff,
+        0 0 0 6px #4A90E2,
+        0 4px 12px rgba(74, 144, 226, 0.4) !important;
+    transform: scale(1.1);
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    box-shadow:
+        0 0 0 3px #ffffff,
+        0 0 0 6px #4A90E2,
+        0 4px 12px rgba(74, 144, 226, 0.4) !important;
+    transform: scale(1.1);
+}
+
+/* Canvas focus for 3D viewport */
+#three-container:focus {
+    outline: 4px solid #4A90E2 !important;
+    outline-offset: 0px !important;
+    box-shadow:
+        inset 0 0 0 4px #ffffff,
+        inset 0 0 0 8px #4A90E2,
+        0 8px 24px rgba(74, 144, 226, 0.3) !important;
+}
+
+/* Custom focus for color picker elements */
+.color-picker-dropdown[tabindex]:focus,
+.current-color-display:focus {
+    outline: 3px solid #4A90E2 !important;
+    outline-offset: 2px !important;
+    box-shadow:
+        0 0 0 1px #ffffff,
+        0 0 0 4px #4A90E2 !important;
+}
+
+/* Modal focus management */
+.modal-overlay[aria-modal="true"] {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.modal-content:focus-within {
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(74, 144, 226, 0.3) !important;
+}
+
+/* ===== HIGH CONTRAST IMPROVEMENTS ===== */
+/* Ensure WCAG AA color contrast ratios (4.5:1 minimum) */
+
+/* Text contrast improvements */
+body {
+    color: #1a1a1a; /* Changed from #ffffff for better contrast */
+    background-color: #ffffff;
+}
+
+.property-panel {
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    color: #1a1a1a;
+    border: 1px solid #dee2e6;
+}
+
+.panel-header h1,
+.base-texture-section h2,
+.layers-section h2 {
+    color: #1a1a1a;
+    font-weight: 700;
+    text-shadow: none;
+}
+
+/* Button contrast improvements */
+.add-layer-btn {
+    background: linear-gradient(145deg, #4A90E2, #357ABD);
+    color: #ffffff;
+    border: 1px solid #2968A3;
+    font-weight: 600;
+}
+
+.add-layer-btn:hover {
+    background: linear-gradient(145deg, #357ABD, #2968A3);
+    color: #ffffff;
+}
+
+.order-btn {
+    background: linear-gradient(145deg, #28a745, #1e7e34);
+    color: #ffffff;
+    border: 1px solid #1e7e34;
+    font-weight: 600;
+}
+
+.submit-btn {
+    background: linear-gradient(145deg, #dc3545, #c82333);
+    color: #ffffff;
+    border: 1px solid #c82333;
+    font-weight: 600;
+}
+
+/* Label improvements */
+label {
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.color-display-label {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* Scale and rotation overlay improvements */
+.scale-slider-overlay,
+.fov-slider-overlay {
+    background: linear-gradient(145deg, rgba(248, 249, 250, 0.95), rgba(233, 236, 239, 0.95));
+    border: 2px solid #4A90E2;
+    color: #1a1a1a;
+}
+
+.scale-slider-container label,
+.fov-slider-container label,
+.rotate-slider-container label {
+    color: #1a1a1a;
+    font-weight: 700;
+    text-shadow: none;
+}
+
+#scale-value,
+#fov-value,
+#rotate-value {
+    color: #1a1a1a;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+/* Color picker improvements */
+.color-picker-dropdown {
+    background: #ffffff;
+    border: 2px solid #4A90E2;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.color-picker-close-btn {
+    background: #6c757d;
+    color: #ffffff;
+    border: 1px solid #495057;
+    font-weight: 600;
+}
+
+.color-picker-close-btn:hover {
+    background: #495057;
+    color: #ffffff;
+}
+
+/* ===== TOUCH TARGET SIZES ===== */
+/* Ensure minimum 44px touch targets for mobile accessibility */
+button,
+input[type="color"],
+input[type="checkbox"],
+input[type="range"],
+.current-color-display,
+.reset-view-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 12px;
+}
+
+/* Larger touch targets for small buttons */
+.reset-view-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.color-picker-close-btn {
+    min-height: 44px;
+    padding: 12px 16px;
+}
+
+/* Range slider thumbs */
+input[type="range"]::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+/* ===== LAYER ITEM ACCESSIBILITY ===== */
+.layer-item {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.layer-item:focus-within {
+    border-color: #4A90E2;
+    background: rgba(74, 144, 226, 0.05);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+}
+
+.layer-item.selected {
+    border-color: #4A90E2;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+/* ===== LOADING AND STATE INDICATORS ===== */
+.loading-indicator {
+    position: relative;
+}
+
+.loading-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #4A90E2;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== DARK MODE AND HIGH CONTRAST SUPPORT ===== */
+@media (prefers-contrast: high) {
+    :root {
+        --focus-color: #0000ff;
+        --text-color: #000000;
+        --background-color: #ffffff;
+        --border-color: #000000;
+    }
+
+    *:focus,
+    .focus-visible {
+        outline: 4px solid var(--focus-color) !important;
+        outline-offset: 2px !important;
+        box-shadow: none !important;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        border: 2px solid var(--border-color) !important;
+        background: var(--background-color) !important;
+        color: var(--text-color) !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+        --background-color: #1a1a1a;
+        --panel-background: #2d2d2d;
+        --border-color: #4A90E2;
+    }
+
+    body {
+        color: var(--text-color);
+        background-color: var(--background-color);
+    }
+
+    .property-panel {
+        background: var(--panel-background);
+        color: var(--text-color);
+        border-color: var(--border-color);
+    }
+
+    .scale-slider-overlay,
+    .fov-slider-overlay {
+        background: rgba(45, 45, 45, 0.95);
+        color: var(--text-color);
+    }
+
+    .color-picker-dropdown {
+        background: var(--panel-background);
+        color: var(--text-color);
+    }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .loading-indicator::after {
+        animation: none;
+        border: 2px solid #4A90E2;
+        border-radius: 50%;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .skip-link,
+    #screen-reader-announcements,
+    #screen-reader-alerts {
+        display: none !important;
+    }
+
+    *:focus {
+        outline: 2px solid #000000 !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ===== KEYBOARD NAVIGATION HELPERS ===== */
+.keyboard-navigation-active *:focus {
+    outline: 3px solid #4A90E2 !important;
+}
+
+.keyboard-navigation-active button:focus,
+.keyboard-navigation-active input:focus,
+.keyboard-navigation-active select:focus {
+    transform: scale(1.02);
+    z-index: 10;
+    position: relative;
+}
+
+/* Help text for keyboard users */
+.keyboard-help {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    max-width: 300px;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.keyboard-help.visible {
+    opacity: 1;
+}
+
+.keyboard-help h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #4A90E2;
+}
+
+.keyboard-help ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.keyboard-help li {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+.keyboard-help kbd {
+    background: #4A90E2;
+    color: #ffffff;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+}

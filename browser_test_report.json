@@ -1,0 +1,1282 @@
+{
+  "timestamp": "2025-09-21T18:25:19.148Z",
+  "url": "http://localhost:3026/",
+  "pageAnalysis": {
+    "title": "유니폼 구성기",
+    "bodyText": "메인 콘텐츠로 건너뛰기\n텍스처 에디터\n기본 텍스처\n기본 색상\n보조 색상\n레이어\n텍스트 추가\n로고 추가\nExport and Order Actions\n주문서 작성 주문 제출\n⟲\n키보드 단축키\nTab Tab - 컨트롤 간 이동\nArrow keys 화살표 키 - 3D 뷰/메뉴 탐색\nEnter/Space Enter/Space - 버튼 활성화\nDelete Delete - 선택된 레이어 제거\nCtrl+↑/↓ Ctrl+↑/↓ - 레이어 순서 변경\nCtrl+1-9 Ctrl+1-9 - 번호로 레이어 선택\n+/- +/- - 3D 뷰 확대/축소\nEsc Esc - 대화상자 닫기/선택 해제",
+    "hasCanvas": true,
+    "hasThreeJS": false,
+    "hasMainApp": false,
+    "errorElements": [],
+    "visibleElements": {
+      "orderButton": false,
+      "viewer3D": false,
+      "layerPanel": false,
+      "fileUpload": false
+    },
+    "layout": {
+      "leftSide": "Not found",
+      "rightSide": "Not found",
+      "mainArea": "Not found"
+    }
+  },
+  "viewer3DAnalysis": {
+    "canvasCount": 3,
+    "canvasDetails": [
+      {
+        "index": 0,
+        "width": 200,
+        "height": 200,
+        "style": "",
+        "parent": "color-wheel-section",
+        "visible": true
+      },
+      {
+        "index": 1,
+        "width": 400,
+        "height": 1080,
+        "style": "display: block; width: 400px; height: 1080px; touch-action: none;",
+        "parent": "unknown",
+        "visible": true
+      },
+      {
+        "index": 2,
+        "width": 200,
+        "height": 200,
+        "style": "",
+        "parent": "color-wheel-section",
+        "visible": false
+      }
+    ],
+    "viewerExists": false,
+    "viewerPosition": null,
+    "threeJSLoaded": false,
+    "sceneInitialized": false
+  },
+  "detailedErrors": {
+    "globalErrors": [],
+    "consoleErrors": [],
+    "loadingErrors": [],
+    "initializationState": {
+      "mainLoaded": false,
+      "threeLoaded": false,
+      "fabricLoaded": false,
+      "managersLoaded": false,
+      "domReady": "complete",
+      "scripts": [
+        {
+          "src": "http://localhost:3026/@vite/client",
+          "loaded": true
+        },
+        {
+          "src": "http://localhost:3026/main.js",
+          "loaded": true
+        },
+        {
+          "src": "http://localhost:3026/accessibility-validator.js",
+          "loaded": true
+        }
+      ]
+    },
+    "failedElements": []
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "timestamp": "2025-09-21T18:25:06.909Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "timestamp": "2025-09-21T18:25:06.981Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryUpload\" in both languages",
+      "timestamp": "2025-09-21T18:25:07.096Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.retryConnection\" in both languages",
+      "timestamp": "2025-09-21T18:25:07.097Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recoverSession\" in both languages",
+      "timestamp": "2025-09-21T18:25:07.097Z"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ Translation missing for \"errors.actions.recreateLayer\" in both languages",
+      "timestamp": "2025-09-21T18:25:07.098Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ ErrorManager initialized",
+      "timestamp": "2025-09-21T18:25:07.098Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Design System initialized",
+      "timestamp": "2025-09-21T18:25:07.098Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 Starting app initialization...",
+      "timestamp": "2025-09-21T18:25:07.103Z"
+    },
+    {
+      "type": "log",
+      "text": "1️⃣ Initializing error management...",
+      "timestamp": "2025-09-21T18:25:07.103Z"
+    },
+    {
+      "type": "log",
+      "text": "2️⃣ Initializing i18n system...",
+      "timestamp": "2025-09-21T18:25:07.104Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-09-21T18:25:07.120Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Language packs loaded: [ko, en]",
+      "timestamp": "2025-09-21T18:25:07.136Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Language changed from ko to ko",
+      "timestamp": "2025-09-21T18:25:07.137Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18nManager initialized with language: ko",
+      "timestamp": "2025-09-21T18:25:07.138Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18n system initialized",
+      "timestamp": "2025-09-21T18:25:07.138Z"
+    },
+    {
+      "type": "log",
+      "text": "3️⃣ Loading server configuration...",
+      "timestamp": "2025-09-21T18:25:07.139Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Server is available",
+      "timestamp": "2025-09-21T18:25:07.156Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Server configuration loaded: {maxImageFileSize: 5, imageConversionThreshold: 2, maxImageWidth: 1024, maxImageHeight: 1024, compressionQuality: 0.8}",
+      "timestamp": "2025-09-21T18:25:07.160Z"
+    },
+    {
+      "type": "log",
+      "text": "4️⃣ Loading default texture...",
+      "timestamp": "2025-09-21T18:25:07.161Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Loading base texture from ./assets/texture.png...",
+      "timestamp": "2025-09-21T18:25:07.161Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Base texture loaded successfully: 1365 x 1365",
+      "timestamp": "2025-09-21T18:25:07.168Z"
+    },
+    {
+      "type": "log",
+      "text": "5️⃣ Setting up managers...",
+      "timestamp": "2025-09-21T18:25:07.168Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Loading model: ./assets/model.gltf",
+      "timestamp": "2025-09-21T18:25:07.563Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Design System initialized",
+      "timestamp": "2025-09-21T18:25:07.594Z"
+    },
+    {
+      "type": "log",
+      "text": "🟡 OrderFormManager constructor called Error\n    at new OrderFormManager (http://localhost:3026/lib/client/OrderFormManager.js:17:63)\n    at UniformConfigurator.setupManagers (http://localhost:3026/main.js:223:37)\n    at UniformConfigurator.initializeApp (http://localhost:3026/main.js:52:18)",
+      "timestamp": "2025-09-21T18:25:07.596Z"
+    },
+    {
+      "type": "log",
+      "text": "🆔 Instance ID: ofm-1758479107595-wnev2v52c",
+      "timestamp": "2025-09-21T18:25:07.596Z"
+    },
+    {
+      "type": "log",
+      "text": "🔗 Events bound for instance: ofm-1758479107595-wnev2v52c",
+      "timestamp": "2025-09-21T18:25:07.597Z"
+    },
+    {
+      "type": "warning",
+      "text": "Form element missing label: JSHandle@node",
+      "timestamp": "2025-09-21T18:25:07.604Z"
+    },
+    {
+      "type": "log",
+      "text": "6️⃣ Setting up event handlers...",
+      "timestamp": "2025-09-21T18:25:07.606Z"
+    },
+    {
+      "type": "log",
+      "text": "7️⃣ Initializing i18n UI updater...",
+      "timestamp": "2025-09-21T18:25:07.606Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ UI updated for language: ko",
+      "timestamp": "2025-09-21T18:25:07.606Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18nUIUpdater initialized",
+      "timestamp": "2025-09-21T18:25:07.606Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ I18n UI updater initialized",
+      "timestamp": "2025-09-21T18:25:07.607Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ App initialization completed successfully!",
+      "timestamp": "2025-09-21T18:25:07.607Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:07.621Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:07.933Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "timestamp": "2025-09-21T18:25:07.933Z"
+    },
+    {
+      "type": "log",
+      "text": "Loading progress: 100%",
+      "timestamp": "2025-09-21T18:25:07.976Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 Starting WCAG AA Compliance Validation...\n",
+      "timestamp": "2025-09-21T18:25:08.136Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 Validating Semantic Structure...",
+      "timestamp": "2025-09-21T18:25:08.137Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Main landmark present",
+      "timestamp": "2025-09-21T18:25:08.137Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 heading elements found",
+      "timestamp": "2025-09-21T18:25:08.137Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Skip link present",
+      "timestamp": "2025-09-21T18:25:08.137Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Language declared: ko",
+      "timestamp": "2025-09-21T18:25:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 Validating Heading Structure...",
+      "timestamp": "2025-09-21T18:25:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Single h1 element present",
+      "timestamp": "2025-09-21T18:25:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Heading level skipped: H4 after h2",
+      "timestamp": "2025-09-21T18:25:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Heading hierarchy validated",
+      "timestamp": "2025-09-21T18:25:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "🗺️ Validating Landmark Elements...",
+      "timestamp": "2025-09-21T18:25:08.140Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: main landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.141Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: main role landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.141Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: aside landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.142Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: complementary role landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.142Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: section landmark present (4)",
+      "timestamp": "2025-09-21T18:25:08.142Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 35 labeled landmarks found",
+      "timestamp": "2025-09-21T18:25:08.143Z"
+    },
+    {
+      "type": "log",
+      "text": "📃 Validating List Structures...",
+      "timestamp": "2025-09-21T18:25:08.143Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: List role without listitem children",
+      "timestamp": "2025-09-21T18:25:08.144Z"
+    },
+    {
+      "type": "log",
+      "text": "⌨️ Validating Keyboard Navigation...",
+      "timestamp": "2025-09-21T18:25:08.144Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 25 focusable elements found",
+      "timestamp": "2025-09-21T18:25:08.144Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Validating Focus Management...",
+      "timestamp": "2025-09-21T18:25:08.147Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: CSS focus styles found",
+      "timestamp": "2025-09-21T18:25:08.147Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Focus-visible styles found",
+      "timestamp": "2025-09-21T18:25:08.147Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 3 focusable elements",
+      "timestamp": "2025-09-21T18:25:08.148Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 1 focusable elements",
+      "timestamp": "2025-09-21T18:25:08.148Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 7 focusable elements",
+      "timestamp": "2025-09-21T18:25:08.148Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 3 focusable elements",
+      "timestamp": "2025-09-21T18:25:08.148Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has 1 focusable elements",
+      "timestamp": "2025-09-21T18:25:08.148Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 Validating Tab Order...",
+      "timestamp": "2025-09-21T18:25:08.149Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 5 elements with explicit tab order",
+      "timestamp": "2025-09-21T18:25:08.149Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: 10 hidden focusable elements (may confuse users)",
+      "timestamp": "2025-09-21T18:25:08.151Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Validating Color Contrast...",
+      "timestamp": "2025-09-21T18:25:08.152Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.154Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.155Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.155Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 3:1): h1",
+      "timestamp": "2025-09-21T18:25:08.155Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 3:1): h2",
+      "timestamp": "2025-09-21T18:25:08.155Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.157Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.157Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 3:1): h2",
+      "timestamp": "2025-09-21T18:25:08.158Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.159Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.05:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.159Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.160Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.05:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.160Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.170Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.172Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.172Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.173Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.174Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.174Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.175Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUE: Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.176Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 38 elements pass contrast requirements",
+      "timestamp": "2025-09-21T18:25:08.177Z"
+    },
+    {
+      "type": "log",
+      "text": "👁️ Validating Focus Indicators...",
+      "timestamp": "2025-09-21T18:25:08.177Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Focus indicators are visible",
+      "timestamp": "2025-09-21T18:25:08.179Z"
+    },
+    {
+      "type": "log",
+      "text": "👆 Validating Touch Targets...",
+      "timestamp": "2025-09-21T18:25:08.180Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.182Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.183Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.183Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.183Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (168x42px): a",
+      "timestamp": "2025-09-21T18:25:08.183Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.183Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.184Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.184Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.184Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.184Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.184Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.185Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 8 elements meet minimum touch target size (44px)",
+      "timestamp": "2025-09-21T18:25:08.187Z"
+    },
+    {
+      "type": "log",
+      "text": "🏷️ Validating ARIA Implementation...",
+      "timestamp": "2025-09-21T18:25:08.188Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 35 elements with ARIA labels",
+      "timestamp": "2025-09-21T18:25:08.188Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 17 elements with ARIA roles",
+      "timestamp": "2025-09-21T18:25:08.188Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 ARIA live regions found",
+      "timestamp": "2025-09-21T18:25:08.188Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 0 elements with aria-expanded",
+      "timestamp": "2025-09-21T18:25:08.189Z"
+    },
+    {
+      "type": "log",
+      "text": "🏷️ Validating Form Labels...",
+      "timestamp": "2025-09-21T18:25:08.189Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 form controls properly labeled",
+      "timestamp": "2025-09-21T18:25:08.189Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: All form controls have labels",
+      "timestamp": "2025-09-21T18:25:08.189Z"
+    },
+    {
+      "type": "log",
+      "text": "📢 Validating Live Regions...",
+      "timestamp": "2025-09-21T18:25:08.190Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "timestamp": "2025-09-21T18:25:08.190Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "timestamp": "2025-09-21T18:25:08.190Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with assertive politeness",
+      "timestamp": "2025-09-21T18:25:08.190Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "timestamp": "2025-09-21T18:25:08.190Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "timestamp": "2025-09-21T18:25:08.191Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "timestamp": "2025-09-21T18:25:08.198Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region with polite politeness",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Live region has aria-atomic attribute",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Screen reader announcements container found",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Screen reader alerts container found",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 Validating Form Accessibility...",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 error message containers found",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ Validating Error Handling...",
+      "timestamp": "2025-09-21T18:25:08.199Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: 6 form elements with descriptions",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "🖼️ Validating Image Accessibility...",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Canvas element properly labeled",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Canvas element may need accessibility labels",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Canvas element properly labeled",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "📱 Validating Modal Accessibility...",
+      "timestamp": "2025-09-21T18:25:08.200Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal missing aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal may be missing close button",
+      "timestamp": "2025-09-21T18:25:08.201Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNING: Modal missing aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has accessible name",
+      "timestamp": "2025-09-21T18:25:08.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ PASS: Modal has close button",
+      "timestamp": "2025-09-21T18:25:08.203Z"
+    },
+    {
+      "type": "log",
+      "text": "\n============================================================",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 WCAG AA ACCESSIBILITY COMPLIANCE REPORT",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "============================================================",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "\n✅ PASSED: 57 checks",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WARNINGS: 19 items",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "❌ ISSUES: 20 problems",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "\n📈 COMPLIANCE SCORE: 59%",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "\n❌ CRITICAL ISSUES (Must Fix):",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.212Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 3:1): h1",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 3:1): h2",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 3:1): h2",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.05:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.05:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.213Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.26:1, needs 4.5:1): label",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Low contrast (1.00:1, needs 4.5:1): div",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "\n⚠️ WARNINGS (Should Fix):",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Heading level skipped: H4 after h2",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • List role without listitem children",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • 10 hidden focusable elements (may confuse users)",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.214Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): link",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (168x42px): a",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): input",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Small touch target (0x0px): button",
+      "timestamp": "2025-09-21T18:25:08.215Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Canvas element may need accessibility labels",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal missing aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal may be missing close button",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Modal missing aria-modal attribute",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "\n✅ PASSED CHECKS:",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Main landmark present",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • 6 heading elements found",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Skip link present",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Language declared: ko",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Single h1 element present",
+      "timestamp": "2025-09-21T18:25:08.216Z"
+    },
+    {
+      "type": "log",
+      "text": "   • Heading hierarchy validated",
+      "timestamp": "2025-09-21T18:25:08.217Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.217Z"
+    },
+    {
+      "type": "log",
+      "text": "   • main role landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.217Z"
+    },
+    {
+      "type": "log",
+      "text": "   • aside landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.218Z"
+    },
+    {
+      "type": "log",
+      "text": "   • complementary role landmark present (1)",
+      "timestamp": "2025-09-21T18:25:08.219Z"
+    },
+    {
+      "type": "log",
+      "text": "   ... and 47 more",
+      "timestamp": "2025-09-21T18:25:08.219Z"
+    },
+    {
+      "type": "log",
+      "text": "\n============================================================",
+      "timestamp": "2025-09-21T18:25:08.219Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ WCAG AA COMPLIANCE: NEEDS WORK",
+      "timestamp": "2025-09-21T18:25:08.219Z"
+    },
+    {
+      "type": "log",
+      "text": "Multiple accessibility issues need attention.",
+      "timestamp": "2025-09-21T18:25:08.219Z"
+    },
+    {
+      "type": "log",
+      "text": "============================================================",
+      "timestamp": "2025-09-21T18:25:08.220Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Material reference stored: {material: MeshLambertMaterial, childName: man}",
+      "timestamp": "2025-09-21T18:25:08.781Z"
+    },
+    {
+      "type": "log",
+      "text": "Default state captured: {cameraPosition: Object, cameraTarget: Object, fov: 35}",
+      "timestamp": "2025-09-21T18:25:08.784Z"
+    },
+    {
+      "type": "log",
+      "text": "Camera centered on model: {center: _Vector3, size: _Vector3, cameraPosition: _Vector3}",
+      "timestamp": "2025-09-21T18:25:08.785Z"
+    },
+    {
+      "type": "log",
+      "text": "Model loaded successfully",
+      "timestamp": "2025-09-21T18:25:08.786Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Model loaded, initializing texture...",
+      "timestamp": "2025-09-21T18:25:08.786Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Base texture image available: true",
+      "timestamp": "2025-09-21T18:25:08.786Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture dimensions: 1365 x 1365",
+      "timestamp": "2025-09-21T18:25:08.787Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 SceneManager.setTexture called: {texture: CanvasTexture, material: MeshLambertMaterial, materialExists: true}",
+      "timestamp": "2025-09-21T18:25:08.787Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Texture applied to 1 materials",
+      "timestamp": "2025-09-21T18:25:08.787Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Texture applied to 3D model",
+      "timestamp": "2025-09-21T18:25:08.787Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:08.808Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:09.037Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "timestamp": "2025-09-21T18:25:09.038Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:09.039Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "timestamp": "2025-09-21T18:25:09.040Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Rendering frame 1",
+      "timestamp": "2025-09-21T18:25:09.041Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 Render loop stopped - scene is static",
+      "timestamp": "2025-09-21T18:25:09.042Z"
+    }
+  ],
+  "errors": [],
+  "failedRequests": [
+    {
+      "url": "http://localhost:3026/styles-tokens.css",
+      "status": 304,
+      "statusText": "Not Modified",
+      "timestamp": "2025-09-21T18:25:07.929Z"
+    },
+    {
+      "url": "http://localhost:3026/styles.css",
+      "status": 304,
+      "statusText": "Not Modified",
+      "timestamp": "2025-09-21T18:25:07.931Z"
+    },
+    {
+      "url": "http://localhost:3026/accessibility.css",
+      "status": 304,
+      "statusText": "Not Modified",
+      "timestamp": "2025-09-21T18:25:07.931Z"
+    }
+  ],
+  "screenshots": [
+    "browser_test_initial.png",
+    "browser_test_before_order_click.png",
+    "browser_test_after_order_click.png",
+    "browser_test_final.png"
+  ]
+}

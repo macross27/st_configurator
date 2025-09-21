@@ -50,7 +50,22 @@
       "Bash(findstr:*)",
       "Bash(tasklist)",
       "Bash(netstat:*)",
-      "Bash(start http://localhost:3024)"
+      "Bash(start http://localhost:3024)",
+      "Bash(start msedge http://localhost:3020)",
+      "Bash(npx playwright:*)",
+      "Bash(npm run test:unit:*)",
+      "Bash(npm run build:production:*)",
+      "Bash(npm run build:*)",
+      "Bash(xargs du:*)",
+      "Bash(npm run test:bundle:*)",
+      "Bash(npm run server:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run:*)",
+      "Bash(npm test)",
+      "Bash(del test_assessment.js assessment_full_page.png assessment_final.png)",
+      "Bash(powershell:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(start:*)"
     ],
     "deny": [],
     "ask": []

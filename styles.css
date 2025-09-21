@@ -11,6 +11,18 @@ body {
     overflow: hidden;
     width: 100vw;
     height: 100vh;
+    /* Mobile optimizations */
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Prevent iOS bounce scroll */
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 /* Scale Slider Overlay */
@@ -725,45 +737,45 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
+/* Simplified responsive layout - prevents overflow */
 .app-container {
     display: flex;
     height: 100vh;
-    width: 100vw;
-    min-width: 600px;
+    width: 100vw; /* Explicit width to ensure proper flexbox behavior */
     overflow: hidden;
+    /* Removed problematic calc() expressions and fixed width */
 }
 
 .viewer-panel {
     flex: 1;
+    min-width: 400px; /* Ensure minimum width for 3D viewport */
+    height: 100vh; /* Explicit height for proper 3D container sizing */
     background-color: #1a1a1a;
     position: relative;
-    min-width: 400px;
-    width: calc(100vw - 320px);
-    max-width: calc(100vw - 320px);
+    order: 2;
 }
 
 #three-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: relative;
     overflow: hidden;
 }
 
 .property-panel {
-    width: 320px;
-    min-width: 320px;
-    max-width: 320px;
+    width: 300px;
+    flex-shrink: 0;
     background-color: #383838;
-    border-left: 1px solid #555;
+    border-right: 1px solid #555;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    flex-shrink: 0;
     height: 100vh;
+    order: 1;
 }
 
 .panel-header {
-    padding: 12px 15px;
+    padding: 8px 12px;
     border-bottom: 1px solid #555;
     flex-shrink: 0;
 }
@@ -1070,111 +1082,156 @@ body {
     z-index: 999;
 }
 
-/* Large screen optimization */
+/* Enhanced Responsive Design - Better mobile breakpoints and touch support */
+
+/* Large screens - optimized layout for wide screens */
 @media screen and (min-width: 1400px) {
     .property-panel {
-        width: 380px;
-        min-width: 380px;
-        max-width: 380px;
-    }
-    
-    .viewer-panel {
-        width: calc(100vw - 380px);
-        max-width: calc(100vw - 380px);
+        width: 320px;
     }
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1024px) {
+/* Medium screens - standard tablet layout */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
     .property-panel {
         width: 300px;
-        min-width: 300px;
-        max-width: 300px;
-    }
-    
-    .viewer-panel {
-        width: calc(100vw - 300px);
-        max-width: calc(100vw - 300px);
-        min-width: 400px;
-    }
-    
-    .app-container {
-        min-width: 700px;
     }
 }
 
-@media screen and (max-width: 800px) {
+/* Tablet breakpoint - better threshold for modern devices */
+@media screen and (max-width: 768px) {
     .app-container {
         flex-direction: column;
-        min-width: unset;
-        min-height: 100vh;
-        width: 100vw;
     }
-    
+
     .viewer-panel {
-        height: 65vh;
-        width: 100vw;
-        min-width: unset;
-        max-width: unset;
+        height: 60vh;
+        order: 1;
         border-bottom: 1px solid #555;
     }
-    
+
     .property-panel {
-        width: 100vw;
-        height: 35vh;
-        min-width: unset;
-        max-width: unset;
-        border-left: none;
+        width: 100%;
+        height: 40vh;
+        order: 2;
+        border-right: none;
         border-top: 1px solid #555;
-        flex-shrink: 1;
     }
-    
+
     .layers-list {
-        max-height: 150px;
-    }
-    
-    #three-container {
-        height: 65vh;
+        max-height: 25vh;
     }
 }
 
+/* Mobile phones - optimized for touch */
 @media screen and (max-width: 480px) {
     .viewer-panel {
-        height: 60vh;
+        height: 55vh;
     }
-    
+
     .property-panel {
-        height: 40vh;
+        height: 45vh;
     }
-    
-    #three-container {
-        height: 60vh;
-    }
-    
+
     .panel-header, .base-texture-section, .layers-section, .export-section {
-        padding: 8px;
+        padding: 12px 8px;
     }
-    
+
     .layers-header {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+        align-items: stretch;
+        gap: 8px;
+        margin-bottom: 12px;
     }
-    
+
     .layers-header h4 {
-        margin-bottom: 3px;
-        font-size: 13px;
+        margin-bottom: 0;
+        font-size: 14px;
     }
-    
+
     .add-layer-btn {
         margin-left: 0;
-        margin-right: 5px;
-        padding: 4px 6px;
-        font-size: 9px;
+        margin-right: 0;
+        padding: 8px 12px;
+        font-size: 11px;
+        width: 100%;
     }
-    
+
     .layers-list {
-        max-height: 120px;
+        max-height: 20vh;
+    }
+
+    /* Korean text optimization on mobile */
+    .layer-name, .form-label, .section-title {
+        word-break: keep-all;
+        line-height: 1.4;
+    }
+}
+
+/* Touch-friendly sizing for all touch devices */
+@media (pointer: coarse) {
+    .button, .form-input, .color-wheel-handle, .add-layer-btn,
+    .layer-control-btn, .btn-primary, .btn-secondary,
+    .current-color-display, .scale-slider-overlay {
+        min-height: 44px; /* iOS recommended touch target */
+        min-width: 44px;
+    }
+
+    /* Larger touch targets for sliders */
+    #scale-slider::-webkit-slider-thumb,
+    #rotate-slider::-webkit-slider-thumb,
+    #fov-slider::-webkit-slider-thumb {
+        width: 28px;
+        height: 28px;
+    }
+
+    #scale-slider::-moz-range-thumb,
+    #rotate-slider::-moz-range-thumb,
+    #fov-slider::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Touch-friendly layer items */
+    .layer-item {
+        padding: 12px;
+        margin-bottom: 12px;
+        min-height: 44px;
+    }
+
+    .layer-control-btn {
+        padding: 8px 12px;
+        margin: 4px;
+        font-size: 12px;
+    }
+
+    /* Larger form inputs for mobile */
+    .form-input, .form-select, .form-textarea {
+        padding: 12px 16px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 44px;
+    }
+}
+
+/* Landscape orientation optimization */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .app-container {
+        flex-direction: row;
+    }
+
+    .viewer-panel {
+        height: 100vh;
+        order: 1;
+        border-bottom: none;
+        border-right: 1px solid #555;
+    }
+
+    .property-panel {
+        width: 35vw;
+        height: 100vh;
+        order: 1;
+        border-top: none;
+        border-right: 1px solid #555;
     }
 }
 

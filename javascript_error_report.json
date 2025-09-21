@@ -1,0 +1,40 @@
+{
+  "testTimestamp": "2025-09-21T14:12:30.912Z",
+  "url": "http://localhost:3029",
+  "consoleErrors": [
+    {
+      "type": "console-error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-09-21T14:12:18.966Z"
+    },
+    {
+      "type": "console-error",
+      "text": "Access to fetch at 'http://localhost:3030/api/health' from origin 'http://localhost:3029' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "timestamp": "2025-09-21T14:12:19.102Z"
+    },
+    {
+      "type": "console-error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "timestamp": "2025-09-21T14:12:19.106Z"
+    }
+  ],
+  "jsErrors": [],
+  "networkErrors": [
+    {
+      "type": "network-error",
+      "url": "http://localhost:3030/api/health",
+      "failure": {
+        "errorText": "net::ERR_FAILED"
+      },
+      "timestamp": "2025-09-21T14:12:19.104Z"
+    }
+  ],
+  "consoleLogs": [],
+  "summary": {
+    "totalConsoleErrors": 3,
+    "totalJsErrors": 0,
+    "totalNetworkErrors": 1,
+    "textButtonFound": true,
+    "orderButtonFound": true
+  }
+}
