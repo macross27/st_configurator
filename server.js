@@ -14,6 +14,7 @@ const ImageProcessor = require('./lib/imageProcessor');
 const SessionManager = require('./lib/sessionManager');
 const EmailService = require('./lib/emailService');
 const OrderParser = require('./lib/OrderParser');
+const FileValidator = require('./lib/fileValidator');
 
 const app = express();
 if (!process.env.PORT) {
@@ -53,6 +54,12 @@ const orderParser = new OrderParser({
     sessionsDir: process.env.SESSIONS_DIR || './sessions'
 });
 
+// Initialize secure file validator
+const fileValidator = new FileValidator();
+
+// Constants
+const IMAGE_SIZE_THRESHOLD = parseInt(process.env.IMAGE_SIZE_THRESHOLD_BYTES) || 1048576; // 1MB default
+
 // Ensure upload directories exist
 async function ensureDirectories() {
     const dirs = [
@@ -82,34 +89,244 @@ const upload = multer({
         files: 10 // Maximum 10 files per request
     },
     fileFilter: (req, file, cb) => {
-        // Check if it's an image
-        if (!file.mimetype.startsWith('image/')) {
-            return cb(new Error('Only image files are allowed'));
+        console.log(`🔍 Validating file: ${file.originalname} (${file.mimetype})`);
+        console.log(`🔍 File object details:`, {
+            fieldname: file.fieldname,
+            originalname: file.originalname,
+            encoding: file.encoding,
+            mimetype: file.mimetype,
+            hasBuffer: !!file.buffer,
+            bufferSize: file.buffer ? file.buffer.length : 'no buffer',
+            size: file.size,
+            hasStream: !!file.stream,
+            keys: Object.keys(file)
+        });
+
+        try {
+            // Basic checks that don't require buffer (since buffer isn't available in fileFilter yet)
+            if (!file.originalname || !file.mimetype) {
+                return cb(new Error('Missing filename or mime type'));
+            }
+
+            // Check mime type
+            const supportedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+            if (!supportedMimeTypes.includes(file.mimetype)) {
+                return cb(new Error(`Unsupported file type: ${file.mimetype}`));
+            }
+
+            // Check filename for basic safety
+            if (file.originalname.includes('..') || file.originalname.includes('/') || file.originalname.includes('\\')) {
+                return cb(new Error('Invalid filename: contains path traversal characters'));
+            }
+
+            console.log(`✅ Basic file validation PASSED for ${file.originalname}`);
+            cb(null, true);
+
+        } catch (error) {
+            console.error(`❌ File validation error for ${file.originalname}:`, error);
+            cb(new Error(`Validation error: ${error.message}`));
         }
-        
-        // Check supported formats
-        const supportedFormats = (process.env.SUPPORTED_FORMATS || 'jpeg,png,webp,gif').split(',');
-        const format = file.mimetype.split('/')[1];
-        
-        if (!supportedFormats.includes(format.toLowerCase())) {
-            return cb(new Error(`Unsupported image format: ${format}`));
-        }
-        
-        cb(null, true);
     }
 });
 
-// Middleware
-app.use(helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
-}));
+// Enhanced Security Middleware with configurable CSP
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const cspConfig = {
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: [
+                "'self'",
+                "data:",
+                "blob:",
+                ...(process.env.CSP_UNSAFE_INLINE_STYLES === 'true' ? ["'unsafe-inline'"] : [])
+            ],
+            scriptSrc: [
+                "'self'",
+                "data:",
+                "blob:",
+                ...(process.env.CSP_UNSAFE_EVAL_SCRIPTS === 'true' ? ["'unsafe-eval'"] : [])
+            ],
+            imgSrc: [
+                "'self'",
+                "data:",
+                "blob:",
+                ...(isDevelopment ? ["http://localhost:*", "https://localhost:*"] : [])
+            ],
+            connectSrc: [
+                "'self'",
+                ...(isDevelopment ? [
+                    "http://localhost:*",
+                    "https://localhost:*",
+                    "ws://localhost:*",
+                    "wss://localhost:*"
+                ] : [])
+            ],
+            fontSrc: ["'self'", "data:", "blob:"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'", "data:", "blob:"],
+            frameSrc: ["'none'"],
+            childSrc: ["'self'", "blob:"],
+            workerSrc: ["'self'", "blob:"],
+            manifestSrc: ["'self'"],
+            baseUri: ["'self'"],
+            formAction: ["'self'"],
+            ...(isDevelopment ? {} : { upgradeInsecureRequests: [] })
+        },
+        reportOnly: process.env.CSP_REPORT_ONLY === 'true',
+        ...(process.env.CSP_REPORT_URI && {
+            reportUri: process.env.CSP_REPORT_URI
+        })
+    },
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginEmbedderPolicy: false,
+    hsts: {
+        maxAge: parseInt(process.env.HSTS_MAX_AGE) || 31536000,
+        includeSubDomains: process.env.HSTS_INCLUDE_SUBDOMAINS === 'true',
+        preload: !isDevelopment
+    },
+    noSniff: true,
+    xssFilter: true,
+    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+    permittedCrossDomainPolicies: false,
+    dnsPrefetchControl: { allow: false },
+    frameguard: { action: 'deny' },
+    hidePoweredBy: true
+};
 
+// CORS must be applied before helmet to prevent interference
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
+    origin: process.env.NODE_ENV === 'production'
         ? process.env.CORS_ORIGINS_PROD.split(',')
         : process.env.CORS_ORIGINS_DEV.split(','),
     credentials: true
 }));
+
+app.use(helmet(cspConfig));
+
+// Log CSP configuration on startup
+console.log(`🔒 Content Security Policy: ${process.env.CSP_REPORT_ONLY === 'true' ? 'Report-Only Mode' : 'Enforcement Mode'}`);
+console.log(`🔒 Environment: ${isDevelopment ? 'Development' : 'Production'}`);
+console.log(`🔒 Unsafe inline styles: ${process.env.CSP_UNSAFE_INLINE_STYLES === 'true' ? 'Enabled' : 'Disabled'}`);
+console.log(`🔒 Unsafe eval scripts: ${process.env.CSP_UNSAFE_EVAL_SCRIPTS === 'true' ? 'Enabled' : 'Disabled'}`);
+
+// Security utility functions for path validation
+class PathSecurity {
+    static validateSessionId(sessionId) {
+        if (!sessionId || typeof sessionId !== 'string') {
+            throw new Error('Invalid session ID: must be a non-empty string');
+        }
+        if (sessionId.includes('..') || sessionId.includes('/') || sessionId.includes('\\')) {
+            throw new Error('Invalid session ID: contains path traversal characters');
+        }
+        if (!/^[a-zA-Z0-9_-]{1,50}$/.test(sessionId)) {
+            throw new Error('Invalid session ID: must contain only alphanumeric characters, underscores, and hyphens (max 50 chars)');
+        }
+        return sessionId;
+    }
+
+    static validateLayerId(layerId) {
+        if (!layerId || typeof layerId !== 'string') {
+            throw new Error('Invalid layer ID: must be a non-empty string');
+        }
+        if (layerId.includes('..') || layerId.includes('/') || layerId.includes('\\')) {
+            throw new Error('Invalid layer ID: contains path traversal characters');
+        }
+        if (!/^[a-zA-Z0-9_-]{1,100}$/.test(layerId)) {
+            throw new Error('Invalid layer ID: must contain only alphanumeric characters, underscores, and hyphens (max 100 chars)');
+        }
+        return layerId;
+    }
+
+    static validateOrderNumber(orderNumber) {
+        if (!orderNumber || typeof orderNumber !== 'string') {
+            throw new Error('Invalid order number: must be a non-empty string');
+        }
+        if (orderNumber.includes('..') || orderNumber.includes('/') || orderNumber.includes('\\')) {
+            throw new Error('Invalid order number: contains path traversal characters');
+        }
+        if (!/^[a-zA-Z0-9_-]{1,50}$/.test(orderNumber)) {
+            throw new Error('Invalid order number: must contain only alphanumeric characters, underscores, and hyphens (max 50 chars)');
+        }
+        return orderNumber;
+    }
+
+    static validateFilename(filename) {
+        if (!filename || typeof filename !== 'string') {
+            throw new Error('Invalid filename: must be a non-empty string');
+        }
+        if (filename.includes('..') || filename.includes('/') || filename.includes('\\') || filename.includes('\0')) {
+            throw new Error('Invalid filename: contains dangerous characters');
+        }
+        if (!/^[a-zA-Z0-9_.-]{1,255}$/.test(filename)) {
+            throw new Error('Invalid filename: must contain only safe characters (max 255 chars)');
+        }
+        return filename;
+    }
+}
+
+// Path validation middleware
+const validateSessionId = (req, res, next) => {
+    try {
+        if (req.params.sessionId) {
+            PathSecurity.validateSessionId(req.params.sessionId);
+        }
+        next();
+    } catch (error) {
+        console.warn(`🚨 Path traversal attempt blocked: ${error.message} - IP: ${req.ip}`);
+        res.status(400).json({
+            error: 'Invalid session ID format',
+            details: error.message
+        });
+    }
+};
+
+const validateLayerId = (req, res, next) => {
+    try {
+        if (req.params.layerId) {
+            PathSecurity.validateLayerId(req.params.layerId);
+        }
+        next();
+    } catch (error) {
+        console.warn(`🚨 Path traversal attempt blocked: ${error.message} - IP: ${req.ip}`);
+        res.status(400).json({
+            error: 'Invalid layer ID format',
+            details: error.message
+        });
+    }
+};
+
+const validateOrderNumber = (req, res, next) => {
+    try {
+        if (req.params.orderNumber) {
+            PathSecurity.validateOrderNumber(req.params.orderNumber);
+        }
+        next();
+    } catch (error) {
+        console.warn(`🚨 Path traversal attempt blocked: ${error.message} - IP: ${req.ip}`);
+        res.status(400).json({
+            error: 'Invalid order number format',
+            details: error.message
+        });
+    }
+};
+
+const validateFilename = (req, res, next) => {
+    try {
+        if (req.params.filename) {
+            PathSecurity.validateFilename(req.params.filename);
+        }
+        next();
+    } catch (error) {
+        console.warn(`🚨 Path traversal attempt blocked: ${error.message} - IP: ${req.ip}`);
+        res.status(400).json({
+            error: 'Invalid filename format',
+            details: error.message
+        });
+    }
+};
+
+// CORS configuration moved above helmet middleware
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -183,11 +400,31 @@ app.post('/api/process/single', upload.single('image'), async (req, res) => {
             });
         }
         
-        // Validate image
-        if (!imageProcessor.isValidImage(req.file)) {
-            return res.status(400).json({
-                error: 'Invalid image format'
+        // ENHANCED SECURITY: Comprehensive validation with detailed reporting
+        const validation = imageProcessor.validateImageSecurity(req.file);
+        if (!validation.isValid) {
+            console.warn(`🚨 Image processing blocked for ${req.file.originalname}:`, {
+                errors: validation.errors,
+                warnings: validation.warnings,
+                fileInfo: validation.fileInfo
             });
+
+            return res.status(400).json({
+                error: 'Image security validation failed',
+                details: validation.errors,
+                warnings: validation.warnings,
+                securityInfo: {
+                    detectedType: validation.fileInfo.detectedType,
+                    claimedType: validation.fileInfo.mimeType,
+                    magicByteValid: validation.magicByteValid,
+                    contentSafe: validation.contentSafe
+                }
+            });
+        }
+
+        // Log security validation success
+        if (validation.warnings.length > 0) {
+            console.warn(`⚠️  Image processing proceeding with warnings for ${req.file.originalname}:`, validation.warnings);
         }
         
         console.log(`Received single image: ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)`);
@@ -238,13 +475,27 @@ app.post('/api/process/batch', upload.array('images', 10), async (req, res) => {
             const file = req.files[i];
             
             try {
-                // Validate image
-                if (!imageProcessor.isValidImage(file)) {
+                // ENHANCED SECURITY: Comprehensive validation for batch processing
+                const validation = imageProcessor.validateImageSecurity(file);
+                if (!validation.isValid) {
+                    console.warn(`🚨 Batch processing blocked for ${file.originalname}:`, validation.errors);
                     errors.push({
                         file: file.originalname,
-                        error: 'Invalid image format'
+                        error: `Security validation failed: ${validation.errors[0]}`,
+                        details: validation.errors,
+                        securityInfo: {
+                            detectedType: validation.fileInfo.detectedType,
+                            claimedType: validation.fileInfo.mimeType,
+                            magicByteValid: validation.magicByteValid,
+                            contentSafe: validation.contentSafe
+                        }
                     });
                     continue;
+                }
+
+                // Log warnings for batch processing
+                if (validation.warnings.length > 0) {
+                    console.warn(`⚠️  Batch processing with warnings for ${file.originalname}:`, validation.warnings);
                 }
                 
                 // Get estimated processing time
@@ -388,7 +639,7 @@ app.get('/api/stats', async (req, res) => {
     try {
         const queueStats = jobQueue.getStats();
         const processorStats = await imageProcessor.getStats();
-        
+
         res.json({
             timestamp: new Date().toISOString(),
             queue: queueStats,
@@ -399,11 +650,49 @@ app.get('/api/stats', async (req, res) => {
                 nodeVersion: process.version
             }
         });
-        
+
     } catch (error) {
         console.error('Error getting stats:', error);
         res.status(500).json({
             error: error.message
+        });
+    }
+});
+
+// Security monitoring endpoint
+app.get('/api/security/status', (req, res) => {
+    try {
+        res.json({
+            timestamp: new Date().toISOString(),
+            securityFeatures: {
+                magicByteValidation: true,
+                contentScanning: true,
+                dangerousSignatureDetection: true,
+                filenameValidation: true,
+                pathTraversalProtection: true,
+                contentSecurityPolicy: process.env.CSP_REPORT_ONLY !== 'true',
+                rateLimiting: true,
+                corsProtection: true
+            },
+            validationStats: {
+                supportedFormats: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+                maxFileSize: parseInt(process.env.MAX_IMAGE_FILE_SIZE_MB) || 5,
+                absoluteFileLimit: 50, // MB
+                magicByteSignatures: Object.keys(fileValidator.magicBytes).length,
+                dangerousSignatures: fileValidator.dangerousSignatures.length,
+                suspiciousPatterns: fileValidator.suspiciousPatterns.length
+            },
+            recommendations: [
+                'Monitor logs for security validation failures',
+                'Regularly update magic byte signatures',
+                'Review and tighten CSP policies',
+                'Consider implementing file quarantine for suspicious uploads'
+            ]
+        });
+    } catch (error) {
+        console.error('Error getting security status:', error);
+        res.status(500).json({
+            error: 'Failed to get security status'
         });
     }
 });
@@ -432,7 +721,7 @@ app.post('/api/sessions', async (req, res) => {
 });
 
 // Get session data
-app.get('/api/sessions/:sessionId', async (req, res) => {
+app.get('/api/sessions/:sessionId', validateSessionId, async (req, res) => {
     try {
         const { sessionId } = req.params;
         const sessionData = await sessionManager.getSession(sessionId);
@@ -457,7 +746,7 @@ app.get('/api/sessions/:sessionId', async (req, res) => {
 });
 
 // Update session data
-app.put('/api/sessions/:sessionId', async (req, res) => {
+app.put('/api/sessions/:sessionId', validateSessionId, async (req, res) => {
     try {
         const { sessionId } = req.params;
         const updates = req.body;
@@ -485,7 +774,7 @@ app.put('/api/sessions/:sessionId', async (req, res) => {
 });
 
 // Add layer to session with image upload
-app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, res) => {
+app.post('/api/sessions/:sessionId/layers', validateSessionId, upload.single('image'), async (req, res) => {
     try {
         const { sessionId } = req.params;
         
@@ -564,11 +853,35 @@ app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, 
                 console.error(`❌ Stack trace: ${serverImageError.stack}`);
             }
         } else if (req.file) {
-            // Validate and process image
-            if (!imageProcessor.isValidImage(req.file)) {
-                return res.status(400).json({
-                    error: 'Invalid image format'
+            console.log(`🔄 Processing uploaded file for layer: ${req.file.originalname}`);
+            console.log(`🔄 File buffer available: ${!!req.file.buffer}, size: ${req.file.buffer ? req.file.buffer.length : 'no buffer'}`);
+
+            // ENHANCED SECURITY: Comprehensive validation for session layer upload (now with buffer available)
+            const validation = fileValidator.validateFile(req.file);
+            if (!validation.isValid) {
+                console.warn(`🚨 Session layer upload blocked for ${req.file.originalname}:`, {
+                    sessionId: sessionId,
+                    errors: validation.errors,
+                    warnings: validation.warnings,
+                    fileInfo: validation.fileInfo
                 });
+
+                return res.status(400).json({
+                    error: 'Image security validation failed',
+                    details: validation.errors,
+                    warnings: validation.warnings,
+                    securityInfo: {
+                        detectedType: validation.fileInfo.detectedType,
+                        claimedType: validation.fileInfo.mimeType,
+                        magicByteValid: validation.magicByteValid,
+                        contentSafe: validation.contentSafe
+                    }
+                });
+            }
+
+            // Log warnings for session layer processing
+            if (validation.warnings.length > 0) {
+                console.warn(`⚠️  Session layer processing with warnings for ${req.file.originalname}:`, validation.warnings);
             }
             
             console.log(`Processing image for session ${sessionId}: ${req.file.originalname} (${Math.round(req.file.size / 1024)}KB)`);
@@ -601,15 +914,32 @@ app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, 
             let processingComplete = false;
             let attempts = 0;
             const maxAttempts = 60; // 60 seconds timeout
-            
+
             while (!processingComplete && attempts < maxAttempts) {
                 const status = jobQueue.getJobStatus(jobId);
-                
+                console.log(`🔍 Job ${jobId} status check ${attempts + 1}: ${status.status}`);
+
                 if (status.status === 'completed') {
-                    processedImageBuffer = status.result.buffer;
+                    // Handle different result formats from job queue
+                    if (status.result && status.result.processedFile) {
+                        // ImageProcessor result format - use the URL and set serverImageUrl
+                        layerData.serverImageUrl = status.result.processedFile.url;
+                        console.log(`🔧 Sync processing: Using server image URL: ${layerData.serverImageUrl}`);
+                        processedImageBuffer = null; // Will be handled via serverImageUrl in addLayer
+                    } else if (status.result && status.result.buffer) {
+                        processedImageBuffer = status.result.buffer;
+                        console.log(`🔧 Sync processing: Using direct buffer: ${Math.round(processedImageBuffer.length / 1024)}KB`);
+                    } else if (status.result && status.result.processedData) {
+                        processedImageBuffer = Buffer.from(status.result.processedData, 'base64');
+                        console.log(`🔧 Sync processing: Using base64 buffer: ${Math.round(processedImageBuffer.length / 1024)}KB`);
+                    } else if (status.result) {
+                        console.warn('⚠️ Unexpected result format from job queue:', Object.keys(status.result));
+                    }
                     originalImageBuffer = req.file.buffer;
                     processingComplete = true;
+                    console.log(`✅ Job ${jobId} completed after ${attempts + 1} attempts`);
                 } else if (status.status === 'failed') {
+                    console.error(`❌ Job ${jobId} failed: ${status.error?.message || 'Unknown error'}`);
                     throw new Error(status.error?.message || 'Image processing failed');
                 } else {
                     // Wait 1 second before checking again
@@ -617,10 +947,16 @@ app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, 
                     attempts++;
                 }
             }
-            
+
             if (!processingComplete) {
+                console.error(`❌ Job ${jobId} timed out after ${maxAttempts} attempts`);
                 throw new Error('Image processing timeout');
             }
+        } else if (layerData.type === 'text') {
+            console.log(`🔄 Processing text layer without image file`);
+            // Text layers don't always need image files, just save the layer data
+        } else {
+            console.log(`🔄 Processing layer without image file: ${layerData.type || 'unknown type'}`);
         }
         
         // Debug: Log what we're passing to addLayer
@@ -631,14 +967,24 @@ app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, 
         console.log(`  - processedImageBuffer: ${processedImageBuffer ? `${Math.round(processedImageBuffer.length / 1024)}KB` : 'null'}`);
         console.log(`  - originalImageBuffer: ${originalImageBuffer ? `${Math.round(originalImageBuffer.length / 1024)}KB` : 'null'}`);
         
-        // Add layer to session
-        const layer = await sessionManager.addLayer(
-            sessionId,
-            layerData,
-            processedImageBuffer,
-            originalImageBuffer
-        );
-        
+        // Add layer to session with enhanced error handling
+        let layer;
+        try {
+            layer = await sessionManager.addLayer(
+                sessionId,
+                layerData,
+                processedImageBuffer,
+                originalImageBuffer
+            );
+            console.log(`✅ Successfully added layer to session ${sessionId}: ${layer.id}`);
+        } catch (addLayerError) {
+            console.error(`❌ Failed to add layer to session ${sessionId}:`, addLayerError);
+            console.error(`❌ Layer data:`, JSON.stringify(layerData, null, 2));
+            console.error(`❌ Has processedImageBuffer: ${!!processedImageBuffer}`);
+            console.error(`❌ Has originalImageBuffer: ${!!originalImageBuffer}`);
+            throw new Error(`Failed to add layer to session: ${addLayerError.message}`);
+        }
+
         res.json({
             success: true,
             layer: layer,
@@ -654,7 +1000,7 @@ app.post('/api/sessions/:sessionId/layers', upload.single('image'), async (req, 
 });
 
 // Update layer in session
-app.put('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
+app.put('/api/sessions/:sessionId/layers/:layerId', validateSessionId, validateLayerId, async (req, res) => {
     try {
         const { sessionId, layerId } = req.params;
         const updates = req.body;
@@ -682,7 +1028,7 @@ app.put('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
 });
 
 // Remove layer from session
-app.delete('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
+app.delete('/api/sessions/:sessionId/layers/:layerId', validateSessionId, validateLayerId, async (req, res) => {
     try {
         const { sessionId, layerId } = req.params;
         
@@ -708,7 +1054,7 @@ app.delete('/api/sessions/:sessionId/layers/:layerId', async (req, res) => {
 });
 
 // Poll job status for async layer processing
-app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
+app.get('/api/sessions/:sessionId/layers/job/:jobId', validateSessionId, async (req, res) => {
     try {
         const { sessionId, jobId } = req.params;
         console.log(`🔄 GET /api/sessions/${sessionId}/layers/job/${jobId} - Polling job status`);
@@ -728,33 +1074,59 @@ app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
         
         if (status.status === 'completed') {
             console.log(`✅ Job ${jobId} completed, adding layer to session`);
-            // Job completed, add layer to session
-            const processedImageBuffer = status.result.processedData 
-                ? Buffer.from(status.result.processedData, 'base64')
-                : null;
+
             const jobMetadata = status.options?.metadata || {};
             const layerData = jobMetadata.layerData || {};
             const originalImageBuffer = jobMetadata.originalBuffer;
-            
-            console.log(`🔧 processedImageBuffer: ${processedImageBuffer ? `${Math.round(processedImageBuffer.length / 1024)}KB` : 'null'}`);
+
+            console.log(`🔧 Job result keys:`, status.result ? Object.keys(status.result) : 'null');
             console.log(`🔧 layerData: ${JSON.stringify(layerData, null, 2)}`);
             console.log(`🔧 originalImageBuffer: ${originalImageBuffer ? `${Math.round(originalImageBuffer.length / 1024)}KB` : 'null'}`);
-            
-            const layer = await sessionManager.addLayer(
-                sessionId,
-                layerData,
-                processedImageBuffer,
-                originalImageBuffer
-            );
-            
-            res.json({
-                success: true,
-                status: 'completed',
-                layer: layer,
-                message: 'Layer processing completed'
-            });
+
+            // For ImageProcessor results, we need to handle the serverImageUrl case
+            let processedImageBuffer = null;
+            let serverImageUrl = null;
+
+            if (status.result && status.result.processedFile) {
+                // ImageProcessor result format - use the URL instead of buffer
+                serverImageUrl = status.result.processedFile.url;
+                console.log(`🔧 Using server image URL: ${serverImageUrl}`);
+
+                // Update layerData to include server image reference
+                layerData.serverImageUrl = serverImageUrl;
+            } else if (status.result && status.result.buffer) {
+                // Direct buffer result
+                processedImageBuffer = status.result.buffer;
+                console.log(`🔧 Using direct buffer: ${Math.round(processedImageBuffer.length / 1024)}KB`);
+            } else {
+                console.warn('⚠️ Unexpected result format in async job completion:', status.result ? Object.keys(status.result) : 'null result');
+            }
+
+            try {
+                const layer = await sessionManager.addLayer(
+                    sessionId,
+                    layerData,
+                    processedImageBuffer,
+                    originalImageBuffer
+                );
+
+                res.json({
+                    success: true,
+                    status: 'completed',
+                    layer: layer,
+                    message: 'Layer processing completed'
+                });
+            } catch (addLayerError) {
+                console.error(`❌ Failed to add async layer to session ${sessionId}:`, addLayerError);
+                res.status(500).json({
+                    success: false,
+                    status: 'failed',
+                    error: `Failed to add layer to session: ${addLayerError.message}`
+                });
+            }
         } else if (status.status === 'failed') {
-            res.json({
+            console.error(`❌ Job ${jobId} failed: ${status.error?.message || 'Unknown error'}`);
+            res.status(500).json({
                 success: false,
                 status: 'failed',
                 error: status.error?.message || 'Image processing failed'
@@ -777,7 +1149,7 @@ app.get('/api/sessions/:sessionId/layers/job/:jobId', async (req, res) => {
 });
 
 // Get layer image
-app.get('/api/sessions/:sessionId/layers/:layerId/image', async (req, res) => {
+app.get('/api/sessions/:sessionId/layers/:layerId/image', validateSessionId, validateLayerId, async (req, res) => {
     try {
         const { sessionId, layerId } = req.params;
         
@@ -803,8 +1175,135 @@ app.get('/api/sessions/:sessionId/layers/:layerId/image', async (req, res) => {
     }
 });
 
+// Get original layer image
+app.get('/api/sessions/:sessionId/original/:layerId', validateSessionId, validateLayerId, async (req, res) => {
+    try {
+        const { sessionId, layerId } = req.params;
+
+        const session = await sessionManager.getSession(sessionId);
+        if (!session) {
+            return res.status(404).json({ error: 'Session not found' });
+        }
+
+        const layer = session.layers.find(l => l.id === layerId);
+        if (!layer || !layer.originalPath) {
+            return res.status(404).json({ error: 'Original image not found' });
+        }
+
+        const originalImagePath = path.join('./sessions', sessionId, layer.originalPath);
+
+        // Check if file exists
+        if (!fs.existsSync(originalImagePath)) {
+            return res.status(404).json({ error: 'Original image file not found' });
+        }
+
+        // Send file
+        res.sendFile(path.resolve(originalImagePath));
+
+    } catch (error) {
+        console.error('Error getting original image:', error);
+        res.status(500).json({ error: 'Failed to get original image' });
+    }
+});
+
+// Reprocess layer from original image
+app.post('/api/sessions/:sessionId/layers/:layerId/reprocess', validateSessionId, validateLayerId, upload.single('image'), async (req, res) => {
+    try {
+        const { sessionId, layerId } = req.params;
+        const { layerData, async: asyncProcessing } = req.body;
+
+        console.log(`🔄 Reprocessing layer ${layerId} for session ${sessionId}`);
+
+        const session = await sessionManager.getSession(sessionId);
+        if (!session) {
+            return res.status(404).json({ error: 'Session not found' });
+        }
+
+        const layerIndex = session.layers.findIndex(l => l.id === layerId);
+        if (layerIndex === -1) {
+            return res.status(404).json({ error: 'Layer not found' });
+        }
+
+        const existingLayer = session.layers[layerIndex];
+
+        // Use original image if no new image provided
+        let imageFile = req.file;
+        if (!imageFile && existingLayer.originalPath) {
+            const originalPath = path.join('./sessions', sessionId, existingLayer.originalPath);
+            if (fs.existsSync(originalPath)) {
+                // Read original file as buffer
+                const buffer = fs.readFileSync(originalPath);
+                const originalExt = path.extname(existingLayer.originalPath);
+                imageFile = {
+                    buffer: buffer,
+                    originalname: existingLayer.name || `layer_${layerId}${originalExt}`,
+                    mimetype: originalExt === '.jpg' || originalExt === '.jpeg' ? 'image/jpeg' :
+                             originalExt === '.png' ? 'image/png' : 'image/jpeg'
+                };
+            }
+        }
+
+        if (!imageFile) {
+            return res.status(400).json({ error: 'No image provided and no original image found' });
+        }
+
+        // Parse layer data
+        let parsedLayerData;
+        try {
+            parsedLayerData = typeof layerData === 'string' ? JSON.parse(layerData) : layerData;
+        } catch (e) {
+            return res.status(400).json({ error: 'Invalid layer data' });
+        }
+
+        // Process image (async or sync based on request)
+        if (asyncProcessing === 'true' && imageFile.buffer && imageFile.buffer.length > IMAGE_SIZE_THRESHOLD) {
+            // Async processing for large images
+            const jobId = `reprocess_${layerId}_${Date.now()}`;
+
+            jobQueue.add(jobId, async () => {
+                return await processLayerImage(imageFile, parsedLayerData, sessionId, layerId, true);
+            });
+
+            res.json({
+                success: true,
+                jobId: jobId,
+                status: 'processing',
+                message: 'Reprocessing started'
+            });
+        } else {
+            // Synchronous processing
+            const result = await processLayerImage(imageFile, parsedLayerData, sessionId, layerId, true);
+
+            // Update session with reprocessed layer
+            session.layers[layerIndex] = {
+                ...existingLayer,
+                ...result.layer,
+                properties: {
+                    ...existingLayer.properties,
+                    ...parsedLayerData.properties
+                }
+            };
+            session.lastModified = new Date().toISOString();
+
+            await sessionManager.saveSession(sessionId, session);
+
+            res.json({
+                success: true,
+                layer: result.layer,
+                status: 'completed'
+            });
+        }
+
+    } catch (error) {
+        console.error('Error reprocessing layer:', error);
+        res.status(500).json({
+            error: error.message || 'Failed to reprocess layer'
+        });
+    }
+});
+
 // Send session files via email
-app.post('/api/sessions/:sessionId/email', async (req, res) => {
+app.post('/api/sessions/:sessionId/email', validateSessionId, async (req, res) => {
     try {
         const { sessionId } = req.params;
         const { recipient } = req.body; // Optional recipient override
@@ -965,7 +1464,7 @@ app.post('/api/email/welcome', async (req, res) => {
 // Order Processing API Endpoints
 
 // Submit order and save XLSX to session
-app.post('/api/sessions/:sessionId/orders', async (req, res) => {
+app.post('/api/sessions/:sessionId/orders', validateSessionId, async (req, res) => {
     try {
         const { sessionId } = req.params;
         const orderData = req.body;
@@ -1010,7 +1509,7 @@ app.post('/api/sessions/:sessionId/orders', async (req, res) => {
 });
 
 // List orders for a session
-app.get('/api/sessions/:sessionId/orders', async (req, res) => {
+app.get('/api/sessions/:sessionId/orders', validateSessionId, async (req, res) => {
     try {
         const { sessionId } = req.params;
         const orders = await orderParser.listSessionOrders(sessionId);
@@ -1030,7 +1529,7 @@ app.get('/api/sessions/:sessionId/orders', async (req, res) => {
 });
 
 // Download order XLSX file
-app.get('/api/sessions/:sessionId/orders/:filename', async (req, res) => {
+app.get('/api/sessions/:sessionId/orders/:filename', validateSessionId, validateFilename, async (req, res) => {
     try {
         const { sessionId, filename } = req.params;
         
@@ -1066,7 +1565,7 @@ app.get('/api/sessions/:sessionId/orders/:filename', async (req, res) => {
 });
 
 // Delete order from session
-app.delete('/api/sessions/:sessionId/orders/:orderNumber', async (req, res) => {
+app.delete('/api/sessions/:sessionId/orders/:orderNumber', validateSessionId, validateOrderNumber, async (req, res) => {
     try {
         const { sessionId, orderNumber } = req.params;
         
@@ -1235,4 +1734,4 @@ async function startServer() {
     }
 }
 
-startServer();
+startServer();// Trigger restart

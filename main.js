@@ -9,6 +9,10 @@ import { SessionManager } from './lib/client/SessionManager.js';
 import { OrderFormManager } from './lib/client/OrderFormManager.js';
 import UIStyleManager from './lib/client/UIStyleManager.js';
 import { DesignSystem } from './lib/client/DesignSystem.js';
+import { KeyboardManager } from './lib/client/KeyboardManager.js';
+import { i18n } from './lib/client/I18nManager.js';
+import { I18nUIUpdater } from './lib/client/I18nUIUpdater.js';
+import { errorManager, ApplicationError, ValidationError, NetworkError, FileProcessingError } from './lib/client/ErrorManager.js';
 import './lib/serverApiClient.js';
 
 class UniformConfigurator {
@@ -17,21 +21,85 @@ class UniformConfigurator {
         this.serverApiClient = null;
         this.imageProcessor = null;
         this.sessionManager = null;
+        this.i18n = i18n;
+        this.languageSwitcher = null;
+        this.i18nUIUpdater = null;
+        this.errorManager = errorManager;
         this.config = {};
-        
+
         this.initializeApp();
     }
     
     async initializeApp() {
         try {
+            console.log('🚀 Starting app initialization...');
+
+            // Initialize error management system first
+            console.log('1️⃣ Initializing error management...');
+            this.errorManager.initialize();
+
+            // Initialize i18n system
+            console.log('2️⃣ Initializing i18n system...');
+            await this.initializeI18n();
+
+            console.log('3️⃣ Loading server configuration...');
             await this.loadServerConfiguration();
-            this.setupManagers();
-            this.setupEventHandlers();
+
+            console.log('4️⃣ Loading default texture...');
             await this.loadDefaultTexture();
+
+            console.log('5️⃣ Setting up managers...');
+            this.setupManagers();
+
+            console.log('6️⃣ Setting up event handlers...');
+            this.setupEventHandlers();
+
+            // Initialize UI updater and language switcher after UI is ready
+            console.log('7️⃣ Initializing i18n UI updater...');
+            await this.initializeI18nUIUpdater();
+
+
+            console.log('✅ App initialization completed successfully!');
         } catch (error) {
-            console.error('Failed to initialize application:', error);
+            console.error('❌ App initialization failed at step:', error);
+            console.error('❌ Error stack:', error.stack);
+
+            const appError = new ApplicationError('appInitializationFailed', error, {
+                context: {
+                    phase: 'initialization',
+                    step: error.message || 'unknown step',
+                    originalError: error.stack
+                }
+            });
+            this.errorManager.handleError(appError);
         }
     }
+
+    /**
+     * Initialize internationalization system
+     */
+    async initializeI18n() {
+        try {
+            await this.i18n.initialize();
+            console.log('✅ I18n system initialized');
+        } catch (error) {
+            console.error('❌ Failed to initialize i18n system:', error);
+        }
+    }
+
+    /**
+     * Initialize UI updater for i18n
+     */
+    async initializeI18nUIUpdater() {
+        try {
+            this.i18nUIUpdater = new I18nUIUpdater(this.i18n);
+            this.i18nUIUpdater.initialize();
+            console.log('✅ I18n UI updater initialized');
+        } catch (error) {
+            console.error('❌ Failed to initialize i18n UI updater:', error);
+        }
+    }
+
     
     async loadServerConfiguration() {
         try {
@@ -126,20 +194,23 @@ class UniformConfigurator {
         this.uiManager = new UIManager();
         this.configurationManager = new ConfigurationManager(this.sceneManager, this.layerManager);
         this.interactionManager = new InteractionManager(this.sceneManager, this.layerManager);
-        
+
+        // Initialize keyboard manager first
+        this.keyboardManager = new KeyboardManager(this.layerManager, this.sceneManager, this.uiManager);
+
         // Initialize Design System and UI Style Manager
         DesignSystem.init();
         this.uiStyleManager = new UIStyleManager();
         this.uiStyleManager.unifyButtons();
-        
+
         // Initialize Session Manager (but don't auto-create sessions)
         if (this.serverAvailable) {
             const serverHost = import.meta.env.VITE_SERVER_HOST || import.meta.env.VITE_DEFAULT_SERVER_HOST || 'localhost';
             const serverPort = import.meta.env.VITE_SERVER_PORT || import.meta.env.VITE_DEFAULT_SERVER_PORT || '3030';
             const serverProtocol = import.meta.env.VITE_SERVER_PROTOCOL || import.meta.env.VITE_DEFAULT_SERVER_PROTOCOL || 'http';
-            
+
             const serverUrl = `${serverProtocol}://${serverHost}:${serverPort}`;
-            
+
             this.sessionManager = new SessionManager({
                 serverUrl: serverUrl,
                 onSessionCreated: (sessionData) => this.handleSessionCreated(sessionData),
@@ -147,7 +218,7 @@ class UniformConfigurator {
                 onSessionSaved: (sessionData) => this.handleSessionSaved(sessionData),
                 onSessionError: (error) => this.handleSessionError(error)
             });
-            
+
             // Initialize Order Form Manager with all dependencies
             this.orderFormManager = new OrderFormManager({
                 sessionManager: this.sessionManager,
@@ -158,22 +229,36 @@ class UniformConfigurator {
             // Initialize Order Form Manager without server dependencies
             this.orderFormManager = new OrderFormManager();
         }
+
+        // Initialize accessibility features AFTER all managers are created
+        this.setupAccessibilityFeatures();
     }
     
     setupEventHandlers() {
         // Scene Manager Events
         this.sceneManager.onModelLoaded = (material) => {
+            console.log('🎯 Model loaded, initializing texture...');
             // Use base texture image dimensions if available, otherwise fallback to 512x512
             const width = this.baseTextureImage ? this.baseTextureImage.width : 512;
             const height = this.baseTextureImage ? this.baseTextureImage.height : 512;
-            
+
+            console.log('🎨 Base texture image available:', !!this.baseTextureImage);
+            console.log('🎨 Texture dimensions:', width, 'x', height);
+
             const texture = this.layerManager.initializeTexture(width, height, this.baseTextureImage);
             this.sceneManager.setTexture(texture);
-            
+
             // Apply current UI color values to the texture
             const primaryColor = document.getElementById('primary-color').value;
             const secondaryColor = document.getElementById('secondary-color').value;
             this.layerManager.updateBaseTexture(primaryColor, secondaryColor);
+
+            // Ensure 3D viewer uses full available space
+            setTimeout(() => {
+                this.sceneManager.onWindowResize();
+            }, 100);
+
+            console.log('✅ Texture applied to 3D model');
         };
         
         this.sceneManager.onCameraStart = () => {
@@ -334,34 +419,298 @@ class UniformConfigurator {
             }, 30000);
         }
     }
-    
-    async loadDefaultTexture() {
-        const textureLoader = new THREE.TextureLoader();
-        try {
-            const loadedTexture = await new Promise((resolve, reject) => {
-                textureLoader.load(
-                    './assets/texture.png',
-                    resolve,
-                    undefined,
-                    reject
-                );
+
+    setupAccessibilityFeatures() {
+        // Initialize screen reader announcements
+        this.announceElement = document.getElementById('screen-reader-announcements');
+        this.alertElement = document.getElementById('screen-reader-alerts');
+
+        // Setup keyboard help toggle
+        this.setupKeyboardHelp();
+
+        // Setup modal accessibility
+        this.setupModalAccessibility();
+
+        // Setup form accessibility
+        this.setupFormAccessibility();
+
+        // Setup color picker accessibility
+        this.setupColorPickerAccessibility();
+
+        // Add ARIA live region updates
+        this.setupLiveRegions();
+
+        // Initialize focus management
+        this.initializeFocusManagement();
+    }
+
+    setupKeyboardHelp() {
+        const keyboardHelp = document.getElementById('keyboard-help');
+        let helpVisible = false;
+
+        // Show help on F1 or ? key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F1' || (e.key === '?' && !e.target.matches('input, textarea'))) {
+                e.preventDefault();
+                helpVisible = !helpVisible;
+                keyboardHelp.classList.toggle('visible', helpVisible);
+
+                if (helpVisible) {
+                    this.announce('Keyboard help displayed', 'assertive');
+                } else {
+                    this.announce('Keyboard help hidden', 'polite');
+                }
+            }
+
+            if (e.key === 'Escape' && helpVisible) {
+                helpVisible = false;
+                keyboardHelp.classList.remove('visible');
+                this.announce('Keyboard help hidden', 'polite');
+            }
+        });
+
+        // Auto-show help for first-time keyboard users
+        let keyboardUsed = false;
+        document.addEventListener('keydown', (e) => {
+            if (!keyboardUsed && e.key === 'Tab') {
+                keyboardUsed = true;
+                setTimeout(() => {
+                    if (!helpVisible) {
+                        keyboardHelp.classList.add('visible');
+                        helpVisible = true;
+                        this.announce('Keyboard navigation detected. Press F1 to toggle help.', 'polite');
+
+                        // Auto-hide after 10 seconds
+                        setTimeout(() => {
+                            if (helpVisible) {
+                                keyboardHelp.classList.remove('visible');
+                                helpVisible = false;
+                            }
+                        }, 10000);
+                    }
+                }, 2000);
+            }
+        }, { once: true });
+    }
+
+    setupModalAccessibility() {
+        // Order modal accessibility
+        const orderModal = document.getElementById('order-modal');
+        const orderBtn = document.getElementById('order-btn');
+        const orderModalClose = document.getElementById('order-modal-close');
+
+        if (orderBtn && orderModal) {
+            orderBtn.addEventListener('click', async () => {
+                await this.orderFormManager.openModal();
+                this.keyboardManager.openModal(orderModal);
             });
-            
-            this.baseTextureImage = loadedTexture.image;
-            this.layerManager.setBaseTexture(loadedTexture.image);
-            console.log('Base texture loaded successfully');
+        }
+
+        if (orderModalClose && orderModal) {
+            orderModalClose.addEventListener('click', () => {
+                this.keyboardManager.closeModal();
+                orderModal.style.display = 'none';
+            });
+        }
+
+        // Close modal on backdrop click
+        if (orderModal) {
+            orderModal.addEventListener('click', (e) => {
+                if (e.target === orderModal) {
+                    this.keyboardManager.closeModal();
+                    orderModal.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    setupFormAccessibility() {
+        // Add labels and descriptions for form elements
+        const formElements = document.querySelectorAll('input, select, textarea');
+        formElements.forEach(element => {
+            // Ensure all form elements have labels
+            if (!element.id || !document.querySelector(`label[for="${element.id}"]`)) {
+                console.warn('Form element missing label:', element);
+            }
+
+            // Add error message containers
+            if (!element.nextElementSibling?.classList.contains('error-message')) {
+                const errorContainer = document.createElement('div');
+                errorContainer.className = 'error-message sr-only';
+                errorContainer.id = `${element.id}-error`;
+                element.setAttribute('aria-describedby', errorContainer.id);
+                element.parentNode.insertBefore(errorContainer, element.nextSibling);
+            }
+        });
+    }
+
+    setupColorPickerAccessibility() {
+        // Make color swatches accessible
+        const colorSwatches = document.querySelectorAll('.current-color-swatch');
+        colorSwatches.forEach(swatch => {
+            const button = swatch.closest('button');
+            if (button) {
+                button.addEventListener('focus', () => {
+                    const color = swatch.style.backgroundColor || '#ffffff';
+                    this.announce(`Current color: ${color}`, 'polite');
+                });
+            }
+        });
+
+        // Add keyboard navigation to color wheels
+        const colorWheels = document.querySelectorAll('[id*="color-wheel-canvas"]');
+        colorWheels.forEach(canvas => {
+            canvas.addEventListener('focus', () => {
+                this.announce('Color wheel focused. Use arrow keys to select color.', 'polite');
+            });
+        });
+
+        // Add keyboard navigation to brightness sliders
+        const brightnessSliders = document.querySelectorAll('[id*="brightness-slider-track"]');
+        brightnessSliders.forEach(slider => {
+            slider.addEventListener('focus', () => {
+                this.announce('Brightness slider focused. Use arrow keys to adjust.', 'polite');
+            });
+
+            // Update ARIA values on change
+            slider.addEventListener('brightnessChange', (e) => {
+                slider.setAttribute('aria-valuenow', e.detail.value);
+                this.announce(`Brightness: ${e.detail.value}%`, 'polite');
+            });
+        });
+    }
+
+    setupLiveRegions() {
+        // Layer changes
+        if (this.layerManager) {
+            const originalAddLayer = this.layerManager.addLayer.bind(this.layerManager);
+            this.layerManager.addLayer = (...args) => {
+                const result = originalAddLayer(...args);
+                if (result) {
+                    this.announce(`Layer added: ${result.name || 'unnamed'}`, 'polite');
+                }
+                return result;
+            };
+
+            const originalRemoveLayer = this.layerManager.removeLayer.bind(this.layerManager);
+            this.layerManager.removeLayer = (...args) => {
+                const layer = this.layerManager.getLayer(args[0]);
+                const result = originalRemoveLayer(...args);
+                if (result && layer) {
+                    this.announce(`Layer deleted: ${layer.name || 'unnamed'}`, 'polite');
+                }
+                return result;
+            };
+
+            const originalSelectLayer = this.layerManager.selectLayer.bind(this.layerManager);
+            this.layerManager.selectLayer = (...args) => {
+                const result = originalSelectLayer(...args);
+                if (result) {
+                    this.announce(`Layer selected: ${result.name || 'unnamed'}`, 'polite');
+                }
+                return result;
+            };
+        }
+
+        // Scene changes
+        if (this.sceneManager) {
+            const originalLoadModel = this.sceneManager.loadModel.bind(this.sceneManager);
+            this.sceneManager.loadModel = (...args) => {
+                this.announce('Loading 3D model...', 'polite');
+                const result = originalLoadModel(...args);
+                if (result && result.then) {
+                    result.then(() => {
+                        this.announce('3D model loaded successfully', 'polite');
+                    }).catch(() => {
+                        this.announce('Failed to load 3D model', 'assertive');
+                    });
+                }
+                return result;
+            };
+        }
+    }
+
+    initializeFocusManagement() {
+        // Add keyboard navigation class when keyboard is used
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation-active');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation-active');
+        });
+
+        // Enhance tab order
+        this.enhanceTabOrder();
+    }
+
+    enhanceTabOrder() {
+        // Ensure logical tab order for dynamic content
+        const layersList = document.getElementById('layers-list');
+        if (layersList) {
+            const observer = new MutationObserver(() => {
+                this.updateLayerTabOrder();
+            });
+
+            observer.observe(layersList, {
+                childList: true,
+                subtree: true
+            });
+        }
+    }
+
+    updateLayerTabOrder() {
+        const layerItems = document.querySelectorAll('.layer-item');
+        layerItems.forEach((item, index) => {
+            const buttons = item.querySelectorAll('button, input, select');
+            buttons.forEach((button, buttonIndex) => {
+                button.setAttribute('tabindex', (index * 10) + buttonIndex);
+            });
+        });
+    }
+
+    announce(message, priority = 'polite') {
+        const element = priority === 'assertive' ? this.alertElement : this.announceElement;
+        if (element) {
+            element.textContent = message;
+            console.log(`[A11Y] ${priority.toUpperCase()}: ${message}`);
+        }
+    }
+
+    async loadDefaultTexture() {
+        try {
+            console.log('🎨 Loading base texture from ./assets/texture.png...');
+
+            // Load the image directly using Image() instead of THREE.TextureLoader
+            const image = new Image();
+            await new Promise((resolve, reject) => {
+                image.onload = resolve;
+                image.onerror = reject;
+                image.crossOrigin = 'anonymous';
+                image.src = './assets/texture.png';
+            });
+
+            this.baseTextureImage = image;
+            console.log('✅ Base texture loaded successfully:', image.width, 'x', image.height);
+
+            // Set the base texture in LayerManager if it's already initialized
+            if (this.layerManager) {
+                this.layerManager.setBaseTexture(image);
+            }
         } catch (error) {
-            console.error('Error loading texture:', error);
-            // Fallback handled by LayerManager
+            console.error('❌ Error loading base texture:', error);
+            // The LayerManager will create a fallback texture
         }
     }
     
     async processImage(file) {
         try {
             this.imageProcessor.validateFile(file);
-            
+
             this.uiManager.showLoadingIndicator(`Processing ${file.name}...`);
-            
+
             let processResult;
             
             // Check file size against conversion threshold
@@ -398,8 +747,15 @@ class UniformConfigurator {
             return processResult;
             
         } catch (error) {
-            console.error('Error processing image:', error);
-            throw error;
+            const processingError = new FileProcessingError('processingFailed', file.name, error, {
+                context: {
+                    fileSize: file.size,
+                    fileType: file.type,
+                    operation: 'processImage'
+                }
+            });
+            this.errorManager.handleError(processingError);
+            throw processingError;
         }
     }
     
@@ -425,7 +781,13 @@ class UniformConfigurator {
                 processedCount++;
                 
             } catch (error) {
-                console.error(`Error processing ${file.name}:`, error);
+                const batchError = new FileProcessingError('batchProcessingFailed', file.name, error, {
+                    context: {
+                        batchIndex: processedCount + failedCount,
+                        totalFiles: totalFiles
+                    }
+                });
+                this.errorManager.handleError(batchError);
                 failedCount++;
             }
         }
@@ -452,13 +814,18 @@ class UniformConfigurator {
                                      error.message.includes('LIMIT_FILE_SIZE');
             
             if (isValidationError) {
-                const fileSizeMB = (this.config.maxImageFileSize);
-                this.uiManager.showErrorModal(
-                    '❌ 파일 용량 초과',
-                    `${file.name}의 용량이 최대 허용치 ${fileSizeMB}MB를 초과하여 사용하실수 없습니다.`
-                );
+                const validationError = new ValidationError('fileTooLarge', 'fileSize', error, {
+                    userMessage: i18n.t('errors.file.fileTooLarge', { fileName: file.name }),
+                    context: {
+                        fileName: file.name,
+                        fileSize: file.size,
+                        maxSize: this.config.maxImageFileSize * 1024 * 1024
+                    }
+                });
+                this.errorManager.handleError(validationError);
             } else {
-                this.uiManager.showNotification(`❌ ${error.message}`, 'error', 0);
+                const uploadError = new FileProcessingError('uploadFailed', file.name, error);
+                this.errorManager.handleError(uploadError);
             }
         }
     }
@@ -522,7 +889,7 @@ class UniformConfigurator {
     showImageProcessingNotification(filename, details) {
         const { wasResized, originalSize, newSize, fileSizeReduced, finalFileSizeKB, serverProcessed, processingTime } = details;
         
-        let message = `${filename} 의 해상도를\n${originalSize.width}×${originalSize.height} 에서 ${newSize.width}×${newSize.height}으로\n${finalFileSizeKB}KB 용량으로 변환하였습니다.`;
+        const message = `${filename} 의 해상도를\n${originalSize.width}×${originalSize.height} 에서 ${newSize.width}×${newSize.height}으로\n${finalFileSizeKB}KB 용량으로 변환하였습니다.`;
         
         const notificationType = serverProcessed ? 'info' : 'warning';
         this.uiManager.showNotification(message, notificationType, 0);
@@ -535,8 +902,10 @@ class UniformConfigurator {
             await this.configurationManager.loadConfiguration(file);
             this.updateUI();
         } catch (error) {
-            console.error('Error loading configuration:', error);
-            this.uiManager.showNotification('Error loading configuration file. Please check the file format.', 'error', this.config.defaultErrorDuration);
+            const configError = new FileProcessingError('loadFailed', file.name, error, {
+                userMessage: i18n.t('errors.file.configLoadFailed')
+            });
+            this.errorManager.handleError(configError);
         }
     }
     
@@ -755,29 +1124,42 @@ class UniformConfigurator {
                 // Create layer from session data for all layer types
                 const layer = this.layerManager.createLayerFromSessionData(layerData);
                 if (layer) {
-                    // Handle image layers with imagePath
-                    if (layerData.imagePath && layer.type !== 'text') {
-                        const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
-                        
-                        // Validate image exists before loading
-                        const imageExists = await this.validateLayerImage(layerData.id, imageUrl);
-                        if (imageExists) {
-                            try {
-                                await this.layerManager.loadLayerImage(layer, imageUrl);
-                                console.log(`✅ Successfully loaded image for layer ${layerData.id}`);
-                            } catch (error) {
-                                console.warn(`⚠️ Failed to load image for layer ${layerData.id}:`, error);
-                                this.handleMissingLayerImage(layerData, layer, 'load_error');
+                    // Handle logo and image layers
+                    if (layer.type === 'logo' || layer.type === 'image') {
+                        // Try to load processed image if it exists
+                        if (layerData.imagePath) {
+                            const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
+
+                            // Validate image exists before loading
+                            const imageExists = await this.validateLayerImage(layerData.id, imageUrl);
+                            if (imageExists) {
+                                try {
+                                    await this.layerManager.loadLayerImage(layer, imageUrl);
+                                    console.log(`✅ Successfully loaded ${layer.type} image for layer ${layerData.id}`);
+                                } catch (error) {
+                                    console.warn(`⚠️ Failed to load ${layer.type} image for layer ${layerData.id}:`, error);
+                                    this.handleMissingLayerImage(layerData, layer, 'load_error');
+                                }
+                            } else {
+                                console.warn(`⚠️ Layer ${layerData.id} has missing processed image file: ${imageUrl}`);
+                                this.handleMissingLayerImage(layerData, layer, 'missing_file');
                             }
-                        } else {
-                            console.warn(`⚠️ Layer ${layerData.id} has missing image file: ${imageUrl}`);
-                            this.handleMissingLayerImage(layerData, layer, 'missing_file');
                         }
-                    } 
-                    // Handle image layers WITHOUT imagePath (processing failed/timed out)
-                    else if (layer.type !== 'text' && !layerData.imagePath) {
-                        console.warn(`⚠️ Image layer ${layerData.id} has no imagePath - processing may have failed`);
-                        this.handleMissingLayerImage(layerData, layer, 'missing_path');
+                        // If no processed image but has original, attempt to reprocess
+                        else if (layerData.originalPath) {
+                            console.log(`🔄 No processed image for ${layer.type} layer ${layerData.id}, attempting to reprocess original...`);
+                            try {
+                                await this.reprocessLayerFromOriginal(layerData, layer);
+                            } catch (error) {
+                                console.warn(`⚠️ Failed to reprocess ${layer.type} layer ${layerData.id}:`, error);
+                                this.handleMissingLayerImage(layerData, layer, 'reprocess_failed');
+                            }
+                        }
+                        // No processed image and no original - complete failure
+                        else {
+                            console.warn(`⚠️ ${layer.type} layer ${layerData.id} has no imagePath or originalPath - complete processing failure`);
+                            this.handleMissingLayerImage(layerData, layer, 'missing_path');
+                        }
                     }
                     // Text layers don't need image loading - they render directly
                     else if (layer.type === 'text') {
@@ -808,11 +1190,92 @@ class UniformConfigurator {
             this.updateUI();
             
         } catch (error) {
-            console.error('Error restoring session state:', error);
-            this.uiManager.showNotification('Error restoring session data', 'error', 5000);
+            const sessionError = new ApplicationError('sessionRestoreFailed', error, {
+                userMessage: i18n.t('errors.session.loadFailed'),
+                context: { sessionId: sessionData.sessionId }
+            });
+            this.errorManager.handleError(sessionError);
         }
     }
-    
+
+    async reprocessLayerFromOriginal(layerData, layer) {
+        if (!this.sessionManager || !layerData.originalPath) {
+            throw new Error('No session manager or original path available');
+        }
+
+        try {
+            console.log(`🔄 Reprocessing layer ${layerData.id} from original: ${layerData.originalPath}`);
+
+            // Create a FormData with the original image data
+            const originalImageUrl = `${this.sessionManager.serverUrl}/api/sessions/${this.sessionManager.getCurrentSessionId()}/original/${layerData.id}`;
+
+            // Fetch the original image
+            const originalResponse = await fetch(originalImageUrl);
+            if (!originalResponse.ok) {
+                throw new Error(`Failed to fetch original image: ${originalResponse.statusText}`);
+            }
+
+            const originalBlob = await originalResponse.blob();
+            const originalFile = new File([originalBlob], layerData.name || 'image.jpg', { type: originalBlob.type });
+
+            // Create FormData for reprocessing
+            const formData = new FormData();
+            formData.append('layerData', JSON.stringify({
+                type: layerData.type,
+                name: layerData.name,
+                visible: layerData.visible,
+                properties: layerData.properties
+            }));
+            formData.append('image', originalFile);
+            formData.append('async', 'true');
+
+            // Submit for reprocessing
+            const reprocessUrl = `${this.sessionManager.serverUrl}/api/sessions/${this.sessionManager.getCurrentSessionId()}/layers/${layerData.id}/reprocess`;
+            console.log(`🔧 Reprocessing at: ${reprocessUrl}`);
+
+            const reprocessResponse = await fetch(reprocessUrl, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!reprocessResponse.ok) {
+                throw new Error(`Reprocessing failed: ${reprocessResponse.statusText}`);
+            }
+
+            const reprocessData = await reprocessResponse.json();
+
+            // If async processing, poll for completion
+            if (reprocessData.jobId) {
+                console.log(`🔄 Reprocessing started, polling job: ${reprocessData.jobId}`);
+                const completedLayer = await this.sessionManager.pollJobCompletion(reprocessData.jobId);
+
+                // Update the layer with the reprocessed image
+                if (completedLayer && completedLayer.imagePath) {
+                    layerData.imagePath = completedLayer.imagePath;
+                    const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
+                    await this.layerManager.loadLayerImage(layer, imageUrl);
+                    console.log(`✅ Successfully reprocessed and loaded ${layer.type} image for layer ${layerData.id}`);
+                } else {
+                    throw new Error('Reprocessing completed but no image path returned');
+                }
+            } else {
+                // Synchronous completion
+                if (reprocessData.layer && reprocessData.layer.imagePath) {
+                    layerData.imagePath = reprocessData.layer.imagePath;
+                    const imageUrl = this.sessionManager.getLayerImageUrl(layerData.id);
+                    await this.layerManager.loadLayerImage(layer, imageUrl);
+                    console.log(`✅ Successfully reprocessed and loaded ${layer.type} image for layer ${layerData.id}`);
+                } else {
+                    throw new Error('Reprocessing completed but no image path returned');
+                }
+            }
+
+        } catch (error) {
+            console.error(`❌ Failed to reprocess layer ${layerData.id}:`, error);
+            throw error;
+        }
+    }
+
     applyConfiguration(config) {
         // Apply any saved configuration (colors, settings, etc.)
         if (config.primaryColor) {
