@@ -67,7 +67,8 @@
       "WebFetch(domain:localhost)",
       "Bash(start:*)",
       "Bash(del nul)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

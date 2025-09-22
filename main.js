@@ -230,6 +230,9 @@ class UniformConfigurator {
             this.orderFormManager = new OrderFormManager();
         }
 
+        // Initialize hybrid GLB system if enabled
+        this.initializeHybridSystemIfEnabled();
+
         // Initialize accessibility features AFTER all managers are created
         this.setupAccessibilityFeatures();
     }
@@ -1358,17 +1361,189 @@ class UniformConfigurator {
     // Note: Images are now processed locally until user clicks SUBMIT
     // The session system will handle image storage only when submitting
     
+    // ================================
+    // HYBRID GLB SYSTEM INTEGRATION
+    // ================================
+
+    /**
+     * Initialize hybrid GLB system if enabled via environment variables
+     */
+    initializeHybridSystemIfEnabled() {
+        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB === 'true';
+
+        if (!enableHybrid) {
+            console.log('🎯 Hybrid GLB system disabled (VITE_ENABLE_HYBRID_GLB=false)');
+            return;
+        }
+
+        console.log('🎯 Initializing hybrid GLB system...');
+
+        try {
+            // Define available models (start with existing model + future models)
+            const availableModels = this.getAvailableModels();
+
+            // Enable hybrid system in SceneManager
+            const modelCache = this.sceneManager.enableHybridSystem(availableModels);
+
+            // Connect LayerManager to ModelCache
+            this.layerManager.setModelCache(modelCache);
+
+            // Initialize ModelSelector UI if multiple models are available
+            if (availableModels.length > 1) {
+                this.initializeModelSelectorUI(availableModels);
+            }
+
+            console.log('✅ Hybrid GLB system initialized successfully');
+        } catch (error) {
+            console.error('❌ Failed to initialize hybrid GLB system:', error);
+            console.log('🔄 Continuing with single model system...');
+        }
+    }
+
+    /**
+     * Get list of available models for hybrid system
+     */
+    getAvailableModels() {
+        // Start with the current default model
+        const models = [
+            { name: 'Default Model', path: './assets/model.gltf' }
+        ];
+
+        // TODO: Add more models here as they become available
+        // Example:
+        // models.push(
+        //     { name: 'T-Shirt Classic', path: './assets/models/tshirt-classic.glb' },
+        //     { name: 'T-Shirt Slim', path: './assets/models/tshirt-slim.glb' },
+        //     { name: 'Hoodie', path: './assets/models/hoodie.glb' }
+        // );
+
+        return models;
+    }
+
+    /**
+     * Initialize ModelSelector UI for multiple models
+     */
+    async initializeModelSelectorUI(availableModels) {
+        try {
+            // Dynamically import ModelSelector to avoid loading it when not needed
+            const { ModelSelector } = await import('./lib/client/ModelSelector.js');
+
+            this.modelSelector = new ModelSelector(this.sceneManager, availableModels);
+            await this.modelSelector.initialize();
+
+            console.log('✅ ModelSelector UI initialized');
+        } catch (error) {
+            console.error('❌ Failed to initialize ModelSelector UI:', error);
+        }
+    }
+
+    /**
+     * Get hybrid system statistics (for debugging/monitoring)
+     */
+    getHybridStats() {
+        if (this.sceneManager) {
+            return this.sceneManager.getHybridStats();
+        }
+        return null;
+    }
+
     updateSessionConfiguration() {
         if (!this.sessionManager) return;
-        
+
         const primaryColor = document.getElementById('primary-color')?.value;
         const secondaryColor = document.getElementById('secondary-color')?.value;
-        
+
         this.sessionManager.updateConfiguration({
             primaryColor: primaryColor,
             secondaryColor: secondaryColor,
             lastModified: new Date().toISOString()
         });
+    }
+
+    // ================================
+    // HYBRID GLB SYSTEM INTEGRATION
+    // ================================
+
+    /**
+     * Initialize hybrid GLB system if enabled via environment variables
+     */
+    initializeHybridSystemIfEnabled() {
+        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB === 'true';
+
+        if (!enableHybrid) {
+            console.log('🎯 Hybrid GLB system disabled (VITE_ENABLE_HYBRID_GLB=false)');
+            return;
+        }
+
+        console.log('🎯 Initializing hybrid GLB system...');
+
+        try {
+            // Define available models (start with existing model + future models)
+            const availableModels = this.getAvailableModels();
+
+            // Enable hybrid system in SceneManager
+            const modelCache = this.sceneManager.enableHybridSystem(availableModels);
+
+            // Connect LayerManager to ModelCache
+            this.layerManager.setModelCache(modelCache);
+
+            // Initialize ModelSelector UI if multiple models are available
+            if (availableModels.length > 1) {
+                this.initializeModelSelectorUI(availableModels);
+            }
+
+            console.log('✅ Hybrid GLB system initialized successfully');
+        } catch (error) {
+            console.error('❌ Failed to initialize hybrid GLB system:', error);
+            console.log('🔄 Continuing with single model system...');
+        }
+    }
+
+    /**
+     * Get list of available models for hybrid system
+     */
+    getAvailableModels() {
+        // Start with the current default model
+        const models = [
+            { name: 'Default Model', path: './assets/model.gltf' }
+        ];
+
+        // TODO: Add more models here as they become available
+        // Example:
+        // models.push(
+        //     { name: 'T-Shirt Classic', path: './assets/models/tshirt-classic.glb' },
+        //     { name: 'T-Shirt Slim', path: './assets/models/tshirt-slim.glb' },
+        //     { name: 'Hoodie', path: './assets/models/hoodie.glb' }
+        // );
+
+        return models;
+    }
+
+    /**
+     * Initialize ModelSelector UI for multiple models
+     */
+    async initializeModelSelectorUI(availableModels) {
+        try {
+            // Dynamically import ModelSelector to avoid loading it when not needed
+            const { ModelSelector } = await import('./lib/client/ModelSelector.js');
+
+            this.modelSelector = new ModelSelector(this.sceneManager, availableModels);
+            await this.modelSelector.initialize();
+
+            console.log('✅ ModelSelector UI initialized');
+        } catch (error) {
+            console.error('❌ Failed to initialize ModelSelector UI:', error);
+        }
+    }
+
+    /**
+     * Get hybrid system statistics (for debugging/monitoring)
+     */
+    getHybridStats() {
+        if (this.sceneManager) {
+            return this.sceneManager.getHybridStats();
+        }
+        return null;
     }
 }
 
