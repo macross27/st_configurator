@@ -949,12 +949,21 @@ class UniformConfigurator {
     updateUI() {
         const layers = this.layerManager.getLayers();
         const selectedLayer = this.layerManager.getSelectedLayer();
-        
+
         console.log('🔄 updateUI - selectedLayer:', selectedLayer);
         console.log('🔄 updateUI - all layers:', layers);
-        
+
         this.uiManager.updateLayersList(layers, selectedLayer);
         this.uiManager.updateScaleSlider(selectedLayer);
+
+        // Update 3D widget color picker to match selected layer color
+        if (selectedLayer && selectedLayer.color && this.uiManager.colorWheelPicker) {
+            this.uiManager.colorWheelPicker.setColor(selectedLayer.color);
+            // Also update the color swatch
+            if (this.uiManager.elements.currentColorSwatch) {
+                this.uiManager.elements.currentColorSwatch.style.backgroundColor = selectedLayer.color;
+            }
+        }
     }
     
     async handleSubmit() {
@@ -1145,14 +1154,41 @@ class UniformConfigurator {
                                 this.handleMissingLayerImage(layerData, layer, 'missing_file');
                             }
                         }
-                        // If no processed image but has original, attempt to reprocess
+                        // If no processed image but has original, use the original directly
                         else if (layerData.originalPath) {
-                            console.log(`🔄 No processed image for ${layer.type} layer ${layerData.id}, attempting to reprocess original...`);
+                            console.log(`🔄 No processed image for ${layer.type} layer ${layerData.id}, using original image directly...`);
                             try {
-                                await this.reprocessLayerFromOriginal(layerData, layer);
+                                // Fetch the original image directly
+                                const originalImageUrl = `${this.sessionManager.serverUrl}/api/sessions/${this.sessionManager.getCurrentSessionId()}/original/${layerData.id}`;
+                                const originalResponse = await fetch(originalImageUrl);
+
+                                if (!originalResponse.ok) {
+                                    throw new Error(`Failed to fetch original image: ${originalResponse.statusText}`);
+                                }
+
+                                const originalBlob = await originalResponse.blob();
+                                const originalImageObjectUrl = URL.createObjectURL(originalBlob);
+
+                                // Load the original image directly
+                                const img = new Image();
+                                img.crossOrigin = 'anonymous';
+
+                                await new Promise((resolve, reject) => {
+                                    img.onload = () => {
+                                        layer.image = img;
+                                        layer.width = img.width;
+                                        layer.height = img.height;
+                                        this.layerManager.updateTexture();
+                                        console.log(`✅ Successfully loaded original image for ${layer.type} layer ${layerData.id}`);
+                                        resolve();
+                                    };
+                                    img.onerror = reject;
+                                    img.src = originalImageObjectUrl;
+                                });
+
                             } catch (error) {
-                                console.warn(`⚠️ Failed to reprocess ${layer.type} layer ${layerData.id}:`, error);
-                                this.handleMissingLayerImage(layerData, layer, 'reprocess_failed');
+                                console.warn(`⚠️ Failed to load original image for ${layer.type} layer ${layerData.id}:`, error);
+                                this.handleMissingLayerImage(layerData, layer, 'original_load_failed');
                             }
                         }
                         // No processed image and no original - complete failure

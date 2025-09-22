@@ -1193,7 +1193,7 @@ app.get('/api/sessions/:sessionId/original/:layerId', validateSessionId, validat
         const originalImagePath = path.join('./sessions', sessionId, layer.originalPath);
 
         // Check if file exists
-        if (!fs.existsSync(originalImagePath)) {
+        if (!fsSync.existsSync(originalImagePath)) {
             return res.status(404).json({ error: 'Original image file not found' });
         }
 
@@ -1230,9 +1230,9 @@ app.post('/api/sessions/:sessionId/layers/:layerId/reprocess', validateSessionId
         let imageFile = req.file;
         if (!imageFile && existingLayer.originalPath) {
             const originalPath = path.join('./sessions', sessionId, existingLayer.originalPath);
-            if (fs.existsSync(originalPath)) {
+            if (fsSync.existsSync(originalPath)) {
                 // Read original file as buffer
-                const buffer = fs.readFileSync(originalPath);
+                const buffer = fsSync.readFileSync(originalPath);
                 const originalExt = path.extname(existingLayer.originalPath);
                 imageFile = {
                     buffer: buffer,
@@ -1258,11 +1258,21 @@ app.post('/api/sessions/:sessionId/layers/:layerId/reprocess', validateSessionId
         // Process image (async or sync based on request)
         if (asyncProcessing === 'true' && imageFile.buffer && imageFile.buffer.length > IMAGE_SIZE_THRESHOLD) {
             // Async processing for large images
-            const jobId = `reprocess_${layerId}_${Date.now()}`;
-
-            jobQueue.add(jobId, async () => {
-                return await processLayerImage(imageFile, parsedLayerData, sessionId, layerId, true);
-            });
+            const jobId = jobQueue.addJob(
+                (data, id) => imageProcessor.processImage(data, id),
+                imageFile,
+                {
+                    priority: parseInt(req.body.priority) || 0,
+                    maxRetries: 2,
+                    metadata: {
+                        layerData: parsedLayerData,
+                        originalBuffer: imageFile.buffer,
+                        sessionId: sessionId,
+                        layerId: layerId,
+                        isReprocess: true
+                    }
+                }
+            );
 
             res.json({
                 success: true,
@@ -1272,7 +1282,17 @@ app.post('/api/sessions/:sessionId/layers/:layerId/reprocess', validateSessionId
             });
         } else {
             // Synchronous processing
-            const result = await processLayerImage(imageFile, parsedLayerData, sessionId, layerId, true);
+            const processedImage = await imageProcessor.processImage(imageFile);
+
+            // Create result structure similar to layer processing
+            const result = {
+                layer: {
+                    id: layerId,
+                    ...parsedLayerData,
+                    imagePath: processedImage.serverImageUrl || null,
+                    processedAt: new Date().toISOString()
+                }
+            };
 
             // Update session with reprocessed layer
             session.layers[layerIndex] = {

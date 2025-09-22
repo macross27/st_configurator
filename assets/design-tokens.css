@@ -1,0 +1,397 @@
+/**
+ * Design Tokens CSS Variables
+ * Auto-generated from design-tokens.js
+ * Import this file to use design tokens in CSS
+ */
+
+:root {
+  /* Colors - Primary */
+  --colors-primary-50: #e3f2fd;
+  --colors-primary-100: #bbdefb;
+  --colors-primary-200: #90caf9;
+  --colors-primary-300: #64b5f6;
+  --colors-primary-400: #42a5f5;
+  --colors-primary-500: #2196f3;
+  --colors-primary-600: #1e88e5;
+  --colors-primary-700: #1976d2;
+  --colors-primary-800: #1565c0;
+  --colors-primary-900: #0d47a1;
+
+  /* Colors - Secondary */
+  --colors-secondary-50: #fafafa;
+  --colors-secondary-100: #f5f5f5;
+  --colors-secondary-200: #eeeeee;
+  --colors-secondary-300: #e0e0e0;
+  --colors-secondary-400: #bdbdbd;
+  --colors-secondary-500: #9e9e9e;
+  --colors-secondary-600: #757575;
+  --colors-secondary-700: #616161;
+  --colors-secondary-800: #424242;
+  --colors-secondary-900: #212121;
+
+  /* Colors - Semantic */
+  --colors-success-light: #4caf50;
+  --colors-success-main: #2e7d32;
+  --colors-success-dark: #1b5e20;
+
+  --colors-warning-light: #ff9800;
+  --colors-warning-main: #f57c00;
+  --colors-warning-dark: #e65100;
+
+  --colors-error-light: #f44336;
+  --colors-error-main: #d32f2f;
+  --colors-error-dark: #c62828;
+
+  --colors-info-light: #2196f3;
+  --colors-info-main: #1976d2;
+  --colors-info-dark: #0d47a1;
+
+  /* Colors - Surface */
+  --colors-surface-background: #ffffff;
+  --colors-surface-paper: #ffffff;
+  --colors-surface-disabled: #f5f5f5;
+  --colors-surface-divider: #e0e0e0;
+
+  /* Colors - Text */
+  --colors-text-primary: #212121;
+  --colors-text-secondary: #757575;
+  --colors-text-disabled: #bdbdbd;
+  --colors-text-hint: #9e9e9e;
+  --colors-text-inverse: #ffffff;
+
+  /* Colors - Three.js */
+  --colors-threejs-scene-background: #f5f5f5;
+  --colors-threejs-grid-helper: #888888;
+  --colors-threejs-ambient-light: #404040;
+  --colors-threejs-directional-light: #ffffff;
+  --colors-threejs-object-highlight: #2196f3;
+  --colors-threejs-object-selected: #1976d2;
+
+  /* Typography */
+  --typography-font-family-primary: "Roboto", "Helvetica", "Arial", sans-serif;
+  --typography-font-family-secondary: "Inter", "Helvetica", "Arial", sans-serif;
+  --typography-font-family-monospace: "Roboto Mono", "Courier New", monospace;
+
+  --typography-font-size-xs: 0.75rem;
+  --typography-font-size-sm: 0.875rem;
+  --typography-font-size-base: 1rem;
+  --typography-font-size-lg: 1.125rem;
+  --typography-font-size-xl: 1.25rem;
+  --typography-font-size-2xl: 1.5rem;
+  --typography-font-size-3xl: 1.875rem;
+  --typography-font-size-4xl: 2.25rem;
+
+  --typography-font-weight-light: 300;
+  --typography-font-weight-normal: 400;
+  --typography-font-weight-medium: 500;
+  --typography-font-weight-semibold: 600;
+  --typography-font-weight-bold: 700;
+
+  --typography-line-height-tight: 1.25;
+  --typography-line-height-normal: 1.5;
+  --typography-line-height-relaxed: 1.75;
+
+  --typography-letter-spacing-tight: -0.025em;
+  --typography-letter-spacing-normal: 0;
+  --typography-letter-spacing-wide: 0.025em;
+
+  /* Spacing */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+
+  /* Border Radius */
+  --border-radius-none: 0;
+  --border-radius-sm: 0.125rem;
+  --border-radius-base: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --border-radius-full: 9999px;
+
+  /* Shadows */
+  --shadows-none: none;
+  --shadows-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadows-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadows-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadows-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadows-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadows-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadows-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* Z-Index */
+  --z-index-auto: auto;
+  --z-index-0: 0;
+  --z-index-10: 10;
+  --z-index-20: 20;
+  --z-index-30: 30;
+  --z-index-40: 40;
+  --z-index-50: 50;
+  --z-index-dropdown: 1000;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  --z-index-toast: 1080;
+
+  /* Animation */
+  --animation-duration-fast: 150ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 500ms;
+
+  --animation-easing-linear: linear;
+  --animation-easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --animation-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --animation-easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Component Tokens */
+  --components-button-height-sm: 32px;
+  --components-button-height-md: 40px;
+  --components-button-height-lg: 48px;
+  --components-button-padding-sm: 0 12px;
+  --components-button-padding-md: 0 16px;
+  --components-button-padding-lg: 0 24px;
+
+  --components-input-height-sm: 32px;
+  --components-input-height-md: 40px;
+  --components-input-height-lg: 48px;
+  --components-input-border-width: 1px;
+  --components-input-focus-border-width: 2px;
+
+  --components-panel-width: 300px;
+  --components-panel-padding: 16px;
+  --components-panel-border-radius: 8px;
+
+  --components-layer-item-height: 48px;
+  --components-layer-item-padding: 12px 16px;
+  --components-layer-item-gap: 12px;
+}
+
+/* Base styles using design tokens */
+body {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-font-size-base);
+  line-height: var(--typography-line-height-normal);
+  color: var(--colors-text-primary);
+  background-color: var(--colors-surface-background);
+}
+
+/* Button styles */
+.btn {
+  font-family: var(--typography-font-family-primary);
+  font-weight: var(--typography-font-weight-medium);
+  border-radius: var(--border-radius-md);
+  transition: all var(--animation-duration-fast) var(--animation-easing-ease-in-out);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sm {
+  height: var(--components-button-height-sm);
+  padding: var(--components-button-padding-sm);
+  font-size: var(--typography-font-size-sm);
+}
+
+.btn-md {
+  height: var(--components-button-height-md);
+  padding: var(--components-button-padding-md);
+  font-size: var(--typography-font-size-base);
+}
+
+.btn-lg {
+  height: var(--components-button-height-lg);
+  padding: var(--components-button-padding-lg);
+  font-size: var(--typography-font-size-lg);
+}
+
+.btn-primary {
+  background-color: var(--colors-primary-500);
+  color: var(--colors-text-inverse);
+}
+
+.btn-primary:hover {
+  background-color: var(--colors-primary-600);
+}
+
+.btn-secondary {
+  background-color: var(--colors-secondary-500);
+  color: var(--colors-text-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--colors-secondary-600);
+}
+
+/* Input styles */
+.input {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-font-size-base);
+  border: var(--components-input-border-width) solid var(--colors-secondary-300);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: var(--colors-surface-background);
+  color: var(--colors-text-primary);
+  transition: border-color var(--animation-duration-fast) var(--animation-easing-ease-in-out);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--colors-primary-500);
+  border-width: var(--components-input-focus-border-width);
+}
+
+.input:disabled {
+  background-color: var(--colors-surface-disabled);
+  color: var(--colors-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Panel styles */
+.panel {
+  background-color: var(--colors-surface-paper);
+  border-radius: var(--components-panel-border-radius);
+  padding: var(--components-panel-padding);
+  box-shadow: var(--shadows-md);
+  border: 1px solid var(--colors-surface-divider);
+}
+
+/* Layer item styles */
+.layer-item {
+  min-height: var(--components-layer-item-height);
+  padding: var(--components-layer-item-padding);
+  border-radius: var(--border-radius-md);
+  background-color: var(--colors-surface-paper);
+  border: 1px solid var(--colors-surface-divider);
+  transition: all var(--animation-duration-fast) var(--animation-easing-ease-in-out);
+}
+
+.layer-item:hover {
+  background-color: var(--colors-secondary-50);
+  border-color: var(--colors-secondary-300);
+}
+
+.layer-item.selected {
+  background-color: var(--colors-primary-50);
+  border-color: var(--colors-primary-500);
+}
+
+.layer-item.locked {
+  background-color: var(--colors-surface-disabled);
+  opacity: 0.7;
+}
+
+/* Notification styles */
+.notification {
+  background-color: var(--colors-surface-paper);
+  color: var(--colors-text-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadows-lg);
+  border-left: 4px solid var(--colors-primary-500);
+  max-width: 400px;
+  position: fixed;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  z-index: var(--z-index-toast);
+}
+
+.notification-success {
+  border-left-color: var(--colors-success-main);
+  background-color: var(--colors-success-light);
+  color: var(--colors-text-inverse);
+}
+
+.notification-error {
+  border-left-color: var(--colors-error-main);
+  background-color: var(--colors-error-light);
+  color: var(--colors-text-inverse);
+}
+
+.notification-warning {
+  border-left-color: var(--colors-warning-main);
+  background-color: var(--colors-warning-light);
+  color: var(--colors-text-inverse);
+}
+
+.notification-info {
+  border-left-color: var(--colors-info-main);
+  background-color: var(--colors-info-light);
+  color: var(--colors-text-inverse);
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: var(--z-index-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--colors-surface-background);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadows-2xl);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+/* Three.js specific styles */
+.scene-container {
+  background-color: var(--colors-threejs-scene-background);
+}
+
+.object-highlight {
+  color: var(--colors-threejs-object-highlight);
+}
+
+.object-selected {
+  color: var(--colors-threejs-object-selected);
+}
+
+/* Utility classes */
+.text-primary { color: var(--colors-text-primary); }
+.text-secondary { color: var(--colors-text-secondary); }
+.text-disabled { color: var(--colors-text-disabled); }
+.text-inverse { color: var(--colors-text-inverse); }
+
+.bg-primary { background-color: var(--colors-primary-500); }
+.bg-secondary { background-color: var(--colors-secondary-500); }
+.bg-surface { background-color: var(--colors-surface-background); }
+.bg-paper { background-color: var(--colors-surface-paper); }
+
+.shadow-sm { box-shadow: var(--shadows-sm); }
+.shadow-base { box-shadow: var(--shadows-base); }
+.shadow-md { box-shadow: var(--shadows-md); }
+.shadow-lg { box-shadow: var(--shadows-lg); }
+.shadow-xl { box-shadow: var(--shadows-xl); }
+.shadow-2xl { box-shadow: var(--shadows-2xl); }
+
+.rounded-sm { border-radius: var(--border-radius-sm); }
+.rounded-base { border-radius: var(--border-radius-base); }
+.rounded-md { border-radius: var(--border-radius-md); }
+.rounded-lg { border-radius: var(--border-radius-lg); }
+.rounded-xl { border-radius: var(--border-radius-xl); }
+.rounded-2xl { border-radius: var(--border-radius-2xl); }
+.rounded-full { border-radius: var(--border-radius-full); }
