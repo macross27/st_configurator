@@ -549,6 +549,9 @@ class UniformConfigurator {
                 // Just toggle model visibility without reloading or resetting camera
                 this.sceneManager.setModelSetVisibility(currentSet, designType, currentNeck);
 
+                // Notify PatternManager of design type change
+                this.patternManager.onDesignTypeChange(designType);
+
                 // Update active state
                 setTypeButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
