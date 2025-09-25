@@ -1,0 +1,94 @@
+{
+  "pants.glb": {
+    "path": "./assets/glbs/pants.glb",
+    "error": "fetch failed"
+  },
+  "reg_back_body.glb": {
+    "path": "./assets/glbs/reg_back_body.glb",
+    "error": "fetch failed"
+  },
+  "reg_cft_b.glb": {
+    "path": "./assets/glbs/reg_cft_b.glb",
+    "error": "fetch failed"
+  },
+  "reg_cft_c.glb": {
+    "path": "./assets/glbs/reg_cft_c.glb",
+    "error": "fetch failed"
+  },
+  "reg_cft_d.glb": {
+    "path": "./assets/glbs/reg_cft_d.glb",
+    "error": "fetch failed"
+  },
+  "reg_long_arms.glb": {
+    "path": "./assets/glbs/reg_long_arms.glb",
+    "error": "fetch failed"
+  },
+  "reg_short_arms.glb": {
+    "path": "./assets/glbs/reg_short_arms.glb",
+    "error": "fetch failed"
+  },
+  "reg_std_a.glb": {
+    "path": "./assets/glbs/reg_std_a.glb",
+    "error": "fetch failed"
+  },
+  "reg_std_b.glb": {
+    "path": "./assets/glbs/reg_std_b.glb",
+    "error": "fetch failed"
+  },
+  "reg_u_body.glb": {
+    "path": "./assets/glbs/reg_u_body.glb",
+    "error": "fetch failed"
+  },
+  "reg_u_v_body.glb": {
+    "path": "./assets/glbs/reg_u_v_body.glb",
+    "error": "fetch failed"
+  },
+  "reg_v_body.glb": {
+    "path": "./assets/glbs/reg_v_body.glb",
+    "error": "fetch failed"
+  },
+  "setin_back_body.glb": {
+    "path": "./assets/glbs/setin_back_body.glb",
+    "error": "fetch failed"
+  },
+  "setin_cft_b.glb": {
+    "path": "./assets/glbs/setin_cft_b.glb",
+    "error": "fetch failed"
+  },
+  "setin_cft_c.glb": {
+    "path": "./assets/glbs/setin_cft_c.glb",
+    "error": "fetch failed"
+  },
+  "setin_cft_d.glb": {
+    "path": "./assets/glbs/setin_cft_d.glb",
+    "error": "fetch failed"
+  },
+  "setin_long_arms.glb": {
+    "path": "./assets/glbs/setin_long_arms.glb",
+    "error": "fetch failed"
+  },
+  "setin_short_arms.glb": {
+    "path": "./assets/glbs/setin_short_arms.glb",
+    "error": "fetch failed"
+  },
+  "setin_std_a.glb": {
+    "path": "./assets/glbs/setin_std_a.glb",
+    "error": "fetch failed"
+  },
+  "setin_std_b.glb": {
+    "path": "./assets/glbs/setin_std_b.glb",
+    "error": "fetch failed"
+  },
+  "setin_u_body.glb": {
+    "path": "./assets/glbs/setin_u_body.glb",
+    "error": "fetch failed"
+  },
+  "setin_u_v_body.glb": {
+    "path": "./assets/glbs/setin_u_v_body.glb",
+    "error": "fetch failed"
+  },
+  "setin_v_body.glb": {
+    "path": "./assets/glbs/setin_v_body.glb",
+    "error": "fetch failed"
+  }
+}
