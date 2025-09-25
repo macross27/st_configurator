@@ -277,6 +277,16 @@ class UniformConfigurator {
 
         // Initialize accessibility features AFTER all managers are created
         this.setupAccessibilityFeatures();
+
+        // Assign managers to global window for debugging and external access
+        window.sceneManager = this.sceneManager;
+        window.layerManager = this.layerManager;
+        window.patternManager = this.patternManager;
+        window.uiManager = this.uiManager;
+        window.configurationManager = this.configurationManager;
+        window.interactionManager = this.interactionManager;
+
+        console.log('✅ Managers assigned to global window object');
     }
     
     setupEventHandlers() {
@@ -293,10 +303,7 @@ class UniformConfigurator {
             const texture = this.layerManager.initializeTexture(width, height, this.baseTextureImage);
             this.sceneManager.setTexture(texture);
 
-            // Apply current UI color values to the texture
-            const primaryColor = document.getElementById('primary-color').value;
-            const secondaryColor = document.getElementById('secondary-color').value;
-            this.layerManager.updateBaseTexture(primaryColor, secondaryColor);
+            // Pattern system will handle texture initialization
 
             // Ensure 3D viewer uses full available space
             setTimeout(() => {
@@ -328,10 +335,42 @@ class UniformConfigurator {
             this.sceneManager.setTexture(texture);
             console.log('🎨 Texture applied to scene');
         };
-        
+
+        // Pattern Manager Events
+        this.patternManager.onPatternChange = async (patternData) => {
+            console.log('🎨 Pattern changed:', patternData);
+
+            try {
+                // Get current colors from UI based on pattern type
+                const colors = this.patternCompositor.getCurrentColors(patternData.name);
+                console.log('🎨 Current colors:', colors);
+
+                if (colors.length === 0) {
+                    console.warn('⚠️ No colors available, skipping pattern texture creation');
+                    return;
+                }
+
+                // Create composite texture using PatternCompositor
+                const compositeDataUrl = await this.patternCompositor.createCompositeTexture(patternData, colors);
+                console.log('🎨 Composite texture created');
+
+                // Convert to Three.js texture and apply to material
+                const threeTexture = this.patternCompositor.createThreeTexture(compositeDataUrl);
+                this.sceneManager.setTexture(threeTexture);
+
+                // Pattern texture applied successfully
+
+                console.log('✅ Pattern texture applied to 3D model');
+            } catch (error) {
+                console.error('❌ Failed to apply pattern texture:', error);
+            }
+        };
+
         // UI Manager Events
         this.uiManager.onColorChange = (colors) => {
+            // Create simple solid color texture (no gradient)
             this.layerManager.updateBaseTexture(colors.primary, colors.secondary);
+            console.log('🎨 LayerManager base texture updated with solid color');
         };
         
         this.uiManager.onAddText = () => {
