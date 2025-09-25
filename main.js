@@ -8,6 +8,8 @@ import { ImageProcessor } from './lib/client/ImageProcessor.js';
 import { SessionManager } from './lib/client/SessionManager.js';
 import { OrderFormManager } from './lib/client/OrderFormManager.js';
 import UIStyleManager from './lib/client/UIStyleManager.js';
+import { PatternManager } from './lib/client/PatternManager.js';
+import { PatternCompositor } from './lib/client/PatternCompositor.js';
 import { DesignSystem } from './lib/client/DesignSystem.js';
 import { KeyboardManager } from './lib/client/KeyboardManager.js';
 import { i18n } from './lib/client/I18nManager.js';
@@ -45,8 +47,6 @@ class UniformConfigurator {
             console.log('3️⃣ Loading server configuration...');
             await this.loadServerConfiguration();
 
-            console.log('4️⃣ Loading default texture...');
-            await this.loadDefaultTexture();
 
             console.log('5️⃣ Setting up managers...');
             this.setupManagers();
@@ -59,7 +59,11 @@ class UniformConfigurator {
             await this.initializeI18nUIUpdater();
 
 
-            console.log('✅ App initialization completed successfully!');
+            // Load initial GLB model
+        console.log('8️⃣ Loading initial model...');
+        await this.loadInitialModel();
+
+        console.log('✅ App initialization completed successfully!');
         } catch (error) {
             console.error('❌ App initialization failed at step:', error);
             console.error('❌ Error stack:', error.stack);
@@ -100,7 +104,38 @@ class UniformConfigurator {
         }
     }
 
-    
+    /**
+     * Load initial GLB model on app startup
+     */
+    async loadInitialModel() {
+        try {
+            // Load the default set option (short-shirt-set with regulan design)
+            const modelCombination = this.getModelCombinationForSet('short-shirt-set', 'regulan', 'std_a');
+            await this.loadModelCombination(modelCombination);
+            console.log('✅ Initial model loaded');
+
+            // Refresh scene after initial model loading
+            console.log('🔄 Refreshing scene after initial model load...');
+            this.sceneManager.controls.update();
+            this.sceneManager.render();
+
+            // Trigger a small camera movement to force visibility update
+            setTimeout(() => {
+                const currentPos = this.sceneManager.camera.position.clone();
+                this.sceneManager.camera.position.set(currentPos.x + 0.001, currentPos.y, currentPos.z);
+                this.sceneManager.controls.update();
+                this.sceneManager.render();
+                // Reset position
+                this.sceneManager.camera.position.copy(currentPos);
+                this.sceneManager.controls.update();
+                this.sceneManager.render();
+            }, 100);
+        } catch (error) {
+            console.error('❌ Failed to load initial model:', error);
+        }
+    }
+
+
     async loadServerConfiguration() {
         try {
             // Use environment variables from Vite
@@ -202,6 +237,13 @@ class UniformConfigurator {
         DesignSystem.init();
         this.uiStyleManager = new UIStyleManager();
         this.uiStyleManager.unifyButtons();
+
+        // Initialize Pattern System
+        this.patternCompositor = new PatternCompositor();
+        this.patternManager = new PatternManager(this.patternCompositor);
+
+        // Initialize pattern system with default design type
+        this.patternManager.initialize('regulan');
 
         // Initialize Session Manager (but don't auto-create sessions)
         if (this.serverAvailable) {
@@ -420,6 +462,224 @@ class UniformConfigurator {
             setInterval(() => {
                 this.sceneManager.logPerformanceReport();
             }, 30000);
+        }
+
+        // Setup Set Option Buttons
+        this.setupSetOptionHandlers();
+    }
+
+    /**
+     * Setup handlers for set option buttons (GLB model combinations)
+     */
+    setupSetOptionHandlers() {
+        const setOptionButtons = document.querySelectorAll('.texture-preset-btn[data-set-option]');
+        const setTypeButtons = document.querySelectorAll('.set-type-btn[data-design-type]');
+        const neckButtons = document.querySelectorAll('.neck-btn[data-neck-type]');
+
+        // Set option handlers (main set selection)
+        setOptionButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const setOption = button.getAttribute('data-set-option');
+
+                // Get current design type and neck type
+                const activeDesignBtn = document.querySelector('.set-type-btn.active[data-design-type]');
+                const activeNeckBtn = document.querySelector('.neck-btn.active[data-neck-type]');
+                const currentDesign = activeDesignBtn ? activeDesignBtn.getAttribute('data-design-type') : 'regulan';
+                const currentNeck = activeNeckBtn ? activeNeckBtn.getAttribute('data-neck-type') : 'std_a';
+
+                // Just toggle model visibility without reloading or resetting camera
+                this.sceneManager.setModelSetVisibility(setOption, currentDesign, currentNeck);
+
+                // Update active state
+                setOptionButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Design type handlers (setin vs regulan)
+        setTypeButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const designType = button.getAttribute('data-design-type');
+
+                // Get current set option and neck type
+                const activeSetBtn = document.querySelector('.texture-preset-btn.active[data-set-option]');
+                const activeNeckBtn = document.querySelector('.neck-btn.active[data-neck-type]');
+                const currentSet = activeSetBtn ? activeSetBtn.getAttribute('data-set-option') : 'short-shirt-set';
+                const currentNeck = activeNeckBtn ? activeNeckBtn.getAttribute('data-neck-type') : 'std_a';
+
+                // Just toggle model visibility without reloading or resetting camera
+                this.sceneManager.setModelSetVisibility(currentSet, designType, currentNeck);
+
+                // Update active state
+                setTypeButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Neck type handlers
+        neckButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const neckType = button.getAttribute('data-neck-type');
+
+                // Get current set option and design type
+                const activeSetBtn = document.querySelector('.texture-preset-btn.active[data-set-option]');
+                const activeDesignBtn = document.querySelector('.set-type-btn.active[data-design-type]');
+                const currentSet = activeSetBtn ? activeSetBtn.getAttribute('data-set-option') : 'short-shirt-set';
+                const currentDesign = activeDesignBtn ? activeDesignBtn.getAttribute('data-design-type') : 'regulan';
+
+                // Just toggle model visibility without reloading or resetting camera
+                this.sceneManager.setModelSetVisibility(currentSet, currentDesign, neckType);
+
+                // Update active state
+                neckButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        console.log('✅ Set option handlers initialized');
+    }
+
+    /**
+     * Handle set option changes (main uniform set selection)
+     */
+    async handleSetOptionChange(setOption) {
+        console.log(`🎯 Set option changed to: ${setOption}`);
+
+        try {
+            let modelCombination = this.getModelCombinationForSet(setOption);
+            await this.loadModelCombination(modelCombination);
+        } catch (error) {
+            console.error('❌ Failed to load set option:', error);
+        }
+    }
+
+    /**
+     * Handle design type changes (setin vs regulan)
+     */
+    async handleDesignTypeChange(designType) {
+        console.log(`🎯 Design type changed to: ${designType}`);
+
+        // Get current set option and update model combination
+        const activeSetBtn = document.querySelector('.texture-preset-btn.active[data-set-option]');
+        const currentSet = activeSetBtn ? activeSetBtn.getAttribute('data-set-option') : 'short-shirt-set';
+
+        try {
+            let modelCombination = this.getModelCombinationForSet(currentSet, designType);
+            await this.loadModelCombination(modelCombination);
+        } catch (error) {
+            console.error('❌ Failed to load design type:', error);
+        }
+    }
+
+    /**
+     * Handle neck type changes
+     */
+    async handleNeckTypeChange(neckType) {
+        console.log(`🎯 Neck type changed to: ${neckType}`);
+
+        // Get current set and design type
+        const activeSetBtn = document.querySelector('.texture-preset-btn.active[data-set-option]');
+        const activeDesignBtn = document.querySelector('.set-type-btn.active[data-design-type]');
+
+        const currentSet = activeSetBtn ? activeSetBtn.getAttribute('data-set-option') : 'short-shirt-set';
+        const currentDesign = activeDesignBtn ? activeDesignBtn.getAttribute('data-design-type') : 'regulan';
+
+        try {
+            let modelCombination = this.getModelCombinationForSet(currentSet, currentDesign, neckType);
+            await this.loadModelCombination(modelCombination);
+        } catch (error) {
+            console.error('❌ Failed to load neck type:', error);
+        }
+    }
+
+    /**
+     * Get GLB model combination based on set options
+     * Uses the same logic as SceneManager.getVisibleModels
+     */
+    getModelCombinationForSet(setOption, designType = 'regulan', neckType = 'std_a') {
+        const prefix = designType === 'setin' ? 'setin' : 'reg';
+
+        // Map neck type to front body type
+        const neckToFrontBodyMap = {
+            'std_a': 'u_body',
+            'cft_c': 'u_body',
+            'cft_b': 'v_body',
+            'std_b': 'v_body',
+            'cft_d': 'u_v_body'
+        };
+
+        const frontBodyType = neckToFrontBodyMap[neckType];
+        const armLength = setOption.includes('long') ? 'long_arms' : 'short_arms';
+
+        let models = [];
+
+        switch (setOption) {
+            case 'short-shirt-set':
+            case 'long-shirt-set':
+                // Full set: shirt (4 parts) + pants
+                models = [
+                    `${prefix}_back_body.glb`,     // back body
+                    `${prefix}_${neckType}.glb`,   // neck piece
+                    `${prefix}_${frontBodyType}.glb`, // front body based on neck
+                    `${prefix}_${armLength}.glb`,  // arms
+                    'pants.glb'                    // pants
+                ];
+                break;
+
+            case 'short-shirt':
+            case 'long-shirt':
+                // Shirt only: 4 parts, no pants
+                models = [
+                    `${prefix}_back_body.glb`,     // back body
+                    `${prefix}_${neckType}.glb`,   // neck piece
+                    `${prefix}_${frontBodyType}.glb`, // front body based on neck
+                    `${prefix}_${armLength}.glb`   // arms
+                ];
+                break;
+
+            case 'pants':
+                // Pants only
+                models = ['pants.glb'];
+                break;
+
+            default:
+                console.warn(`Unknown set option: ${setOption}, defaulting to short-shirt-set`);
+                // Default to short shirt set with regulan std_a
+                models = [
+                    'reg_back_body.glb',
+                    'reg_std_a.glb',
+                    'reg_u_body.glb',
+                    'reg_short_arms.glb',
+                    'pants.glb'
+                ];
+        }
+
+        return models;
+    }
+
+    /**
+     * Load multiple GLB models as a combination
+     */
+    async loadModelCombination(modelPaths) {
+        console.log('🎯 Loading model combination:', modelPaths);
+
+        try {
+            // For now, load the first model (primary body part)
+            // TODO: Implement actual model combination logic
+            const primaryModel = modelPaths[0];
+            const modelPath = `./assets/glbs/${primaryModel}`;
+
+            console.log('📦 Loading primary model:', modelPath);
+            await this.sceneManager.loadModel(modelPath);
+
+            // TODO: Load and combine additional models
+            // This would require updates to SceneManager to handle multiple models
+
+            console.log('✅ Model combination loaded successfully');
+        } catch (error) {
+            console.error('❌ Failed to load model combination:', error);
+            // No fallback - GLB models should always be available
+            throw error;
         }
     }
 
@@ -682,31 +942,6 @@ class UniformConfigurator {
         }
     }
 
-    async loadDefaultTexture() {
-        try {
-            console.log('🎨 Loading base texture from ./assets/texture.png...');
-
-            // Load the image directly using Image() instead of THREE.TextureLoader
-            const image = new Image();
-            await new Promise((resolve, reject) => {
-                image.onload = resolve;
-                image.onerror = reject;
-                image.crossOrigin = 'anonymous';
-                image.src = './assets/texture.png';
-            });
-
-            this.baseTextureImage = image;
-            console.log('✅ Base texture loaded successfully:', image.width, 'x', image.height);
-
-            // Set the base texture in LayerManager if it's already initialized
-            if (this.layerManager) {
-                this.layerManager.setBaseTexture(image);
-            }
-        } catch (error) {
-            console.error('❌ Error loading base texture:', error);
-            // The LayerManager will create a fallback texture
-        }
-    }
     
     async processImage(file) {
         try {
@@ -1369,7 +1604,7 @@ class UniformConfigurator {
      * Initialize hybrid GLB system if enabled via environment variables
      */
     initializeHybridSystemIfEnabled() {
-        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB === 'true';
+        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB !== 'false'; // Default to enabled
 
         if (!enableHybrid) {
             console.log('🎯 Hybrid GLB system disabled (VITE_ENABLE_HYBRID_GLB=false)');
@@ -1388,10 +1623,7 @@ class UniformConfigurator {
             // Connect LayerManager to ModelCache
             this.layerManager.setModelCache(modelCache);
 
-            // Initialize ModelSelector UI if multiple models are available
-            if (availableModels.length > 1) {
-                this.initializeModelSelectorUI(availableModels);
-            }
+            // ModelSelector UI removed - clean 3D viewer only
 
             console.log('✅ Hybrid GLB system initialized successfully');
         } catch (error) {
@@ -1404,18 +1636,43 @@ class UniformConfigurator {
      * Get list of available models for hybrid system
      */
     getAvailableModels() {
-        // Start with the current default model
+        // All 23 GLB models from your assets/glbs directory
         const models = [
-            { name: 'Default Model', path: './assets/model.gltf' }
+            // Initial 5 models (will be preloaded and VISIBLE)
+            { name: 'Regular Upper Body', path: './assets/glbs/reg_u_body.glb' },
+            { name: 'Regular Back Body', path: './assets/glbs/reg_back_body.glb' },
+            { name: 'Regular Standard A', path: './assets/glbs/reg_std_a.glb' },
+            { name: 'Regular Short Arms', path: './assets/glbs/reg_short_arms.glb' },
+            { name: 'Pants', path: './assets/glbs/pants.glb' },
+
+            // Regular fit models (lazy loaded)
+            { name: 'Regular Comfort B', path: './assets/glbs/reg_cft_b.glb' },
+            { name: 'Regular Standard B', path: './assets/glbs/reg_std_b.glb' },
+            { name: 'Regular Comfort C', path: './assets/glbs/reg_cft_c.glb' },
+            { name: 'Regular Comfort D', path: './assets/glbs/reg_cft_d.glb' },
+            { name: 'Regular Upper V Body', path: './assets/glbs/reg_u_v_body.glb' },
+            { name: 'Regular V Body', path: './assets/glbs/reg_v_body.glb' },
+
+            // Regular arms (lazy loaded)
+            { name: 'Regular Long Arms', path: './assets/glbs/reg_long_arms.glb' },
+
+            // Set-in fit models (lazy loaded)
+            { name: 'Set-in Upper Body', path: './assets/glbs/setin_u_body.glb' },
+            { name: 'Set-in Back Body', path: './assets/glbs/setin_back_body.glb' },
+            { name: 'Set-in Standard A', path: './assets/glbs/setin_std_a.glb' },
+            { name: 'Set-in Standard B', path: './assets/glbs/setin_std_b.glb' },
+            { name: 'Set-in Comfort B', path: './assets/glbs/setin_cft_b.glb' },
+            { name: 'Set-in Comfort C', path: './assets/glbs/setin_cft_c.glb' },
+            { name: 'Set-in Comfort D', path: './assets/glbs/setin_cft_d.glb' },
+            { name: 'Set-in Upper V Body', path: './assets/glbs/setin_u_v_body.glb' },
+            { name: 'Set-in V Body', path: './assets/glbs/setin_v_body.glb' },
+
+            // Set-in arms (lazy loaded)
+            { name: 'Set-in Short Arms', path: './assets/glbs/setin_short_arms.glb' },
+            { name: 'Set-in Long Arms', path: './assets/glbs/setin_long_arms.glb' }
         ];
 
-        // TODO: Add more models here as they become available
-        // Example:
-        // models.push(
-        //     { name: 'T-Shirt Classic', path: './assets/models/tshirt-classic.glb' },
-        //     { name: 'T-Shirt Slim', path: './assets/models/tshirt-slim.glb' },
-        //     { name: 'Hoodie', path: './assets/models/hoodie.glb' }
-        // );
+        console.log(`📦 Available models for hybrid system: ${models.length} (first 5 will be preloaded)`);
 
         return models;
     }
@@ -1468,7 +1725,7 @@ class UniformConfigurator {
      * Initialize hybrid GLB system if enabled via environment variables
      */
     initializeHybridSystemIfEnabled() {
-        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB === 'true';
+        const enableHybrid = import.meta.env.VITE_ENABLE_HYBRID_GLB !== 'false'; // Default to enabled
 
         if (!enableHybrid) {
             console.log('🎯 Hybrid GLB system disabled (VITE_ENABLE_HYBRID_GLB=false)');
@@ -1487,10 +1744,7 @@ class UniformConfigurator {
             // Connect LayerManager to ModelCache
             this.layerManager.setModelCache(modelCache);
 
-            // Initialize ModelSelector UI if multiple models are available
-            if (availableModels.length > 1) {
-                this.initializeModelSelectorUI(availableModels);
-            }
+            // ModelSelector UI removed - clean 3D viewer only
 
             console.log('✅ Hybrid GLB system initialized successfully');
         } catch (error) {
@@ -1503,18 +1757,43 @@ class UniformConfigurator {
      * Get list of available models for hybrid system
      */
     getAvailableModels() {
-        // Start with the current default model
+        // All 23 GLB models from your assets/glbs directory
         const models = [
-            { name: 'Default Model', path: './assets/model.gltf' }
+            // Initial 5 models (will be preloaded and VISIBLE)
+            { name: 'Regular Upper Body', path: './assets/glbs/reg_u_body.glb' },
+            { name: 'Regular Back Body', path: './assets/glbs/reg_back_body.glb' },
+            { name: 'Regular Standard A', path: './assets/glbs/reg_std_a.glb' },
+            { name: 'Regular Short Arms', path: './assets/glbs/reg_short_arms.glb' },
+            { name: 'Pants', path: './assets/glbs/pants.glb' },
+
+            // Regular fit models (lazy loaded)
+            { name: 'Regular Comfort B', path: './assets/glbs/reg_cft_b.glb' },
+            { name: 'Regular Standard B', path: './assets/glbs/reg_std_b.glb' },
+            { name: 'Regular Comfort C', path: './assets/glbs/reg_cft_c.glb' },
+            { name: 'Regular Comfort D', path: './assets/glbs/reg_cft_d.glb' },
+            { name: 'Regular Upper V Body', path: './assets/glbs/reg_u_v_body.glb' },
+            { name: 'Regular V Body', path: './assets/glbs/reg_v_body.glb' },
+
+            // Regular arms (lazy loaded)
+            { name: 'Regular Long Arms', path: './assets/glbs/reg_long_arms.glb' },
+
+            // Set-in fit models (lazy loaded)
+            { name: 'Set-in Upper Body', path: './assets/glbs/setin_u_body.glb' },
+            { name: 'Set-in Back Body', path: './assets/glbs/setin_back_body.glb' },
+            { name: 'Set-in Standard A', path: './assets/glbs/setin_std_a.glb' },
+            { name: 'Set-in Standard B', path: './assets/glbs/setin_std_b.glb' },
+            { name: 'Set-in Comfort B', path: './assets/glbs/setin_cft_b.glb' },
+            { name: 'Set-in Comfort C', path: './assets/glbs/setin_cft_c.glb' },
+            { name: 'Set-in Comfort D', path: './assets/glbs/setin_cft_d.glb' },
+            { name: 'Set-in Upper V Body', path: './assets/glbs/setin_u_v_body.glb' },
+            { name: 'Set-in V Body', path: './assets/glbs/setin_v_body.glb' },
+
+            // Set-in arms (lazy loaded)
+            { name: 'Set-in Short Arms', path: './assets/glbs/setin_short_arms.glb' },
+            { name: 'Set-in Long Arms', path: './assets/glbs/setin_long_arms.glb' }
         ];
 
-        // TODO: Add more models here as they become available
-        // Example:
-        // models.push(
-        //     { name: 'T-Shirt Classic', path: './assets/models/tshirt-classic.glb' },
-        //     { name: 'T-Shirt Slim', path: './assets/models/tshirt-slim.glb' },
-        //     { name: 'Hoodie', path: './assets/models/hoodie.glb' }
-        // );
+        console.log(`📦 Available models for hybrid system: ${models.length} (first 5 will be preloaded)`);
 
         return models;
     }

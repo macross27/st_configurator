@@ -74,14 +74,6 @@
                             <h4>Custom Color</h4>
 
                             <div class="color-group">
-                                <h5>Primary/Secondary</h5>
-                                <div class="color-pickers">
-                                    <input type="color" id="primary-color" class="custom-color-picker" value="#ffffff">
-                                    <input type="color" id="secondary-color" class="custom-color-picker" value="#000000">
-                                </div>
-                            </div>
-
-                            <div class="color-group">
                                 <h5>Body</h5>
                                 <div class="color-pickers">
                                     <input type="color" id="body-color-1" class="custom-color-picker" value="#ffffff">
