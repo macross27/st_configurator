@@ -446,11 +446,13 @@ input[type="range"]::-moz-range-thumb {
     max-width: 300px;
     z-index: 10000;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
 .keyboard-help.visible {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .keyboard-help h4 {

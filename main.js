@@ -510,6 +510,12 @@ class UniformConfigurator {
 
         // Setup Set Option Buttons
         this.setupSetOptionHandlers();
+
+        // Setup Numbers Texture Handlers
+        this.setupNumbersTextureHandlers();
+
+        // Setup Names Texture Handlers
+        this.setupNamesTextureHandlers();
     }
 
     /**
@@ -577,6 +583,9 @@ class UniformConfigurator {
                 // Just toggle model visibility without reloading or resetting camera
                 this.sceneManager.setModelSetVisibility(currentSet, currentDesign, neckType);
 
+                // Show/hide second neck color picker based on neck type
+                this.updateNeckColorPickerVisibility(neckType);
+
                 // Update active state
                 neckButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
@@ -584,6 +593,29 @@ class UniformConfigurator {
         });
 
         console.log('✅ Set option handlers initialized');
+
+        // Set initial neck color picker visibility based on default selection
+        const activeNeckBtn = document.querySelector('.neck-btn.active[data-neck-type]');
+        const initialNeckType = activeNeckBtn ? activeNeckBtn.getAttribute('data-neck-type') : 'std_a';
+        this.updateNeckColorPickerVisibility(initialNeckType);
+    }
+
+    /**
+     * Update neck color picker visibility based on neck type selection
+     */
+    updateNeckColorPickerVisibility(neckType) {
+        const neckColor2 = document.getElementById('neck-color-2');
+
+        if (neckColor2) {
+            // Show second neck color picker only for Comfort C and Comfort D
+            if (neckType === 'cft_c' || neckType === 'cft_d') {
+                neckColor2.style.display = 'inline-block';
+                console.log(`👔 Second neck color picker shown for ${neckType}`);
+            } else {
+                neckColor2.style.display = 'none';
+                console.log(`👔 Second neck color picker hidden for ${neckType}`);
+            }
+        }
     }
 
     /**
@@ -1260,13 +1292,18 @@ class UniformConfigurator {
         try {
             // Show submission dialog instead of notification
             this.uiManager.showSubmissionDialog();
-            
+
+            // Ensure session exists first
+            if (!this.sessionManager.currentSessionId) {
+                await this.sessionManager.createNewSession();
+            }
+
             // Update session configuration with current settings
             this.updateSessionConfiguration();
-            
+
             // Update progress
             this.uiManager.updateSubmissionDialog('세션 정보를 업데이트하는 중...', 25);
-            
+
             // Submit session and get the shareable URL
             const shareableUrl = await this.sessionManager.submitSession(this.layerManager);
             
@@ -1408,6 +1445,8 @@ class UniformConfigurator {
     
     async restoreSessionState(sessionData) {
         try {
+            console.log('🔧 DEBUG: Session data received:', sessionData);
+
             // Clear all existing layers before restoring session layers
             console.log(`🧹 Clearing ${this.layerManager.getLayers().length} existing layers before session restore`);
             this.layerManager.clearLayers();
@@ -1598,28 +1637,174 @@ class UniformConfigurator {
     }
 
     applyConfiguration(config) {
-        // Apply any saved configuration (colors, settings, etc.)
-        if (config.primaryColor) {
-            const primaryColorInput = document.getElementById('primary-color');
-            if (primaryColorInput) {
-                primaryColorInput.value = config.primaryColor;
+        console.log('🔄 Applying complete configuration:', config);
+
+        // Temporarily disable pattern auto-selection during restoration
+        if (this.patternManager && this.patternManager.setRestorationMode) {
+            this.patternManager.setRestorationMode(true);
+        }
+
+        // If no configuration provided, apply defaults
+        if (!config || Object.keys(config).length === 0) {
+            console.log('⚠️ No configuration data provided, applying defaults');
+            config = {
+                setOption: 'short-shirt-set',
+                designType: 'regulan',
+                neckType: 'std_a',
+                customPattern: 'reg_custom-1-2',
+                neckColor1: '#ffffff',
+                neckColor2: '#000000',
+                pantsColor1: '#ffffff',
+                pantsColor2: '#000000',
+                patternColors: {}
+            };
+        }
+
+        // Restore set option
+        if (config.setOption) {
+            const setBtn = document.querySelector(`[data-set-option="${config.setOption}"]`);
+            if (setBtn) {
+                document.querySelectorAll('.texture-preset-btn').forEach(btn => btn.classList.remove('active'));
+                setBtn.classList.add('active');
+                console.log('✅ Restored set option:', config.setOption);
             }
         }
-        
-        if (config.secondaryColor) {
-            const secondaryColorInput = document.getElementById('secondary-color');
-            if (secondaryColorInput) {
-                secondaryColorInput.value = config.secondaryColor;
+
+        // Restore design type
+        if (config.designType) {
+            const designBtn = document.querySelector(`[data-design-type="${config.designType}"]`);
+            if (designBtn) {
+                document.querySelectorAll('.set-type-btn').forEach(btn => btn.classList.remove('active'));
+                designBtn.classList.add('active');
+                console.log('✅ Restored design type:', config.designType);
             }
         }
-        
-        // Update colors if they were set
-        if (config.primaryColor || config.secondaryColor) {
-            this.layerManager.updateBaseTexture(
-                config.primaryColor || '#ff6600',
-                config.secondaryColor || '#0066ff'
-            );
+
+        // Restore neck type
+        if (config.neckType) {
+            const neckBtn = document.querySelector(`[data-neck-type="${config.neckType}"]`);
+            if (neckBtn) {
+                document.querySelectorAll('.neck-btn').forEach(btn => btn.classList.remove('active'));
+                neckBtn.classList.add('active');
+                console.log('✅ Restored neck type:', config.neckType);
+
+                // Update neck color picker visibility
+                this.updateNeckColorPickerVisibility(config.neckType);
+            }
         }
+
+        // Restore custom pattern
+        if (config.customPattern) {
+            const patternBtn = document.querySelector(`[data-pattern="${config.customPattern}"]`);
+            if (patternBtn) {
+                document.querySelectorAll('.custom-pattern-btn').forEach(btn => btn.classList.remove('active'));
+                patternBtn.classList.add('active');
+                console.log('✅ Restored custom pattern:', config.customPattern);
+            }
+        }
+
+        // Restore color values
+        if (config.neckColor1) {
+            const neckColor1Input = document.getElementById('neck-color-1');
+            if (neckColor1Input) {
+                neckColor1Input.value = config.neckColor1;
+                console.log('✅ Restored neck color 1:', config.neckColor1);
+            }
+        }
+
+        if (config.neckColor2) {
+            const neckColor2Input = document.getElementById('neck-color-2');
+            if (neckColor2Input) {
+                neckColor2Input.value = config.neckColor2;
+                console.log('✅ Restored neck color 2:', config.neckColor2);
+            }
+        }
+
+        if (config.pantsColor1) {
+            const pantsColor1Input = document.getElementById('pants-color-1');
+            if (pantsColor1Input) {
+                pantsColor1Input.value = config.pantsColor1;
+                console.log('✅ Restored pants color 1:', config.pantsColor1);
+            }
+        }
+
+        if (config.pantsColor2) {
+            const pantsColor2Input = document.getElementById('pants-color-2');
+            if (pantsColor2Input) {
+                pantsColor2Input.value = config.pantsColor2;
+                console.log('✅ Restored pants color 2:', config.pantsColor2);
+            }
+        }
+
+        // Restore pattern colors
+        if (config.patternColors) {
+            Object.keys(config.patternColors).forEach(colorId => {
+                const colorInput = document.getElementById(colorId);
+                if (colorInput) {
+                    colorInput.value = config.patternColors[colorId];
+                    console.log(`✅ Restored ${colorId}:`, config.patternColors[colorId]);
+                }
+            });
+        }
+
+        // Restore layer colors and properties
+        if (config.layerData && Array.isArray(config.layerData)) {
+            console.log('🎨 Restoring layer colors and properties');
+            this.restoreLayerProperties(config.layerData);
+        }
+
+        console.log('✅ Configuration restoration complete');
+
+        // Re-enable pattern auto-selection after restoration
+        if (this.patternManager && this.patternManager.setRestorationMode) {
+            this.patternManager.setRestorationMode(false);
+        }
+    }
+
+    restoreLayerProperties(layerDataArray) {
+        // This will be called after layers are restored
+        // We need to apply the saved properties to the restored layers
+        setTimeout(() => {
+            const currentLayers = this.layerManager.getLayers();
+
+            layerDataArray.forEach((savedLayerData, index) => {
+                const currentLayer = currentLayers[index];
+                if (currentLayer && currentLayer.type === savedLayerData.type) {
+                    // Restore layer properties
+                    if (savedLayerData.color && currentLayer.type === 'text') {
+                        currentLayer.color = savedLayerData.color;
+                        console.log(`✅ Restored text layer color: ${savedLayerData.color}`);
+                    }
+
+                    if (savedLayerData.fontSize && currentLayer.type === 'text') {
+                        currentLayer.fontSize = savedLayerData.fontSize;
+                    }
+
+                    if (savedLayerData.fontFamily && currentLayer.type === 'text') {
+                        currentLayer.fontFamily = savedLayerData.fontFamily;
+                    }
+
+                    if (savedLayerData.text && currentLayer.type === 'text') {
+                        currentLayer.text = savedLayerData.text;
+                    }
+
+                    // Restore transform properties
+                    if (savedLayerData.position) {
+                        currentLayer.x = savedLayerData.position.x;
+                        currentLayer.y = savedLayerData.position.y;
+                    }
+
+                    currentLayer.scale = savedLayerData.scale || 1;
+                    currentLayer.rotation = savedLayerData.rotation || 0;
+                    currentLayer.opacity = savedLayerData.opacity || 1;
+                    currentLayer.visible = savedLayerData.visible !== undefined ? savedLayerData.visible : true;
+                }
+            });
+
+            // Update the texture to reflect restored layer properties
+            this.layerManager.updateTexture();
+            console.log('✅ Layer properties restoration complete');
+        }, 500);
     }
     
     displayShareableUrl() {
@@ -1754,14 +1939,76 @@ class UniformConfigurator {
     updateSessionConfiguration() {
         if (!this.sessionManager) return;
 
-        const primaryColor = document.getElementById('primary-color')?.value;
-        const secondaryColor = document.getElementById('secondary-color')?.value;
+        const completeState = this.captureCompleteCurrentState();
+        console.log('🔧 DEBUG: Saving complete configuration state:', completeState);
+        this.sessionManager.updateConfiguration(completeState);
+    }
 
-        this.sessionManager.updateConfiguration({
-            primaryColor: primaryColor,
-            secondaryColor: secondaryColor,
+    captureCompleteCurrentState() {
+        // Get current UI state (or defaults if nothing selected)
+        const activeSetBtn = document.querySelector('.texture-preset-btn.active');
+        const activeDesignBtn = document.querySelector('.set-type-btn.active');
+        const activeNeckBtn = document.querySelector('.neck-btn.active');
+        const activePatternBtn = document.querySelector('.custom-pattern-btn.active');
+
+        // Get color values (with fallbacks to current input values)
+        const neckColor1 = document.getElementById('neck-color-1')?.value || '#ffffff';
+        const neckColor2 = document.getElementById('neck-color-2')?.value || '#000000';
+        const pantsColor1 = document.getElementById('pants-color-1')?.value || '#ffffff';
+        const pantsColor2 = document.getElementById('pants-color-2')?.value || '#000000';
+
+        // Get pattern colors
+        const patternColors = {};
+        for (let i = 1; i <= 3; i++) {
+            const colorInput = document.getElementById(`pattern-color-${i}`);
+            if (colorInput) {
+                patternColors[`pattern-color-${i}`] = colorInput.value;
+            }
+        }
+
+        // Get layer data including colors
+        const layers = this.layerManager.getLayers();
+        const layerData = layers.map(layer => ({
+            id: layer.id,
+            type: layer.type,
+            name: layer.name,
+            visible: layer.visible,
+            position: { x: layer.x || 0, y: layer.y || 0 },
+            scale: layer.scale || 1,
+            rotation: layer.rotation || 0,
+            opacity: layer.opacity || 1,
+            // Include layer-specific properties
+            ...(layer.type === 'text' && {
+                text: layer.text,
+                color: layer.color || '#000000',
+                fontSize: layer.fontSize || 48,
+                fontFamily: layer.fontFamily || 'Arial'
+            }),
+            ...(layer.type === 'logo' && {
+                originalName: layer.originalName
+            })
+        }));
+
+        return {
+            // UI state (use fallbacks to handle no selection = first option)
+            setOption: activeSetBtn?.getAttribute('data-set-option') || 'short-shirt-set',
+            designType: activeDesignBtn?.getAttribute('data-design-type') || 'regulan',
+            neckType: activeNeckBtn?.getAttribute('data-neck-type') || 'std_a',
+            customPattern: activePatternBtn?.getAttribute('data-pattern') || 'reg_custom-1-2',
+
+            // Colors
+            neckColor1,
+            neckColor2,
+            pantsColor1,
+            pantsColor2,
+            patternColors,
+
+            // Layer information
+            layerData,
+
+            // Metadata
             lastModified: new Date().toISOString()
-        });
+        };
     }
 
     // ================================
@@ -1870,6 +2117,234 @@ class UniformConfigurator {
             return this.sceneManager.getHybridStats();
         }
         return null;
+    }
+
+    /**
+     * Setup handlers for numbers texture functionality
+     */
+    setupNumbersTextureHandlers() {
+        const numbersTextureSelect = document.getElementById('numbers-texture-select');
+        const numbersTextureColor = document.getElementById('numbers-texture-color');
+
+        if (numbersTextureSelect) {
+            numbersTextureSelect.addEventListener('change', () => {
+                this.handleNumbersTextureChange();
+            });
+        }
+
+        if (numbersTextureColor) {
+            numbersTextureColor.addEventListener('change', () => {
+                this.handleNumbersTextureChange();
+            });
+        }
+
+        console.log('✅ Numbers texture handlers initialized');
+
+        // Apply initial numbers texture after a short delay to ensure everything is loaded
+        setTimeout(() => {
+            this.handleNumbersTextureChange();
+        }, 500);
+    }
+
+    /**
+     * Handle numbers texture change (dropdown or color)
+     */
+    handleNumbersTextureChange() {
+        const numbersTextureSelect = document.getElementById('numbers-texture-select');
+        const numbersTextureColor = document.getElementById('numbers-texture-color');
+
+        if (!numbersTextureSelect || !numbersTextureColor) {
+            return;
+        }
+
+        const selectedTexture = numbersTextureSelect.value;
+        const selectedColor = numbersTextureColor.value;
+
+        console.log(`🔢 Numbers texture changed: ${selectedTexture} with color ${selectedColor}`);
+
+        // Apply the numbers texture to the scene
+        this.applyNumbersTexture(selectedTexture, selectedColor);
+    }
+
+    /**
+     * Apply numbers texture with fixed position and scale
+     */
+    applyNumbersTexture(textureFilename, color) {
+        const texturePath = `./assets/textures/numbers/${textureFilename}`;
+
+        // Fixed coordinates and scale as specified
+        const position = { x: 0.46, y: 0.25 };
+        const scale = 0.15;
+
+        console.log(`🔢 Applying numbers texture: ${texturePath} at position (${position.x}, ${position.y}) with scale ${scale}`);
+
+        // Create or update numbers texture layer
+        const img = new Image();
+        img.onload = () => {
+            // Remove existing numbers texture layer if it exists
+            const existingLayer = this.layerManager.layers.find(layer =>
+                layer.type === 'logo' && layer.isNumbersTexture
+            );
+
+            if (existingLayer) {
+                this.layerManager.removeLayer(existingLayer.id);
+            }
+
+            // Create new numbers texture layer
+            const layer = this.layerManager.addLogoLayer(img, textureFilename);
+
+            // Mark as numbers texture and set fixed properties
+            layer.isNumbersTexture = true;
+            layer.position = position;
+            layer.scale = scale;
+            layer.color = color;
+            layer.locked = true; // Lock the layer by default
+
+            // Update the layer with fixed properties
+            this.layerManager.updateLayer(layer.id, {
+                position: position,
+                scale: scale,
+                color: color,
+                locked: true
+            });
+
+            // Force a complete texture rebuild by triggering the onTextureUpdated event
+            setTimeout(() => {
+                // Force texture update
+                this.layerManager.updateTexture(true);
+
+                // Get the updated texture and manually trigger the event
+                const texture = this.layerManager.getTexture();
+                if (texture && this.layerManager.onTextureUpdated) {
+                    this.layerManager.onTextureUpdated(texture);
+                }
+
+                // Force UI update
+                this.updateUI();
+            }, 50);
+
+            console.log(`✅ Numbers texture applied and locked: ${textureFilename}`);
+        };
+
+        img.onerror = () => {
+            console.error(`❌ Failed to load numbers texture: ${texturePath}`);
+        };
+
+        img.src = texturePath;
+    }
+
+    /**
+     * Setup handlers for names texture functionality
+     */
+    setupNamesTextureHandlers() {
+        const namesTextureSelect = document.getElementById('names-texture-select');
+        const namesTextureColor = document.getElementById('names-texture-color');
+
+        if (namesTextureSelect) {
+            namesTextureSelect.addEventListener('change', () => {
+                this.handleNamesTextureChange();
+            });
+        }
+
+        if (namesTextureColor) {
+            namesTextureColor.addEventListener('change', () => {
+                this.handleNamesTextureChange();
+            });
+        }
+
+        console.log('✅ Names texture handlers initialized');
+
+        // Apply initial names texture after a short delay to ensure everything is loaded
+        setTimeout(() => {
+            this.handleNamesTextureChange();
+        }, 600);
+    }
+
+    /**
+     * Handle names texture change (dropdown or color)
+     */
+    handleNamesTextureChange() {
+        const namesTextureSelect = document.getElementById('names-texture-select');
+        const namesTextureColor = document.getElementById('names-texture-color');
+
+        if (!namesTextureSelect || !namesTextureColor) {
+            return;
+        }
+
+        const selectedTexture = namesTextureSelect.value;
+        const selectedColor = namesTextureColor.value;
+
+        console.log(`📝 Names texture changed: ${selectedTexture} with color ${selectedColor}`);
+
+        // Apply the names texture to the scene
+        this.applyNamesTexture(selectedTexture, selectedColor);
+    }
+
+    /**
+     * Apply names texture with fixed position and scale
+     */
+    applyNamesTexture(textureFilename, color) {
+        const texturePath = `./assets/textures/names/${textureFilename}`;
+
+        // Fixed coordinates and scale as specified (same as numbers)
+        const position = { x: 0.4605, y: 0.15 };
+        const scale = 0.125;
+
+        console.log(`📝 Applying names texture: ${texturePath} at position (${position.x}, ${position.y}) with scale ${scale}`);
+
+        // Create or update names texture layer
+        const img = new Image();
+        img.onload = () => {
+            // Remove existing names texture layer if it exists
+            const existingLayer = this.layerManager.layers.find(layer =>
+                layer.type === 'logo' && layer.isNamesTexture
+            );
+
+            if (existingLayer) {
+                this.layerManager.removeLayer(existingLayer.id);
+            }
+
+            // Create new names texture layer
+            const layer = this.layerManager.addLogoLayer(img, textureFilename);
+
+            // Mark as names texture and set fixed properties
+            layer.isNamesTexture = true;
+            layer.position = position;
+            layer.scale = scale;
+            layer.color = color;
+            layer.locked = true; // Lock the layer by default
+
+            // Update the layer with fixed properties
+            this.layerManager.updateLayer(layer.id, {
+                position: position,
+                scale: scale,
+                color: color,
+                locked: true
+            });
+
+            // Force a complete texture rebuild by triggering the onTextureUpdated event
+            setTimeout(() => {
+                // Force texture update
+                this.layerManager.updateTexture(true);
+
+                // Get the updated texture and manually trigger the event
+                const texture = this.layerManager.getTexture();
+                if (texture && this.layerManager.onTextureUpdated) {
+                    this.layerManager.onTextureUpdated(texture);
+                }
+
+                // Force UI update
+                this.updateUI();
+            }, 50);
+
+            console.log(`✅ Names texture applied and locked: ${textureFilename}`);
+        };
+
+        img.onerror = () => {
+            console.error(`❌ Failed to load names texture: ${texturePath}`);
+        };
+
+        img.src = texturePath;
     }
 }
 
