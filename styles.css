@@ -755,8 +755,8 @@ body {
 }
 
 .viewer-panel {
-    flex: 1 !important;
-    min-width: 400px; /* Ensure minimum width for 3D viewport */
+    width: calc(100vw - 280px) !important; /* Force specific width - viewport minus texture panel */
+    flex-shrink: 0 !important;
     height: 100vh; /* Explicit height for proper 3D container sizing */
     background-color: #1a1a1a;
     position: relative;
@@ -771,15 +771,17 @@ body {
 }
 
 .property-panel {
-    width: 300px !important;
+    width: 280px !important;
     flex-shrink: 0 !important;
     background-color: #383838;
     border-left: 1px solid #555;
     display: flex !important;
     flex-direction: column !important;
-    overflow-y: auto;
+    overflow-y: auto !important; /* Enable scroll for entire panel */
+    overflow-x: hidden !important;
     height: 100vh;
     order: 2 !important; /* Texture editor on right */
+    position: relative !important;
 }
 
 .panel-header {
@@ -797,6 +799,8 @@ body {
     padding: 12px 15px;
     border-bottom: 1px solid #555;
     flex-shrink: 0;
+    overflow: visible !important; /* Remove section scroll */
+    max-height: none !important; /* Remove height restriction */
 }
 
 .base-texture-section h4 {
@@ -826,10 +830,12 @@ body {
 
 .layers-section {
     padding: 15px;
-    flex: 1;
+    flex: 0 0 auto; /* Change flex to allow natural height */
     display: flex;
     flex-direction: column;
     min-height: 0;
+    overflow: visible !important; /* Remove section scroll */
+    max-height: none !important; /* Remove height restriction */
 }
 
 .layers-header {
@@ -1040,7 +1046,7 @@ body {
     padding: 12px 15px;
     border-top: 1px solid #555;
     flex-shrink: 0;
-    margin-top: auto;
+    margin-top: 20px; /* Remove auto margin */
 }
 
 
@@ -1883,6 +1889,34 @@ body {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
+
+/* Custom scrollbar styles for entire texture editor panel */
+.property-panel::-webkit-scrollbar {
+    width: 12px !important;
+}
+
+.property-panel::-webkit-scrollbar-track {
+    background: #2a2a2a !important;
+    border-radius: 6px !important;
+}
+
+.property-panel::-webkit-scrollbar-thumb {
+    background: #666 !important;
+    border-radius: 6px !important;
+    border: 2px solid #383838 !important;
+}
+
+.property-panel::-webkit-scrollbar-thumb:hover {
+    background: #777 !important;
+}
+
+/* Firefox scrollbar styling */
+.property-panel {
+    scrollbar-width: thin !important;
+    scrollbar-color: #666 #2a2a2a !important;
+}
+
+/* Remove body padding since we're not using fixed positioning */
 
 /* Texture Dropdown Menus */
 .texture-selectors {

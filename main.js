@@ -294,9 +294,9 @@ class UniformConfigurator {
         // Scene Manager Events
         this.sceneManager.onModelLoaded = (material) => {
             console.log('🎯 Model loaded, initializing texture...');
-            // Use base texture image dimensions if available, otherwise fallback to 512x512
-            const width = this.baseTextureImage ? this.baseTextureImage.width : 512;
-            const height = this.baseTextureImage ? this.baseTextureImage.height : 512;
+            // Force high resolution for better texture quality
+            const width = 2048;
+            const height = 2048;
 
             console.log('🎨 Base texture image available:', !!this.baseTextureImage);
             console.log('🎨 Texture dimensions:', width, 'x', height);
@@ -306,10 +306,11 @@ class UniformConfigurator {
 
             // Pattern system will handle texture initialization
 
-            // Ensure 3D viewer uses full available space
+            // Initialize centralized texture update system
             setTimeout(() => {
+                this.initializeCentralizedTextureUpdates();
                 this.sceneManager.onWindowResize();
-            }, 100);
+            }, 200);
 
             console.log('✅ Texture applied to 3D model');
         };
@@ -322,7 +323,7 @@ class UniformConfigurator {
         // Layer Manager Events
         this.layerManager.onLayerAdded = (layer) => {
             console.log('🎨 Layer added:', layer);
-            this.layerManager.selectLayer(layer.id);
+            // Don't auto-select layers when added - let user control selection
             this.updateUI();
         };
         
@@ -540,6 +541,10 @@ class UniformConfigurator {
                 // Just toggle model visibility without reloading or resetting camera
                 this.sceneManager.setModelSetVisibility(setOption, currentDesign, currentNeck);
 
+                // Refresh names and numbers textures for the new model combination
+                this.handleNamesTextureChange();
+                this.handleNumbersTextureChange();
+
                 // Update active state
                 setOptionButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
@@ -563,6 +568,10 @@ class UniformConfigurator {
                 // Notify PatternManager of design type change
                 this.patternManager.onDesignTypeChange(designType);
 
+                // Refresh names and numbers textures for the new model combination
+                this.handleNamesTextureChange();
+                this.handleNumbersTextureChange();
+
                 // Update active state
                 setTypeButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
@@ -585,6 +594,10 @@ class UniformConfigurator {
 
                 // Show/hide second neck color picker based on neck type
                 this.updateNeckColorPickerVisibility(neckType);
+
+                // Refresh names and numbers textures for the new model combination
+                this.handleNamesTextureChange();
+                this.handleNumbersTextureChange();
 
                 // Update active state
                 neckButtons.forEach(btn => btn.classList.remove('active'));
@@ -1827,7 +1840,93 @@ class UniformConfigurator {
     
     // Note: Images are now processed locally until user clicks SUBMIT
     // The session system will handle image storage only when submitting
-    
+
+    // ================================
+    // CENTRALIZED TEXTURE UPDATE SYSTEM
+    // ================================
+
+    /**
+     * Initialize centralized texture update system
+     */
+    initializeCentralizedTextureUpdates() {
+        console.log('🔄 Initializing centralized texture update system');
+
+        // Setup additional monitoring for any custom components
+        this.setupCustomTextureContributors();
+
+        console.log('✅ Centralized texture update system initialized');
+    }
+
+    /**
+     * Setup custom texture contributors that aren't automatically detected
+     */
+    setupCustomTextureContributors() {
+        // Register number texture contributors if they exist
+        this.registerNumberTextureContributors();
+
+        // Register any other custom texture contributors
+        this.registerCustomColorContributors();
+    }
+
+    /**
+     * Register number texture contributors
+     */
+    registerNumberTextureContributors() {
+        // Check for number texture selects or inputs
+        const numberSelectors = document.querySelectorAll('[id*="number"], [id*="jersey"]');
+
+        numberSelectors.forEach(element => {
+            if (element.type === 'select-one' || element.type === 'color') {
+                const key = `number-${element.id}`;
+
+                this.layerManager.registerTextureContributor(
+                    key,
+                    () => element.value,
+                    (callback) => {
+                        element.addEventListener('change', () => callback(element.value));
+                        element.addEventListener('input', () => callback(element.value));
+                    }
+                );
+
+                console.log(`✅ Registered number texture contributor: ${key}`);
+            }
+        });
+    }
+
+    /**
+     * Register custom color contributors that might not be picked up automatically
+     */
+    registerCustomColorContributors() {
+        // Look for any color inputs that might not be in the standard list
+        const colorInputs = document.querySelectorAll('input[type="color"]:not([id*="pattern-"]):not([id*="pants-"]):not([id*="neck-"])');
+
+        colorInputs.forEach(element => {
+            if (element.id) {
+                const key = `custom-${element.id}`;
+
+                this.layerManager.registerTextureContributor(
+                    key,
+                    () => element.value,
+                    (callback) => {
+                        element.addEventListener('change', () => callback(element.value));
+                        element.addEventListener('input', () => callback(element.value));
+                    }
+                );
+
+                console.log(`✅ Registered custom color contributor: ${key}`);
+            }
+        });
+    }
+
+    /**
+     * Manually trigger texture update from external components
+     */
+    forceTextureUpdate(reason = 'external-trigger') {
+        if (this.layerManager) {
+            this.layerManager.forceTextureUpdate(reason);
+        }
+    }
+
     // ================================
     // HYBRID GLB SYSTEM INTEGRATION
     // ================================
@@ -2174,7 +2273,7 @@ class UniformConfigurator {
 
         // Fixed coordinates and scale as specified
         const position = { x: 0.46, y: 0.25 };
-        const scale = 0.15;
+        const scale = 0.6;
 
         console.log(`🔢 Applying numbers texture: ${texturePath} at position (${position.x}, ${position.y}) with scale ${scale}`);
 
@@ -2288,7 +2387,7 @@ class UniformConfigurator {
 
         // Fixed coordinates and scale as specified (same as numbers)
         const position = { x: 0.4605, y: 0.15 };
-        const scale = 0.125;
+        const scale = 0.4;
 
         console.log(`📝 Applying names texture: ${texturePath} at position (${position.x}, ${position.y}) with scale ${scale}`);
 
@@ -2350,3 +2449,15 @@ class UniformConfigurator {
 
 // Initialize the application
 window.uniformConfigurator = new UniformConfigurator();
+
+// Add global utility functions for texture updates
+window.forceTextureUpdate = (reason = 'global') => {
+    if (window.uniformConfigurator && window.uniformConfigurator.layerManager) {
+        console.log(`🔄 Global texture update triggered: ${reason}`);
+        window.uniformConfigurator.layerManager.forceTextureUpdate(reason);
+    } else {
+        console.warn('⚠️ Cannot force texture update - LayerManager not available');
+    }
+};
+
+console.log('🔄 Global texture update utility registered: window.forceTextureUpdate()');
