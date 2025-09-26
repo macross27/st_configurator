@@ -737,22 +737,30 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Simplified responsive layout - prevents overflow */
+/* FORCE LAYOUT UPDATE - Texture editor on RIGHT side */
 .app-container {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
     height: 100vh;
     width: 100vw; /* Explicit width to ensure proper flexbox behavior */
     overflow: hidden;
     /* Removed problematic calc() expressions and fixed width */
 }
 
+/* Fix the MAIN element order */
+#main-content {
+    order: 1 !important;
+    flex: 1 !important;
+    display: flex !important;
+}
+
 .viewer-panel {
-    flex: 1;
+    flex: 1 !important;
     min-width: 400px; /* Ensure minimum width for 3D viewport */
     height: 100vh; /* Explicit height for proper 3D container sizing */
     background-color: #1a1a1a;
     position: relative;
-    order: 2;
+    order: 1 !important; /* 3D view on left */
 }
 
 #three-container {
@@ -763,15 +771,15 @@ body {
 }
 
 .property-panel {
-    width: 300px;
-    flex-shrink: 0;
+    width: 300px !important;
+    flex-shrink: 0 !important;
     background-color: #383838;
-    border-right: 1px solid #555;
-    display: flex;
-    flex-direction: column;
+    border-left: 1px solid #555;
+    display: flex !important;
+    flex-direction: column !important;
     overflow-y: auto;
     height: 100vh;
-    order: 1;
+    order: 2 !important; /* Texture editor on right */
 }
 
 .panel-header {
@@ -1114,7 +1122,7 @@ body {
         width: 100%;
         height: 40vh;
         order: 2;
-        border-right: none;
+        border-left: none;
         border-top: 1px solid #555;
     }
 
@@ -1229,9 +1237,9 @@ body {
     .property-panel {
         width: 35vw;
         height: 100vh;
-        order: 1;
+        order: 2;
         border-top: none;
-        border-right: 1px solid #555;
+        border-left: 1px solid #555;
     }
 }
 

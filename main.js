@@ -15,7 +15,7 @@ import { KeyboardManager } from './lib/client/KeyboardManager.js';
 import { i18n } from './lib/client/I18nManager.js';
 import { I18nUIUpdater } from './lib/client/I18nUIUpdater.js';
 import { errorManager, ApplicationError, ValidationError, NetworkError, FileProcessingError } from './lib/client/ErrorManager.js';
-import './lib/serverApiClient.js';
+import { ServerApiClient } from './lib/serverApiClient.js';
 
 class UniformConfigurator {
     constructor() {
@@ -272,8 +272,9 @@ class UniformConfigurator {
             this.orderFormManager = new OrderFormManager();
         }
 
-        // Initialize hybrid GLB system if enabled
-        this.initializeHybridSystemIfEnabled();
+        // DISABLED: Initialize hybrid GLB system - now using single master.glb
+        // this.initializeHybridSystemIfEnabled();
+        console.log('🎯 Using simple master GLB system (hybrid disabled)');
 
         // Initialize accessibility features AFTER all managers are created
         this.setupAccessibilityFeatures();
@@ -350,8 +351,12 @@ class UniformConfigurator {
                     return;
                 }
 
-                // Create composite texture using PatternCompositor
-                const compositeDataUrl = await this.patternCompositor.createCompositeTexture(patternData, colors);
+                // Get additional texture colors (pants, neck)
+                const additionalTextures = this.patternCompositor.getAdditionalTextureColors();
+                console.log('🎨 Additional textures for initial load:', additionalTextures);
+
+                // Create composite texture using PatternCompositor with additional textures
+                const compositeDataUrl = await this.patternCompositor.createCompositeTexture(patternData, colors, additionalTextures);
                 console.log('🎨 Composite texture created');
 
                 // Convert to Three.js texture and apply to material

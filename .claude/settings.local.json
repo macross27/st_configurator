@@ -69,7 +69,9 @@
       "Bash(del nul)",
       "Bash(rm:*)",
       "Bash(grep:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(del \"E:\\github\\st_configurator\\.git\\index.lock\")",
+      "Bash(tail:*)"
     ],
     "deny": [],
     "ask": []

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <title>유니폼 구성기</title>
     <link rel="stylesheet" href="styles-tokens.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=right-layout">
     <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
@@ -17,6 +17,107 @@
     <div id="screen-reader-alerts" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
 
     <div class="app-container" role="application" data-i18n-aria="accessibility.appContainer" aria-label="3D 유니폼 구성기 응용프로그램">
+        <main id="main-content" role="main" data-i18n-aria="accessibility.mainContent" aria-label="3D 유니폼 미리보기 및 컨트롤">
+        <section class="viewer-panel" data-i18n-aria="accessibility.previewViewport" aria-label="3D 미리보기 뷰포트">
+            <div id="three-container" role="img" data-i18n-aria="accessibility.threeDPreview" aria-label="3D 유니폼 미리보기 - 화살표 키로 회전, +/- 키로 확대/축소" tabindex="0"></div>
+            
+            <!-- Reset button (bottom left) -->
+            <div class="reset-button-container">
+                <button id="reset-view-btn" class="reset-view-btn"
+                        aria-label="Reset 3D view to default state"
+                        title="Reset view to default state">⟲</button>
+            </div>
+            
+            <!-- FOV slider overlay -->
+            <div id="fov-slider-overlay" class="fov-slider-overlay" style="display: none;" role="dialog" aria-label="Field of View Controls">
+                <div class="fov-slider-container">
+                    <label for="fov-slider">Field of View:</label>
+                    <input type="range" id="fov-slider" min="10" max="50" step="1" value="35"
+                           aria-label="Field of view angle in degrees"
+                           aria-describedby="fov-value">
+                    <span id="fov-value" aria-live="polite">35°</span>
+                </div>
+            </div>
+            
+            <!-- Scale slider overlay -->
+            <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;" role="dialog" aria-label="Layer Property Controls">
+                <div class="scale-slider-container">
+                    <label for="scale-slider" data-i18n="controls.scale">크기:</label>
+                    <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1"
+                           aria-label="Layer scale from 0.1 to 3.0"
+                           aria-describedby="scale-value">
+                    <span id="scale-value" aria-live="polite">1.0</span>
+                </div>
+
+                <div class="section-separator"></div>
+
+                <div class="rotate-flip-container">
+                    <div class="rotate-slider-container">
+                        <label for="rotate-slider" data-i18n="controls.rotation">회전:</label>
+                        <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0"
+                               aria-label="Layer rotation angle in degrees"
+                               aria-describedby="rotate-value">
+                        <span id="rotate-value" aria-live="polite">0°</span>
+                    </div>
+                    <div class="flip-controls-container">
+                        <label class="flip-checkbox-label">
+                            <input type="checkbox" id="flip-horizontal-checkbox"
+                                   aria-label="Flip layer horizontally">
+                            <span class="checkbox-text" data-i18n="controls.flipHorizontal">좌우반전</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Color picker for layers with color property -->
+                <div id="color-palette-container" class="color-display-container" style="display: none;">
+                    <div class="color-display-wrapper">
+                        <label class="color-display-label" for="current-color-display">Color:</label>
+                        <button class="current-color-display" id="current-color-display"
+                                aria-label="Open color picker"
+                                aria-describedby="current-color-description">
+                            <div class="current-color-swatch" id="current-color-swatch" aria-hidden="true"></div>
+                            <span id="current-color-description" class="sr-only">Current color picker button</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Color picker dropdown -->
+                <div id="color-picker-dropdown" class="color-picker-dropdown" role="dialog"
+                     aria-label="Color Picker" aria-modal="true" tabindex="-1">
+                    <div class="color-picker-content">
+                        <button class="color-picker-close-btn" id="color-picker-close-btn"
+                                aria-label="Close color picker">Close</button>
+                        <div class="color-picker-main">
+                            <div class="color-wheel-section">
+                                <label for="color-wheel-canvas" class="sr-only">Color wheel - click or use arrow keys to select hue and saturation</label>
+                                <canvas id="color-wheel-canvas" width="200" height="200"
+                                        role="slider"
+                                        aria-label="Color wheel for hue and saturation selection"
+                                        tabindex="0"></canvas>
+                                <div class="color-wheel-handle" id="color-wheel-handle" aria-hidden="true"></div>
+                            </div>
+                            <div class="brightness-section">
+                                <label for="brightness-slider-track" class="sr-only">Brightness slider</label>
+                                <div class="brightness-slider-container">
+                                    <div class="brightness-slider-track" id="brightness-slider-track"
+                                         role="slider"
+                                         aria-label="Brightness level"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100"
+                                         aria-valuenow="50"
+                                         tabindex="0">
+                                        <div class="brightness-slider-handle" id="brightness-slider-handle" aria-hidden="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        </main>
+
         <aside class="property-panel" role="complementary" aria-label="Texture Editor Controls">
             <div class="panel-header">
                 <h1 data-i18n="nav.textureEditor">텍스처 에디터</h1>
@@ -31,13 +132,6 @@
                         <button id="short-shirt-btn" class="texture-preset-btn" data-set-option="short-shirt">Short Shirt</button>
                         <button id="long-shirt-btn" class="texture-preset-btn" data-set-option="long-shirt">Long Shirt</button>
                         <button id="pants-btn" class="texture-preset-btn" data-set-option="pants">Pants</button>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Debug Extract Button -->
-                    <div class="debug-section">
-                        <button id="extract-texture-btn" class="extract-btn">📥 Extract Texture</button>
                     </div>
 
                     <div class="divider"></div>
@@ -164,107 +258,6 @@
                 </div>
             </section>
         </aside>
-
-        <main id="main-content" role="main" data-i18n-aria="accessibility.mainContent" aria-label="3D 유니폼 미리보기 및 컨트롤">
-        <section class="viewer-panel" data-i18n-aria="accessibility.previewViewport" aria-label="3D 미리보기 뷰포트">
-            <div id="three-container" role="img" data-i18n-aria="accessibility.threeDPreview" aria-label="3D 유니폼 미리보기 - 화살표 키로 회전, +/- 키로 확대/축소" tabindex="0"></div>
-            
-            <!-- Reset button (bottom left) -->
-            <div class="reset-button-container">
-                <button id="reset-view-btn" class="reset-view-btn"
-                        aria-label="Reset 3D view to default state"
-                        title="Reset view to default state">⟲</button>
-            </div>
-            
-            <!-- FOV slider overlay -->
-            <div id="fov-slider-overlay" class="fov-slider-overlay" style="display: none;" role="dialog" aria-label="Field of View Controls">
-                <div class="fov-slider-container">
-                    <label for="fov-slider">Field of View:</label>
-                    <input type="range" id="fov-slider" min="10" max="50" step="1" value="35"
-                           aria-label="Field of view angle in degrees"
-                           aria-describedby="fov-value">
-                    <span id="fov-value" aria-live="polite">35°</span>
-                </div>
-            </div>
-            
-            <!-- Scale slider overlay -->
-            <div id="scale-slider-overlay" class="scale-slider-overlay" style="display: none;" role="dialog" aria-label="Layer Property Controls">
-                <div class="scale-slider-container">
-                    <label for="scale-slider" data-i18n="controls.scale">크기:</label>
-                    <input type="range" id="scale-slider" min="0.1" max="3" step="0.1" value="1"
-                           aria-label="Layer scale from 0.1 to 3.0"
-                           aria-describedby="scale-value">
-                    <span id="scale-value" aria-live="polite">1.0</span>
-                </div>
-
-                <div class="section-separator"></div>
-
-                <div class="rotate-flip-container">
-                    <div class="rotate-slider-container">
-                        <label for="rotate-slider" data-i18n="controls.rotation">회전:</label>
-                        <input type="range" id="rotate-slider" min="0" max="359" step="1" value="0"
-                               aria-label="Layer rotation angle in degrees"
-                               aria-describedby="rotate-value">
-                        <span id="rotate-value" aria-live="polite">0°</span>
-                    </div>
-                    <div class="flip-controls-container">
-                        <label class="flip-checkbox-label">
-                            <input type="checkbox" id="flip-horizontal-checkbox"
-                                   aria-label="Flip layer horizontally">
-                            <span class="checkbox-text" data-i18n="controls.flipHorizontal">좌우반전</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <!-- Color picker for layers with color property -->
-                <div id="color-palette-container" class="color-display-container" style="display: none;">
-                    <div class="color-display-wrapper">
-                        <label class="color-display-label" for="current-color-display">Color:</label>
-                        <button class="current-color-display" id="current-color-display"
-                                aria-label="Open color picker"
-                                aria-describedby="current-color-description">
-                            <div class="current-color-swatch" id="current-color-swatch" aria-hidden="true"></div>
-                            <span id="current-color-description" class="sr-only">Current color picker button</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Color picker dropdown -->
-                <div id="color-picker-dropdown" class="color-picker-dropdown" role="dialog"
-                     aria-label="Color Picker" aria-modal="true" tabindex="-1">
-                    <div class="color-picker-content">
-                        <button class="color-picker-close-btn" id="color-picker-close-btn"
-                                aria-label="Close color picker">Close</button>
-                        <div class="color-picker-main">
-                            <div class="color-wheel-section">
-                                <label for="color-wheel-canvas" class="sr-only">Color wheel - click or use arrow keys to select hue and saturation</label>
-                                <canvas id="color-wheel-canvas" width="200" height="200"
-                                        role="slider"
-                                        aria-label="Color wheel for hue and saturation selection"
-                                        tabindex="0"></canvas>
-                                <div class="color-wheel-handle" id="color-wheel-handle" aria-hidden="true"></div>
-                            </div>
-                            <div class="brightness-section">
-                                <label for="brightness-slider-track" class="sr-only">Brightness slider</label>
-                                <div class="brightness-slider-container">
-                                    <div class="brightness-slider-track" id="brightness-slider-track"
-                                         role="slider"
-                                         aria-label="Brightness level"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100"
-                                         aria-valuenow="50"
-                                         tabindex="0">
-                                        <div class="brightness-slider-handle" id="brightness-slider-handle" aria-hidden="true"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-        </main>
     </div>
     
     <!-- Order Form Modal -->
